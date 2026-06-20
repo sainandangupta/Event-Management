@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Allocation Center | EventHub360</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "emerald-green": "#4CAF8D",
+                    "on-secondary": "#ffffff",
+                    "outline": "#8c706f",
+                    "surface-container-low": "#eff4ff",
+                    "sunset-orange": "#FF8A5B",
+                    "on-error": "#ffffff",
+                    "surface-bright": "#f8f9ff",
+                    "on-secondary-fixed-variant": "#5b4304",
+                    "surface-variant": "#d9e3f6",
+                    "tertiary-fixed": "#eaddff",
+                    "on-primary": "#ffffff",
+                    "surface": "#f8f9ff",
+                    "primary-fixed": "#ffdad8",
+                    "inverse-primary": "#ffb3b0",
+                    "primary-fixed-dim": "#ffb3b0",
+                    "on-tertiary-fixed": "#240554",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed-dim": "#d3bbff",
+                    "outline-variant": "#e0bfbd",
+                    "on-primary-container": "#6d0010",
+                    "on-background": "#121c2a",
+                    "on-tertiary-container": "#3d246c",
+                    "tertiary": "#69519b",
+                    "primary-container": "#ff6b6b",
+                    "secondary": "#755a1d",
+                    "inverse-surface": "#27313f",
+                    "surface-tint": "#ae2f34",
+                    "on-tertiary": "#ffffff",
+                    "surface-container": "#e6eeff",
+                    "secondary-fixed": "#ffdea0",
+                    "on-surface-variant": "#584140",
+                    "on-secondary-container": "#785d1f",
+                    "surface-container-high": "#dee9fc",
+                    "surface-container-highest": "#d9e3f6",
+                    "on-primary-fixed-variant": "#8c1520",
+                    "on-primary-fixed": "#410006",
+                    "primary": "#ae2f34",
+                    "background-alt": "#F5F7FA",
+                    "on-surface": "#121c2a",
+                    "error-container": "#ffdad6",
+                    "background": "#f8f9ff",
+                    "tertiary-container": "#a88ede",
+                    "on-error-container": "#93000a",
+                    "error": "#ba1a1a",
+                    "secondary-container": "#fed88e",
+                    "on-tertiary-fixed-variant": "#513982",
+                    "secondary-fixed-dim": "#e6c27a",
+                    "inverse-on-surface": "#eaf1ff",
+                    "on-secondary-fixed": "#261a00",
+                    "border-gray": "#E6EAF0",
+                    "surface-dim": "#d0dbed",
+                    "off-white": "#FAFAFA"
+            },
+            "borderRadius": {
+                    "DEFAULT": "24px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-margin": "32px",
+                    "base": "8px",
+                    "section-gap": "64px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "body-sm": ["Inter"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Hanken Grotesk"],
+                    "body-md": ["Inter"],
+                    "display-lg-mobile": ["Hanken Grotesk"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #d9e3f6; border-radius: 10px; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .coral-gradient {
+            background: linear-gradient(135deg, #ae2f34 0%, #FF8A5B 100%);
+        }
+        .allocation-cell {
+            min-width: 160px;
+            height: 80px;
+        }
+    </style>
+</head>
+<body class="bg-off-white text-on-surface font-body-md overflow-hidden">
+<!-- Top Navigation Bar -->
+<header class="bg-white/60 dark:bg-surface/60 backdrop-blur-xl docked full-width top-0 sticky z-50 bg-white/60 dark:bg-surface/60 backdrop-blur-xl border-b border-border-gray shadow-sm">
+<div class="flex justify-between items-center w-full px-container-margin h-20 max-w-[1440px] mx-auto">
+<div class="flex items-center gap-8">
+<h1 class="font-headline-md text-headline-md font-black text-primary dark:text-inverse-primary">EventHub360</h1>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-all" href="#">Dashboard</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-all" href="#">Directory</a>
+<a class="text-primary dark:text-inverse-primary font-bold border-b-2 border-primary pb-1" href="#">Allocation</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-all" href="#">Conflicts</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-all" href="#">Utilization</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer p-2 rounded-full hover:bg-surface-container-low transition-all">search</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer p-2 rounded-full hover:bg-surface-container-low transition-all">notifications</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer p-2 rounded-full hover:bg-surface-container-low transition-all">settings</span>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+<img alt="Administrator Profile" data-alt="A professional headshot of a senior event manager in a modern office environment. The person is smiling warmly, wearing a charcoal grey blazer and a crisp white shirt. The background is a soft-focus architectural office with warm wooden textures and floor-to-ceiling windows, creating a high-end enterprise atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMl6VM80UoNrTVSNN2n8WJDh-a2nG00ow9U3EvuMg1zoA71hlczjmBwMhG795IEnC3ZrzYKE1R6sP9UgoE3kbqwugLsXJFg8q3-EmysFjqiMROqrCiyyO9u-LICmowULKAbOxgQW4rar_kl2dgv5p1_dLU8pnpWO7NnGhFZDAXPPUrJtjZjUd9zpnr_b0G4B59wr3U801bjgiI-ZO4WWM8gs7LZFyuxJAlihTVbGWixV_8KCGowAri9iFvXBRMOMnTWrPymHRLMHze"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex h-[calc(100vh-80px)] overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="bg-surface-container-lowest dark:bg-inverse-surface shadow-sm w-64 h-screen fixed left-0 top-0 z-40 hidden lg:block pt-20">
+<div class="flex flex-col h-full py-base gap-base">
+<div class="px-6 py-4">
+<h2 class="font-headline-lg text-headline-lg font-bold text-primary dark:text-inverse-primary">EventHub360</h2>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-70">Resource Management</p>
+</div>
+<div class="flex flex-col px-3 gap-1">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Event Workspace</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Events</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">event_note</span>
+<span class="font-label-md text-label-md">Planning</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-primary dark:text-inverse-primary font-bold border-r-4 border-primary bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-md text-label-md">Resources</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Budget</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-label-md text-label-md">Vendors</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">task_alt</span>
+<span class="font-label-md text-label-md">Execution</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Documents</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant font-medium hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Reporting</span>
+</a>
+</div>
+<div class="mt-auto p-4">
+<button class="w-full coral-gradient text-white py-4 px-6 rounded-xl font-label-md text-label-md flex items-center justify-center gap-2 shadow-lg active:scale-[0.98] transition-transform duration-200">
+<span class="material-symbols-outlined">add</span>
+                        Add New Resource
+                    </button>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 lg:ml-64 bg-off-white overflow-hidden flex flex-col">
+<!-- Content Header -->
+<div class="px-container-margin py-8 flex justify-between items-end">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Resource Allocation Center</h2>
+<p class="text-on-surface-variant font-body-md max-w-2xl mt-2">Manage Staff, Venues, and Equipment across the upcoming Summit series. Drag resources from the unassigned pool to the timeline.</p>
+</div>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 px-6 py-3 bg-white rounded-full shadow-sm border border-border-gray hover:bg-surface-container-low transition-all font-label-md text-label-md">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+                        Filters
+                    </button>
+<button class="flex items-center gap-2 px-6 py-3 coral-gradient text-white rounded-full shadow-lg hover:shadow-xl transition-all font-label-md text-label-md active:scale-[0.99]">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+                        Smart Allocation AI
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Content -->
+<div class="flex-1 px-container-margin pb-container-margin grid grid-cols-12 grid-rows-6 gap-gutter overflow-hidden">
+<!-- Timeline Scheduler (Bento Primary) -->
+<div class="col-span-9 row-span-4 bg-white rounded-xl shadow-sm border border-border-gray overflow-hidden flex flex-col">
+<div class="p-6 border-b border-border-gray flex justify-between items-center bg-surface-container-lowest">
+<div class="flex gap-4">
+<button class="px-4 py-1.5 bg-surface-container-high rounded-lg text-primary font-bold text-label-md">Staff</button>
+<button class="px-4 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all text-label-md">Venues</button>
+<button class="px-4 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-all text-label-md">Equipment</button>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">chevron_left</span>
+<span class="font-label-md text-label-md">Oct 14 - Oct 20, 2024</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary">chevron_right</span>
+</div>
+</div>
+<div class="flex-1 overflow-auto custom-scrollbar">
+<table class="w-full border-collapse">
+<thead>
+<tr class="sticky top-0 bg-white z-10">
+<th class="p-4 text-left font-label-md text-label-md border-b border-r border-border-gray min-w-[200px] bg-white">Resource Name</th>
+<th class="p-4 text-center font-label-md text-label-md border-b border-border-gray bg-white">Mon 14</th>
+<th class="p-4 text-center font-label-md text-label-md border-b border-border-gray bg-white">Tue 15</th>
+<th class="p-4 text-center font-label-md text-label-md border-b border-border-gray bg-white">Wed 16</th>
+<th class="p-4 text-center font-label-md text-label-md border-b border-border-gray bg-white">Thu 17</th>
+<th class="p-4 text-center font-label-md text-label-md border-b border-border-gray bg-white">Fri 18</th>
+<th class="p-4 text-center font-label-md text-label-md border-b border-border-gray bg-white">Sat 19</th>
+</tr>
+</thead>
+<tbody>
+<!-- Resource Row 1 -->
+<tr>
+<td class="p-4 border-r border-b border-border-gray flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-primary font-bold">JD</div>
+<div>
+<p class="font-label-md text-label-md">James Dubois</p>
+<p class="text-[10px] text-on-surface-variant">Lead Coordinator</p>
+</div>
+</td>
+<td class="border-b border-border-gray p-2">
+<div class="bg-primary/10 text-primary p-2 rounded-lg text-[11px] border border-primary/20 cursor-pointer hover:bg-primary/20 transition-all">
+<p class="font-bold">Opening Ceremony</p>
+<p>8:00 - 14:00</p>
+</div>
+</td>
+<td class="border-b border-border-gray p-2"></td>
+<td class="border-b border-border-gray p-2">
+<div class="bg-primary/10 text-primary p-2 rounded-lg text-[11px] border border-primary/20">
+<p class="font-bold">VIP Dinner</p>
+<p>18:00 - 22:00</p>
+</div>
+</td>
+<td class="border-b border-border-gray p-2" colspan="2">
+<div class="bg-tertiary-container/20 text-tertiary p-2 rounded-lg text-[11px] border border-tertiary-container/40">
+<p class="font-bold">Main Hall Logistics</p>
+<p>Full Day</p>
+</div>
+</td>
+<td class="border-b border-border-gray p-2"></td>
+</tr>
+<!-- Resource Row 2 -->
+<tr>
+<td class="p-4 border-r border-b border-border-gray flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-primary font-bold">SL</div>
+<div>
+<p class="font-label-md text-label-md">Sarah Lynn</p>
+<p class="text-[10px] text-on-surface-variant">Production Mgr</p>
+</div>
+</td>
+<td class="border-b border-border-gray p-2"></td>
+<td class="border-b border-border-gray p-2" colspan="2">
+<div class="bg-sunset-orange/10 text-sunset-orange p-2 rounded-lg text-[11px] border border-sunset-orange/30">
+<p class="font-bold">Tech Rehearsal</p>
+<p>2 Day Intensive</p>
+</div>
+</td>
+<td class="border-b border-border-gray p-2"></td>
+<td class="border-b border-border-gray p-2">
+<div class="bg-primary/10 text-primary p-2 rounded-lg text-[11px] border border-primary/20">
+<p class="font-bold">Workshop B</p>
+<p>10:00 - 15:00</p>
+</div>
+</td>
+<td class="border-b border-border-gray p-2"></td>
+</tr>
+<!-- Resource Row 3 (Venue Example) -->
+<tr>
+<td class="p-4 border-r border-b border-border-gray flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">meeting_room</span>
+</div>
+<div>
+<p class="font-label-md text-label-md">Grand Ballroom</p>
+<p class="text-[10px] text-on-surface-variant">Capacity: 500</p>
+</div>
+</td>
+<td class="border-b border-border-gray p-2" colspan="3">
+<div class="bg-emerald-green/10 text-emerald-green p-2 rounded-lg text-[11px] border border-emerald-green/30">
+<p class="font-bold">International Tech Summit</p>
+<p>Main Keynotes</p>
+</div>
+</td>
+<td class="border-b border-border-gray p-2"></td>
+<td class="border-b border-border-gray p-2">
+<div class="bg-emerald-green/10 text-emerald-green p-2 rounded-lg text-[11px] border border-emerald-green/30">
+<p class="font-bold">After-Party</p>
+<p>20:00 - Late</p>
+</div>
+</td>
+<td class="border-b border-border-gray p-2"></td>
+</tr>
+<!-- Resource Row 4 -->
+<tr>
+<td class="p-4 border-r border-b border-border-gray flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-primary font-bold">MA</div>
+<div>
+<p class="font-label-md text-label-md">Mark Arnell</p>
+<p class="text-[10px] text-on-surface-variant">Security Lead</p>
+</div>
+</td>
+<td class="border-b border-border-gray p-2"></td>
+<td class="border-b border-border-gray p-2"></td>
+<td class="border-b border-border-gray p-2" colspan="3">
+<div class="bg-primary/10 text-primary p-2 rounded-lg text-[11px] border border-primary/20">
+<p class="font-bold">Public Expo Days</p>
+<p>Hall 4 Perimeter</p>
+</div>
+</td>
+<td class="border-b border-border-gray p-2"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Unassigned Resources Pool -->
+<div class="col-span-3 row-span-3 bg-white rounded-xl shadow-sm border border-border-gray flex flex-col">
+<div class="p-5 border-b border-border-gray flex justify-between items-center">
+<h3 class="font-headline-md text-label-md font-bold">Unassigned Pool</h3>
+<span class="bg-surface-container text-primary px-2 py-0.5 rounded-full text-[10px] font-bold">12 Total</span>
+</div>
+<div class="p-4 flex-1 overflow-auto custom-scrollbar flex flex-col gap-3">
+<!-- Resource Item -->
+<div class="p-3 bg-background-alt rounded-xl border border-transparent hover:border-primary-container hover:bg-white transition-all cursor-grab active:cursor-grabbing group">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-white shadow-sm flex items-center justify-center overflow-hidden">
+<img alt="Resource" data-alt="A portrait of a young professional event specialist with a focused expression. She is wearing a modern black jumpsuit and a headset. The background is a brightly lit, contemporary venue with bokeh lights and architectural metal beams." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYqj3jDh37mFxnvWkvPS_3MAPZ_i9V9_ssH397qvh2g2ubIsoP-Gd0ktyqcGSlT7pskSjiQN8ljsomZl3BfrRCxJM5SaucPMmVI27SRhvmEYTaFo8q1Ce-CHskc3Fz2QudRGyzOHrvQn0VaG3X2p1hnTwOG8KVIm1imSBdwlf8g7FN-qz2lA7Kva9MRvz14GW4843DhIpqtSqFkO3d7NBd55U4-y4d-5tHm7r83hyEQ4Cw97dgEzJsh4eoBC7-UoObgiwt5DWwwm47"/>
+</div>
+<div class="flex-1">
+<p class="text-label-md font-bold">Elena Rodriguez</p>
+<p class="text-[11px] text-on-surface-variant">Hospitality Manager</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">drag_indicator</span>
+</div>
+</div>
+<!-- Resource Item -->
+<div class="p-3 bg-background-alt rounded-xl border border-transparent hover:border-primary-container hover:bg-white transition-all cursor-grab active:cursor-grabbing group">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-white shadow-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">theater_comedy</span>
+</div>
+<div class="flex-1">
+<p class="text-label-md font-bold">AV Stage Kit #4</p>
+<p class="text-[11px] text-on-surface-variant">Hardware • 4K Rig</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">drag_indicator</span>
+</div>
+</div>
+<!-- Resource Item -->
+<div class="p-3 bg-background-alt rounded-xl border border-transparent hover:border-primary-container hover:bg-white transition-all cursor-grab active:cursor-grabbing group">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-white shadow-sm flex items-center justify-center overflow-hidden">
+<img alt="Resource" data-alt="Close-up profile of a male audio engineer with salt-and-pepper hair, wearing a sleek black polo shirt. He is working at a high-tech soundboard with glowing faders in a dimly lit studio environment with warm amber accent lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-yJ_NJRRC7Xgs6T9mE0j7-eV6ySouDqQSmqUeKbqYtqJ1g6hF0LPOlGxVyta7WE_jbMEq15cTJHmEGwWt1eq9HJeD2lg9wxO6SclAMoyzTg98pwlQLh4th5WyqDu4_3QuWHnGXdSfkkk4bBBl87RZ8KH0oQvUC-h_hIxMeNtbt094dhnO_D4DyKbMEeOl4mKqpgnpXP4CahOuy1GTOz2YYvLQcJtqt0gesEmfggbcf_0ADTpSvP4PQwEW3tx_XVDgCHu54Jgcczes"/>
+</div>
+<div class="flex-1">
+<p class="text-label-md font-bold">David Chen</p>
+<p class="text-[11px] text-on-surface-variant">Audio Engineer</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">drag_indicator</span>
+</div>
+</div>
+<!-- Resource Item -->
+<div class="p-3 bg-background-alt rounded-xl border border-transparent hover:border-primary-container hover:bg-white transition-all cursor-grab active:cursor-grabbing group">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-white shadow-sm flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">local_shipping</span>
+</div>
+<div class="flex-1">
+<p class="text-label-md font-bold">Logistics Van A</p>
+<p class="text-[11px] text-on-surface-variant">Fleet • Electric</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">drag_indicator</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Draft Allocations & Conflict Panel -->
+<div class="col-span-3 row-span-3 bg-white rounded-xl shadow-sm border border-border-gray flex flex-col">
+<div class="p-5 border-b border-border-gray flex justify-between items-center">
+<h3 class="font-headline-md text-label-md font-bold">Draft Allocations</h3>
+<div class="flex gap-2">
+<span class="bg-error-container text-on-error-container px-2 py-0.5 rounded-full text-[10px] font-bold">2 Issues</span>
+</div>
+</div>
+<div class="p-4 flex-1 overflow-auto custom-scrollbar space-y-4">
+<div class="p-4 bg-error-container/20 rounded-xl border-l-4 border-error">
+<div class="flex items-center gap-2 text-error mb-2">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+<p class="text-label-sm font-bold">Double Booking Conflict</p>
+</div>
+<p class="text-body-sm text-on-surface-variant leading-snug">
+<strong>James Dubois</strong> is drafted for "Strategy Lunch" on Oct 16 while already assigned to "VIP Dinner".
+                            </p>
+<button class="mt-3 text-primary font-bold text-label-sm hover:underline">Resolve Automatically</button>
+</div>
+<div class="p-4 bg-surface-container-low rounded-xl border border-surface-variant">
+<div class="flex items-center gap-2 text-tertiary mb-2">
+<span class="material-symbols-outlined text-[18px]">drafts</span>
+<p class="text-label-sm font-bold">Pending Review</p>
+</div>
+<div class="flex items-center justify-between text-on-surface-variant">
+<span class="text-body-sm">Catering Staff (5x)</span>
+<span class="text-[10px] bg-white px-2 py-0.5 rounded border border-border-gray">Oct 18</span>
+</div>
+</div>
+</div>
+<div class="p-4 mt-auto border-t border-border-gray bg-off-white/50">
+<button class="w-full py-3 bg-inverse-surface text-white rounded-xl font-bold text-label-md active:scale-[0.98] transition-all">Publish All Changes</button>
+</div>
+</div>
+<!-- Resource Utilization Stats (Asymmetric Bottom Card) -->
+<div class="col-span-12 row-span-2 glass-panel rounded-xl shadow-lg border border-white flex items-center px-10 gap-16 relative overflow-hidden">
+<div class="absolute right-0 top-0 w-1/3 h-full opacity-10">
+
+</div>
+<div class="relative z-10 flex flex-col">
+<span class="text-on-surface-variant font-label-md uppercase tracking-wider mb-2">Efficiency Rating</span>
+<h4 class="font-display-lg text-display-lg text-primary">84%</h4>
+<p class="text-body-md text-on-surface-variant mt-2">Utilization is tracking 12% higher than last quarter.</p>
+</div>
+<div class="flex gap-12 relative z-10">
+<div class="flex flex-col">
+<p class="text-on-surface-variant font-label-sm">Active Staff</p>
+<p class="font-headline-md text-headline-md mt-1">42 / 50</p>
+<div class="w-32 h-1.5 bg-surface-variant rounded-full mt-2">
+<div class="w-[84%] h-full coral-gradient rounded-full"></div>
+</div>
+</div>
+<div class="flex flex-col">
+<p class="text-on-surface-variant font-label-sm">Venue Capacity</p>
+<p class="font-headline-md text-headline-md mt-1">92%</p>
+<div class="w-32 h-1.5 bg-surface-variant rounded-full mt-2">
+<div class="w-[92%] h-full bg-emerald-green rounded-full"></div>
+</div>
+</div>
+<div class="flex flex-col">
+<p class="text-on-surface-variant font-label-sm">Equip. Readiness</p>
+<p class="font-headline-md text-headline-md mt-1">100%</p>
+<div class="w-32 h-1.5 bg-surface-variant rounded-full mt-2">
+<div class="w-full h-full bg-tertiary rounded-full shadow-[0_0_10px_rgba(105,81,155,0.3)]"></div>
+</div>
+</div>
+</div>
+<div class="ml-auto flex items-center gap-6 relative z-10">
+<div class="text-right">
+<p class="text-label-md font-bold text-on-surface">Peak Demand</p>
+<p class="text-body-sm text-on-surface-variant">Wednesday, Oct 16</p>
+</div>
+<div class="w-16 h-16 rounded-full border-4 border-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[32px]">trending_up</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Floating Action Button (FAB) - Suppressed per rule since this is a management detail screen, but providing a subtle notification toast simulation -->
+<div class="fixed bottom-8 right-8 glass-panel border border-white p-4 rounded-2xl shadow-2xl flex items-center gap-4 translate-y-32 transition-transform duration-500 z-50" id="ai-toast">
+<div class="w-10 h-10 rounded-full coral-gradient flex items-center justify-center text-white">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-bold">AI Suggestion</p>
+<p class="text-body-sm text-on-surface-variant">Optimize Hall B staffing for tomorrow?</p>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" onclick="this.parentElement.style.transform='translateY(150%)'">close</button>
+</div>
+<script>
+        // Micro-interactions and simulation logic
+        window.addEventListener('DOMContentLoaded', () => {
+            // Show AI toast after 3 seconds
+            setTimeout(() => {
+                document.getElementById('ai-toast').style.transform = 'translateY(0)';
+            }, 3000);
+
+            // Drag and drop interaction simulation placeholder
+            const items = document.querySelectorAll('.cursor-grab');
+            items.forEach(item => {
+                item.addEventListener('mousedown', () => {
+                    item.style.scale = '0.98';
+                    item.style.opacity = '0.7';
+                });
+                item.addEventListener('mouseup', () => {
+                    item.style.scale = '1';
+                    item.style.opacity = '1';
+                });
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EventHub360 - Gantt &amp; Critical Path</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(230, 234, 240, 0.5);
+        }
+        .gantt-grid {
+            background-size: 40px 40px;
+            background-image: linear-gradient(to right, #E6EAF0 1px, transparent 1px), linear-gradient(to bottom, #E6EAF0 1px, transparent 1px);
+        }
+        .dependency-line {
+            stroke: #8c706f;
+            stroke-width: 1.5;
+            fill: none;
+            stroke-dasharray: 4;
+        }
+        .critical-path .dependency-line {
+            stroke: #ae2f34;
+            stroke-width: 2.5;
+            stroke-dasharray: 0;
+            filter: drop-shadow(0 0 4px rgba(174, 47, 52, 0.3));
+        }
+        .critical-task {
+            outline: 2px solid #ae2f34;
+            outline-offset: 2px;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#785d1f",
+                        "surface-bright": "#f8f9ff",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#3d246c",
+                        "inverse-primary": "#ffb3b0",
+                        "on-secondary-fixed": "#261a00",
+                        "surface-container-highest": "#d9e3f6",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#755a1d",
+                        "background": "#f8f9ff",
+                        "on-primary-fixed": "#410006",
+                        "sunset-orange": "#FF8A5B",
+                        "on-primary-container": "#6d0010",
+                        "tertiary-container": "#a88ede",
+                        "inverse-surface": "#27313f",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#eff4ff",
+                        "surface": "#f8f9ff",
+                        "tertiary": "#69519b",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#584140",
+                        "on-tertiary-fixed": "#240554",
+                        "tertiary-fixed-dim": "#d3bbff",
+                        "outline": "#8c706f",
+                        "inverse-on-surface": "#eaf1ff",
+                        "primary-fixed-dim": "#ffb3b0",
+                        "primary-fixed": "#ffdad8",
+                        "surface-dim": "#d0dbed",
+                        "on-surface": "#121c2a",
+                        "secondary-fixed": "#ffdea0",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#e6c27a",
+                        "outline-variant": "#e0bfbd",
+                        "surface-tint": "#ae2f34",
+                        "off-white": "#FAFAFA",
+                        "surface-variant": "#d9e3f6",
+                        "primary": "#ae2f34",
+                        "on-secondary-fixed-variant": "#5b4304",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#ff6b6b",
+                        "surface-container": "#e6eeff",
+                        "on-primary-fixed-variant": "#8c1520",
+                        "secondary-container": "#fed88e",
+                        "tertiary-fixed": "#eaddff",
+                        "border-gray": "#E6EAF0",
+                        "on-background": "#121c2a",
+                        "background-alt": "#F5F7FA",
+                        "emerald-green": "#4CAF8D",
+                        "on-tertiary-fixed-variant": "#513982",
+                        "surface-container-high": "#dee9fc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "base": "8px",
+                        "section-gap": "64px",
+                        "container-margin": "32px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "display-lg": ["Hanken Grotesk"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background font-body-md text-on-surface antialiased overflow-hidden h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface-container-lowest dark:bg-surface-dim shadow-[0_4px_20px_0_rgba(31,41,55,0.05)] z-50">
+<div class="flex justify-between items-center w-full px-gutter h-16 max-w-[1440px] mx-auto">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">EventHub360</span>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-colors duration-200 px-3 py-1 rounded-lg" href="#">Dashboard</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-colors duration-200 px-3 py-1 rounded-lg" href="#">Tasks</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-colors duration-200 px-3 py-1 rounded-lg" href="#">Calendar</a>
+<a class="text-primary dark:text-primary-fixed-dim border-b-2 border-primary dark:border-primary-fixed-dim pb-1 font-bold font-label-md text-label-md" href="#">Gantt</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-colors duration-200 px-3 py-1 rounded-lg" href="#">Milestones</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden lg:flex items-center px-4 py-2 border border-outline text-primary font-label-md text-label-md rounded-full hover:bg-surface-container-low transition-all duration-200">
+                    Add Milestone
+                </button>
+<button class="flex items-center px-6 py-2 bg-gradient-to-r from-primary to-sunset-orange text-on-primary font-label-md text-label-md rounded-full shadow-lg hover:scale-102 active:scale-98 transition-transform duration-200">
+                    Create Task
+                </button>
+<div class="flex gap-2">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<img alt="User profile" class="w-8 h-8 rounded-full border border-border-gray" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-z7PQIzz7j8WVDpSOKYBih7bpmJYsFkUZJFBC7VyeAvt-i0BxRQbayRADcXMQdo_1HFfn1xLl0f68VpqNw9re8vsgwAlvQEJz9ToagpnUQer7cNhtA8LqrXGnAGvqogaxgIKRbq1kwQcVI95MM0uCOJveFPgLkkjnAdPitGEuCsozU9d9CnAzsqGb77w2uvAOVz7xwI6LOm3ZjbWC0ht0pWRxjVV85v6YA9mIr7Jb7WSdBJmI4ABwk6fmURGaVntuFP9B6lm719y_"/>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar -->
+<aside class="bg-surface-container-low dark:bg-surface-container-high border-r border-border-gray dark:border-outline-variant w-64 flex-shrink-0 flex flex-col h-full p-4 gap-2 hidden lg:flex">
+<div class="flex items-center gap-3 mb-6 px-2">
+<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">event_available</span>
+</div>
+<div>
+<h2 class="font-headline-md text-headline-md text-primary font-bold leading-none">EventHub360</h2>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Premium Concierge</p>
+</div>
+</div>
+<nav class="space-y-1"><a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-inverse-surface rounded-xl transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">dashboard</span>
+<span class="font-label-md text-label-md">Event Workspace</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-inverse-surface rounded-xl transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">event</span>
+<span class="font-label-md text-label-md">Events</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container dark:bg-on-secondary-container text-on-secondary-container dark:text-secondary-fixed-dim rounded-xl font-bold transition-all duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">event_note</span>
+<span class="font-label-md text-label-md">Planning</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-inverse-surface rounded-xl transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">group</span>
+<span class="font-label-md text-label-md">Resources</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-inverse-surface rounded-xl transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">payments</span>
+<span class="font-label-md text-label-md">Budget</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-inverse-surface rounded-xl transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">storefront</span>
+<span class="font-label-md text-label-md">Vendors</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-inverse-surface rounded-xl transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">play_circle</span>
+<span class="font-label-md text-label-md">Execution</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-inverse-surface rounded-xl transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">description</span>
+<span class="font-label-md text-label-md">Documents</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest dark:hover:bg-inverse-surface rounded-xl transition-all duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">assessment</span>
+<span class="font-label-md text-label-md">Reporting</span>
+</a></nav>
+<div class="mt-auto pt-4 space-y-1 border-t border-border-gray">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-xl transition-all duration-200" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Help</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-highest rounded-xl transition-all duration-200" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0 bg-off-white relative overflow-hidden">
+<!-- Breadcrumbs & Controls -->
+<div class="px-8 pt-6 pb-4 flex flex-col gap-4">
+<nav class="flex items-center text-label-sm font-label-sm text-on-surface-variant gap-2">
+<span>Planning</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-primary font-bold">Gantt</span>
+</nav>
+<div class="flex flex-wrap items-center justify-between gap-4">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Timeline Strategy</h1>
+<p class="text-body-sm text-on-surface-variant">Annual Gala 2024 • Project Critical Path</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center bg-surface-container p-1 rounded-full border border-border-gray">
+<button class="px-4 py-1.5 rounded-full bg-surface-container-lowest shadow-sm text-label-md font-label-md text-primary">Week</button>
+<button class="px-4 py-1.5 rounded-full text-label-md font-label-md text-on-surface-variant hover:bg-surface-container-low">Month</button>
+<button class="px-4 py-1.5 rounded-full text-label-md font-label-md text-on-surface-variant hover:bg-surface-container-low">Quarter</button>
+</div>
+<div class="h-8 w-px bg-border-gray mx-2"></div>
+<label class="flex items-center gap-3 cursor-pointer group">
+<span class="text-label-md font-label-md text-on-surface-variant group-hover:text-primary transition-colors">Critical Path</span>
+<div class="relative inline-flex items-center cursor-pointer" onclick="toggleCriticalPath()">
+<input class="sr-only peer" id="critical-toggle" type="checkbox"/>
+<div class="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</label>
+</div>
+</div>
+</div>
+<!-- Gantt Workspace -->
+<div class="flex-1 flex overflow-hidden border-t border-border-gray m-8 mb-0 rounded-t-3xl glass-panel shadow-lg" id="gantt-container">
+<!-- Task List (Left Sidebar) -->
+<div class="w-80 flex-shrink-0 border-r border-border-gray flex flex-col bg-white/50">
+<div class="p-4 border-b border-border-gray flex items-center justify-between bg-surface-container-lowest/80">
+<span class="text-label-md font-label-md uppercase tracking-wider text-on-surface-variant">Task Name</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">sort</span>
+</div>
+<div class="flex-1 overflow-y-auto overflow-x-hidden">
+<!-- Task Rows -->
+<div class="task-sidebar-row h-[60px] px-4 flex items-center border-b border-border-gray hover:bg-primary/5 transition-colors cursor-pointer group" data-task-id="t1">
+<div class="flex items-center gap-3 overflow-hidden">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-primary">drag_indicator</span>
+<span class="font-label-md text-label-md truncate text-on-surface">Venue Selection &amp; Booking</span>
+</div>
+</div>
+<div class="task-sidebar-row h-[60px] px-4 flex items-center border-b border-border-gray hover:bg-primary/5 transition-colors cursor-pointer group" data-task-id="t2">
+<div class="flex items-center gap-3 overflow-hidden">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-primary">drag_indicator</span>
+<span class="font-label-md text-label-md truncate text-on-surface">Concept &amp; Theme Design</span>
+</div>
+</div>
+<div class="task-sidebar-row h-[60px] px-4 flex items-center border-b border-border-gray hover:bg-primary/5 transition-colors cursor-pointer group" data-task-id="t3">
+<div class="flex items-center gap-3 overflow-hidden">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-primary">drag_indicator</span>
+<span class="font-label-md text-label-md truncate text-on-surface">Vendor Procurement</span>
+</div>
+</div>
+<div class="task-sidebar-row h-[60px] px-4 flex items-center border-b border-border-gray hover:bg-primary/5 transition-colors cursor-pointer group" data-task-id="t4">
+<div class="flex items-center gap-3 overflow-hidden">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-primary">drag_indicator</span>
+<span class="font-label-md text-label-md truncate text-on-surface">Marketing &amp; Invitations</span>
+</div>
+</div>
+<div class="task-sidebar-row h-[60px] px-4 flex items-center border-b border-border-gray hover:bg-primary/5 transition-colors cursor-pointer group" data-task-id="t5">
+<div class="flex items-center gap-3 overflow-hidden">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-primary">drag_indicator</span>
+<span class="font-label-md text-label-md truncate text-on-surface">Catering Menu Finalization</span>
+</div>
+</div>
+<div class="task-sidebar-row h-[60px] px-4 flex items-center border-b border-border-gray hover:bg-primary/5 transition-colors cursor-pointer group" data-task-id="t6">
+<div class="flex items-center gap-3 overflow-hidden">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant group-hover:text-primary">drag_indicator</span>
+<span class="font-label-md text-label-md truncate text-on-surface">Logistics &amp; Run of Show</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Timeline View (Right side) -->
+<div class="flex-1 overflow-auto relative select-none" id="timeline-scroll">
+<!-- Timeline Header -->
+<div class="sticky top-0 z-20 flex bg-surface-container-lowest/90 backdrop-blur-md border-b border-border-gray h-12">
+<div class="flex shrink-0">
+<!-- Week 1 -->
+<div class="w-[280px] border-r border-border-gray flex items-center justify-center font-label-md text-label-md text-on-surface-variant bg-surface-container-low/30">May 01 - May 07</div>
+<!-- Week 2 -->
+<div class="w-[280px] border-r border-border-gray flex items-center justify-center font-label-md text-label-md text-on-surface-variant">May 08 - May 14</div>
+<!-- Week 3 -->
+<div class="w-[280px] border-r border-border-gray flex items-center justify-center font-label-md text-label-md text-on-surface-variant bg-surface-container-low/30">May 15 - May 21</div>
+<!-- Week 4 -->
+<div class="w-[280px] border-r border-border-gray flex items-center justify-center font-label-md text-label-md text-on-surface-variant">May 22 - May 28</div>
+</div>
+</div>
+<!-- Gantt Grid Surface -->
+<div class="relative gantt-grid" style="width: 1120px; height: 360px;">
+<!-- Dependency SVG Overlay -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none z-10" id="dependency-svg">
+<!-- Path for t1 -> t3 -->
+<path class="dependency-line critical-item hidden" d="M 220 30 L 235 30 L 235 150 L 245 150"></path>
+<path class="dependency-line" d="M 220 30 L 235 30 L 235 150 L 245 150"></path>
+<!-- Path for t2 -> t3 -->
+<path class="dependency-line critical-item hidden" d="M 180 90 L 200 90 L 200 150 L 245 150"></path>
+<path class="dependency-line" d="M 180 90 L 200 90 L 200 150 L 245 150"></path>
+<!-- Path for t3 -> t5 -->
+<path class="dependency-line critical-item hidden" d="M 460 150 L 480 150 L 480 270 L 515 270"></path>
+<path class="dependency-line" d="M 460 150 L 480 150 L 480 270 L 515 270"></path>
+<!-- Path for t3 -> t6 -->
+<path class="dependency-line critical-item hidden" d="M 460 150 L 480 150 L 480 330 L 635 330"></path>
+<path class="dependency-line" d="M 460 150 L 480 150 L 480 330 L 635 330"></path>
+</svg>
+<!-- Gantt Bars -->
+<div class="absolute w-full">
+<!-- Task 1 Bar -->
+<div class="absolute top-[15px] left-[40px] w-[180px] h-[30px] rounded-full bg-emerald-green/20 border border-emerald-green/40 flex items-center px-4 group transition-all critical-task-element" data-task="t1">
+<div class="w-2 h-2 rounded-full bg-emerald-green mr-2"></div>
+<span class="text-label-sm font-label-sm text-on-surface truncate">Venue Selection</span>
+<div class="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-white border-2 border-emerald-green rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<!-- Task 2 Bar -->
+<div class="absolute top-[75px] left-[20px] w-[160px] h-[30px] rounded-full bg-sunset-orange/20 border border-sunset-orange/40 flex items-center px-4 group transition-all critical-task-element" data-task="t2">
+<div class="w-2 h-2 rounded-full bg-sunset-orange mr-2"></div>
+<span class="text-label-sm font-label-sm text-on-surface truncate">Theme Design</span>
+</div>
+<!-- Task 3 Bar (Middle dependency) -->
+<div class="absolute top-[135px] left-[250px] w-[210px] h-[30px] rounded-full bg-primary/20 border border-primary/40 flex items-center px-4 group transition-all critical-task-element" data-task="t3">
+<div class="w-2 h-2 rounded-full bg-primary mr-2"></div>
+<span class="text-label-sm font-label-sm text-on-surface truncate">Procurement phase</span>
+</div>
+<!-- Task 4 Bar (Parallel) -->
+<div class="absolute top-[195px] left-[150px] w-[350px] h-[30px] rounded-full bg-secondary/20 border border-secondary/40 flex items-center px-4 group transition-all" data-task="t4">
+<div class="w-2 h-2 rounded-full bg-secondary mr-2"></div>
+<span class="text-label-sm font-label-sm text-on-surface truncate">Marketing Campaign</span>
+</div>
+<!-- Milestone 1 -->
+<div class="absolute top-[210px] left-[520px] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+<div class="w-6 h-6 rotate-45 bg-primary border-4 border-white shadow-md mb-1"></div>
+<span class="text-[10px] font-bold text-primary uppercase whitespace-nowrap">Vendor Launch</span>
+</div>
+<!-- Task 5 Bar -->
+<div class="absolute top-[255px] left-[520px] w-[140px] h-[30px] rounded-full bg-tertiary/20 border border-tertiary/40 flex items-center px-4 group transition-all critical-task-element" data-task="t5">
+<div class="w-2 h-2 rounded-full bg-tertiary mr-2"></div>
+<span class="text-label-sm font-label-sm text-on-surface truncate">Catering Prep</span>
+</div>
+<!-- Task 6 Bar -->
+<div class="absolute top-[315px] left-[640px] w-[280px] h-[30px] rounded-full bg-on-surface-variant/20 border border-on-surface-variant/40 flex items-center px-4 group transition-all critical-task-element" data-task="t6">
+<div class="w-2 h-2 rounded-full bg-on-surface-variant mr-2"></div>
+<span class="text-label-sm font-label-sm text-on-surface truncate">Logistics Planning</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Stats -->
+<div class="mx-8 mt-4 p-4 glass-panel rounded-2xl flex items-center justify-between">
+<div class="flex gap-8">
+<div class="flex flex-col">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase">Total Tasks</span>
+<span class="text-headline-md font-headline-md text-on-surface">42</span>
+</div>
+<div class="flex flex-col">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase">Completion</span>
+<span class="text-headline-md font-headline-md text-emerald-green">68%</span>
+</div>
+<div class="flex flex-col">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase">Time remaining</span>
+<span class="text-headline-md font-headline-md text-secondary">14 Days</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex -space-x-3">
+<img class="w-8 h-8 rounded-full border-2 border-white" data-alt="Corporate headshot of a creative director in a professional setting, warm lighting, premium boutique office aesthetic, soft focus background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2H0-xJvfuMAdOW4aGDo1VqD4w3NLg4Ttlhifx0DvphoY4kfHfjt_kFmJZkv7WNL5JI63JlkVOrU-5vTcfo_T3dQ8uOtuEM1Ic5H78o8awjLBw3fRllaNTLW00Hn4nO2TQ3IBTkDkdks0Xbd5_wCUCVNVUf2c6fehjFp3fE9l_6xa2_FX5rlL08lrvG35El2xWgU_YjMklYgZkphkLVC2qNRVZuAjcd_QJhwlmBdraHKVr32BL81XnHDmz9TzSGmLCbuaD_7QXMKGW"/>
+<img class="w-8 h-8 rounded-full border-2 border-white" data-alt="Portrait of a young event coordinator with a friendly smile, modern workspace, natural morning lighting, clean and professional look with a soft color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA195xoBszNbfn0R6R7kescEq8D8I8iajKYhptmJIw1cDfklN3pl4bYCB8Y8BWo3kyP02K2jl2Uog5rb_xOY5tkjENXLzY4V4VS8P9MxpLjXqr3DJduviIzdCWYcMz2opWa4rMKryzbYBjRoL9onvdEZtCGhbOJRGf-PNvt8GNYmyQ5VxZuCrnhvKlDd6D9lt2HhvDz_w7uc-VBS_5twSc8lrcx6rX8G48b4kDDAu4mHr5luEMldPX9RO84nXqx-wy0Epnv5TAqYe_U"/>
+<img class="w-8 h-8 rounded-full border-2 border-white" data-alt="High-end professional headshot of a project manager, focused expression, minimalist office environment with glass elements, soft studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCATcvn0vyubZqpp2F8K7H8mQRgHjx_VpJcjimwVXDlOhBKOcBa4d6Vn362D6QUGP_YRgcLRkk25NXCdUlnTLwcxx9UencuMCQUvMRgktnnma1ksyImsILrwm9yzxN2_OBUsnsb5hdd8JVPeU1ippSssl6Hf1M2wM3Fj4Z_1rdHIz3yHmnbq_J3ZGrN0WD9RYXDrxYGLhzIB29QImr6tdlMLYxp-RhBFcDRFjNL2YrDT5xOfU5txWHJY4ngsp3AGSEIeh5GkqGoOvwW"/>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-surface-container-highest flex items-center justify-center text-label-sm font-bold text-on-surface-variant">+8</div>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 hover:bg-surface-container-high rounded-xl transition-colors">
+<span class="material-symbols-outlined text-[20px]">share</span>
+<span class="font-label-md text-label-md">Export View</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+<!-- Background Decoration -->
+<div class="fixed top-0 right-0 -z-10 opacity-20 pointer-events-none">
+</div>
+<script>
+        function toggleCriticalPath() {
+            const toggle = document.getElementById('critical-toggle');
+            const svg = document.getElementById('dependency-svg');
+            const criticalItems = document.querySelectorAll('.critical-item');
+            const criticalTaskElements = document.querySelectorAll('.critical-task-element');
+            const taskSidebarRows = document.querySelectorAll('.task-sidebar-row');
+
+            if (toggle.checked) {
+                svg.classList.add('critical-path');
+                criticalItems.forEach(item => item.classList.remove('hidden'));
+                criticalTaskElements.forEach(item => {
+                    item.classList.add('critical-task');
+                    const taskId = item.getAttribute('data-task');
+                    const sidebarRow = document.querySelector(`.task-sidebar-row[data-task-id="${taskId}"]`);
+                    if(sidebarRow) sidebarRow.classList.add('bg-primary/10', 'border-l-4', 'border-l-primary');
+                });
+            } else {
+                svg.classList.remove('critical-path');
+                criticalItems.forEach(item => item.classList.add('hidden'));
+                criticalTaskElements.forEach(item => {
+                    item.classList.remove('critical-task');
+                    const taskId = item.getAttribute('data-task');
+                    const sidebarRow = document.querySelector(`.task-sidebar-row[data-task-id="${taskId}"]`);
+                    if(sidebarRow) sidebarRow.classList.remove('bg-primary/10', 'border-l-4', 'border-l-primary');
+                });
+            }
+        }
+
+        // Horizontal scroll sync for header
+        const timelineScroll = document.getElementById('timeline-scroll');
+        timelineScroll.addEventListener('scroll', () => {
+            // Header is sticky, so it handles vertical scroll automatically via sticky top-0
+            // but we can add horizontal highlights here if needed
+        });
+
+        // Hover sync between sidebar and timeline
+        document.querySelectorAll('.task-sidebar-row').forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                const taskId = row.getAttribute('data-task-id');
+                const bar = document.querySelector(`.critical-task-element[data-task="${taskId}"], [data-task="${taskId}"]`);
+                if(bar) bar.style.transform = 'scale(1.05)';
+            });
+            row.addEventListener('mouseleave', () => {
+                const taskId = row.getAttribute('data-task-id');
+                const bar = document.querySelector(`.critical-task-element[data-task="${taskId}"], [data-task="${taskId}"]`);
+                if(bar) bar.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body></html>

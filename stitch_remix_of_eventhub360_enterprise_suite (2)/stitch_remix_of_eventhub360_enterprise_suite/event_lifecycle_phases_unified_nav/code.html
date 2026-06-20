@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Event Phases | EventHub360</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .timeline-connector {
+            background: linear-gradient(to bottom, #ae2f34 50%, transparent 50%);
+            background-size: 1px 20px;
+        }
+        .gradient-button {
+            background: linear-gradient(135deg, #ae2f34 0%, #FF8A5B 100%);
+        }
+        .step-active-glow {
+            box-shadow: 0 0 20px rgba(174, 47, 52, 0.2);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                "error-container": "#ffdad6",
+                "on-primary-container": "#6d0010",
+                "on-background": "#121c2a",
+                "off-white": "#FAFAFA",
+                "inverse-surface": "#27313f",
+                "tertiary-fixed": "#eaddff",
+                "surface-container-highest": "#d9e3f6",
+                "primary-container": "#ff6b6b",
+                "on-primary-fixed-variant": "#8c1520",
+                "sunset-orange": "#FF8A5B",
+                "on-error-container": "#93000a",
+                "surface": "#f8f9ff",
+                "surface-container-high": "#dee9fc",
+                "surface-bright": "#f8f9ff",
+                "surface-container": "#e6eeff",
+                "on-tertiary-fixed-variant": "#513982",
+                "surface-dim": "#d0dbed",
+                "primary-fixed-dim": "#ffb3b0",
+                "on-tertiary-fixed": "#240554",
+                "primary": "#ae2f34",
+                "on-tertiary": "#ffffff",
+                "on-secondary-container": "#785d1f",
+                "emerald-green": "#4CAF8D",
+                "on-secondary-fixed": "#261a00",
+                "on-primary": "#ffffff",
+                "background-alt": "#F5F7FA",
+                "background": "#f8f9ff",
+                "surface-container-low": "#eff4ff",
+                "inverse-primary": "#ffb3b0",
+                "border-gray": "#E6EAF0",
+                "on-surface-variant": "#584140",
+                "on-secondary": "#ffffff",
+                "secondary": "#755a1d",
+                "on-primary-fixed": "#410006",
+                "on-secondary-fixed-variant": "#5b4304",
+                "secondary-fixed": "#ffdea0",
+                "outline-variant": "#e0bfbd",
+                "tertiary-fixed-dim": "#d3bbff",
+                "error": "#ba1a1a",
+                "secondary-fixed-dim": "#e6c27a",
+                "primary-fixed": "#ffdad8",
+                "on-surface": "#121c2a",
+                "on-error": "#ffffff",
+                "tertiary": "#69519b",
+                "outline": "#8c706f",
+                "tertiary-container": "#a88ede",
+                "surface-variant": "#d9e3f6",
+                "surface-tint": "#ae2f34",
+                "secondary-container": "#fed88e",
+                "inverse-on-surface": "#eaf1ff",
+                "on-tertiary-container": "#3d246c",
+                "surface-container-lowest": "#ffffff"
+              },
+              "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+              },
+              "spacing": {
+                "container-margin": "32px",
+                "base": "8px",
+                "section-gap": "64px",
+                "gutter": "24px"
+              },
+              "fontFamily": {
+                "display-lg": ["Hanken Grotesk"],
+                "headline-lg": ["Hanken Grotesk"],
+                "label-md": ["Inter"],
+                "headline-md": ["Hanken Grotesk"],
+                "body-md": ["Inter"],
+                "body-lg": ["Inter"],
+                "display-lg-mobile": ["Hanken Grotesk"],
+                "body-sm": ["Inter"],
+                "label-sm": ["Inter"]
+              },
+              "fontSize": {
+                "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+              }
+            }
+          }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+<!-- TopNavBar (Execution) -->
+<nav class="flex justify-between items-center w-full h-16 px-gutter fixed top-0 z-50 ml-0 md:ml-64 bg-surface/60 backdrop-blur-xl border-b border-border-gray shadow-sm">
+<div class="flex items-center gap-gutter">
+<h1 class="font-headline-md text-headline-md text-primary font-bold">EventHub360</h1>
+<div class="hidden lg:flex items-center gap-6 ml-8"><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" href="#">Overview</a><a class="font-label-md text-label-md text-primary border-b-2 border-primary pb-1" href="#">Phases</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" href="#">Team</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" href="#">Timeline</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" href="#">Planning</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" href="#">Resources</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" href="#">Budget</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" href="#">Vendors</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" href="#">Documents</a><a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" href="#">Reports</a></div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container transition-colors rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container transition-colors rounded-full">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+<button class="hidden md:block px-6 py-2 gradient-button text-white font-label-md rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all">
+                Create Event
+            </button>
+</div>
+</nav>
+<!-- SideNavBar (Updated Hierarchy) -->
+<aside class="hidden md:flex flex-col h-screen fixed left-0 top-0 py-base px-gutter w-64 bg-surface-container-low shadow-sm z-40 overflow-y-auto">
+<div class="mb-10 mt-4 px-4"><span class="font-headline-md text-headline-md font-bold text-primary block">EventHub360</span><span class="text-label-sm text-on-surface-variant opacity-70">Concierge Suite</span></div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 p-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard_customize</span>
+<span class="font-label-md">Event Workspace</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-xl text-primary font-bold border-r-4 border-primary bg-surface-container transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-md">Events</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">event_note</span>
+<span class="font-label-md">Planning</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-md">Resources</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md">Budget</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-label-md">Vendors</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">play_circle</span>
+<span class="font-label-md">Execution</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md">Documents</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-label-md">Reporting</span>
+</a>
+</nav>
+<div class="mt-8 space-y-2 border-t border-border-gray pt-6 mb-4">
+<a class="flex items-center gap-3 p-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md">Help</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<span class="material-symbols-outlined">archive</span>
+<span class="font-label-md">Archive</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="md:ml-64 pt-24 px-gutter pb-section-gap">
+<div class="max-w-[1200px] mx-auto">
+<!-- Page Header (Updated Breadcrumbs) -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
+<div>
+<nav class="flex text-label-sm text-on-surface-variant mb-2 gap-2"><span class="">Events</span><span class="material-symbols-outlined text-[14px]">chevron_right</span><span class="">Summer Gala 2024</span><span class="material-symbols-outlined text-[14px]">chevron_right</span><span class="font-bold text-primary">Phases</span></nav>
+<h2 class="font-display-lg text-display-lg text-on-surface">Event Phases</h2>
+<p class="text-body-lg text-on-surface-variant mt-2">Manage the sequential stages of your event lifecycle.</p>
+</div>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 px-5 py-2.5 bg-surface-container-highest text-on-surface font-label-md rounded-xl hover:bg-surface-variant transition-colors border border-border-gray">
+<span class="material-symbols-outlined text-[20px]">edit</span>
+                        Edit Flow
+                    </button>
+<button class="flex items-center gap-2 px-5 py-2.5 bg-primary text-white font-label-md rounded-xl hover:shadow-lg transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                        Add Phase
+                    </button>
+</div>
+</div>
+<!-- Dashboard Stats Summary -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-12">
+<div class="bg-white p-6 rounded-[24px] shadow-sm border border-border-gray">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-primary-container/10 rounded-2xl text-primary">
+<span class="material-symbols-outlined">hourglass_top</span>
+</div>
+<span class="text-label-sm text-on-surface-variant">Progress</span>
+</div>
+<div class="text-headline-md font-bold">Phase 3 of 5</div>
+<div class="w-full bg-surface-container-low h-2 rounded-full mt-4">
+<div class="bg-primary h-2 rounded-full" style="width: 60%"></div>
+</div>
+</div>
+<div class="bg-white p-6 rounded-[24px] shadow-sm border border-border-gray">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-emerald-green/10 rounded-2xl text-emerald-green">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+<span class="text-label-sm text-on-surface-variant">Status</span>
+</div>
+<div class="text-headline-md font-bold">2 Complete</div>
+<p class="text-body-sm text-on-surface-variant mt-1">Next: Technical Logistics</p>
+</div>
+<div class="bg-white p-6 rounded-[24px] shadow-sm border border-border-gray">
+<div class="flex justify-between items-start mb-4">
+<div class="p-3 bg-secondary/10 rounded-2xl text-secondary">
+<span class="material-symbols-outlined">event</span>
+</div>
+<span class="text-label-sm text-on-surface-variant">Deadline</span>
+</div>
+<div class="text-headline-md font-bold">14 Days Left</div>
+<p class="text-body-sm text-on-surface-variant mt-1">Until Execution Phase</p>
+</div>
+</div>
+<!-- Timeline Section -->
+<div class="relative">
+<!-- Legend Area -->
+<div class="flex flex-wrap gap-6 mb-8 p-4 bg-surface-container-low rounded-xl border border-border-gray"><div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-emerald-green"></span><span class="text-label-sm text-on-surface-variant">Complete</span></div><div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-primary animate-pulse"></span><span class="text-label-sm text-on-surface-variant">Active</span></div><div class="flex items-center gap-2"><span class="w-3 h-3 rounded-full bg-surface-container-highest"></span><span class="text-label-sm text-on-surface-variant">Pending</span></div><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[16px] text-on-surface-variant">lock</span><span class="text-label-sm text-on-surface-variant">Locked</span></div></div><div class="absolute left-[39px] top-8 bottom-8 w-0.5 timeline-connector hidden md:block"></div>
+<div class="space-y-8 relative">
+<!-- Phase 1: Inception (Complete) -->
+<div class="flex flex-col md:flex-row gap-8 items-start group">
+<div class="hidden md:flex flex-col items-center pt-2">
+<div class="w-20 h-20 rounded-full bg-emerald-green text-white flex items-center justify-center z-10 border-4 border-white shadow-md transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined text-[32px]">check</span>
+</div>
+</div>
+<div class="flex-1 bg-white p-8 rounded-[24px] shadow-sm border border-border-gray hover:shadow-md transition-all duration-300">
+<div class="flex flex-wrap justify-between items-start gap-4 mb-6">
+<div>
+<span class="px-3 py-1 bg-emerald-green/10 text-emerald-green text-label-sm rounded-full mb-3 inline-block">Complete</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Phase 01: Inception &amp; Discovery</h3>
+<p class="text-body-md text-on-surface-variant mt-2">Initial concept design, stakeholder interviews, and feasibility analysis.</p>
+</div>
+<div class="flex -space-x-3 overflow-hidden">
+<img alt="" class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDT5PwnIea2kLO77JSKbMqxmjJDpe8JAs28ck00mu-nmZNeLa5Bn7oCJ2HcUWP4oU-A0Ab-Hek0RRlHyYqFvsh95ciYlLx6iXdPMGU8p9kEdpIOzZLHjuyvn4spKPUyjiVUXzj0hVxRzflx5y7oWk2ResAKrLD19qUGQyA_Sovenu0ycE1a7BRsp3ooq0UoGKa0hBg2mccO5XzzThOnRNVi8YPTiHlbw8nvYRjIEPqguAYVpZOs11AeTfTKEO7E8NuoBNUTyYaaCso3"/>
+<img alt="" class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEA2k8tPNtEWnJCvhEcbn5Zm2_lsnGpQujRjTNre65h0lHG3Npx5my8NK6Uw2tq9XJaurFdWOfsteQhhRV3vpp8TslVt-praiAoObYTKe0tVX7KcE08wTM-j1lUHKtitFqqpDYlmiLVkJvu4RRkYzmVjG3RZfWi7Wvxxw8__GazBbWFQ9vGy3SVVp6lt02Jks6bgkKMKLqGVJVPXojSDyek15LdHzcPWZPw4g1ZWqQ3TbSVsSQE7bimz1tgrYdDJ8sJnLGgYKgr3NV"/>
+</div>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t border-border-gray">
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Assigned Lead</p>
+<p class="font-label-md text-on-surface">Sarah Mitchell</p>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Start Date</p>
+<p class="font-label-md text-on-surface">Oct 12, 2023</p>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">End Date</p>
+<p class="font-label-md text-on-surface">Oct 30, 2023</p>
+</div>
+<div class="text-right"><button class="text-on-surface-variant hover:text-primary font-label-md mr-4">Assign Team</button>
+<button class="text-primary hover:underline font-label-md">View Docs</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Phase 2: Planning (Complete) -->
+<div class="flex flex-col md:flex-row gap-8 items-start group">
+<div class="hidden md:flex flex-col items-center pt-2">
+<div class="w-20 h-20 rounded-full bg-emerald-green text-white flex items-center justify-center z-10 border-4 border-white shadow-md transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined text-[32px]">check</span>
+</div>
+</div>
+<div class="flex-1 bg-white p-8 rounded-[24px] shadow-sm border border-border-gray hover:shadow-md transition-all duration-300">
+<div class="flex flex-wrap justify-between items-start gap-4 mb-6">
+<div>
+<span class="px-3 py-1 bg-emerald-green/10 text-emerald-green text-label-sm rounded-full mb-3 inline-block">Complete</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Phase 02: Strategic Planning</h3>
+<p class="text-body-md text-on-surface-variant mt-2">Budget allocation, vendor selection, and project roadmap finalization.</p>
+</div>
+<div class="flex -space-x-3 overflow-hidden">
+<img alt="" class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1GSvQPLV_5tPXq93bK4h5BXm_0qsRnCw6FLztscv-hEo0jLSjcKcxl463Zl0ekUwoPxAGZoH1TChiKuCXWQ9p2ksIsEp2aoRbs-jbnCJIcaiaTV35kWjXqibqKB4ypBAJrNyUJ3IUY5KbZTVTftu8SyAzUzTYKI_PRM_URENh4O1ItZrlHB1EVw33yXZ1HniMXyVo_M0R1uRh9URa-UynQqxJ7FT9CurB_3jk28XhE_S3TMOTR0BvQxYIlvMYYZz3UT4XnHIc08ab"/>
+</div>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t border-border-gray">
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Assigned Lead</p>
+<p class="font-label-md text-on-surface">Marcus Chen</p>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Start Date</p>
+<p class="font-label-md text-on-surface">Nov 05, 2023</p>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">End Date</p>
+<p class="font-label-md text-on-surface">Dec 15, 2023</p>
+</div>
+<div class="text-right"><button class="text-on-surface-variant hover:text-primary font-label-md mr-4">Assign Team</button>
+<button class="text-primary hover:underline font-label-md">View Budget</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Phase 3: Logistics (Active) -->
+<div class="flex flex-col md:flex-row gap-8 items-start group">
+<div class="hidden md:flex flex-col items-center pt-2">
+<div class="w-20 h-20 rounded-full bg-primary text-white flex items-center justify-center z-10 border-4 border-white shadow-md step-active-glow animate-pulse">
+<span class="material-symbols-outlined text-[32px]">sync</span>
+</div>
+</div>
+<div class="flex-1 bg-white p-8 rounded-[24px] shadow-lg border-2 border-primary/20 hover:shadow-xl transition-all duration-300 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 -mr-16 -mt-16 bg-primary/5 rounded-full pointer-events-none"></div>
+<div class="flex flex-wrap justify-between items-start gap-4 mb-6">
+<div>
+<span class="px-3 py-1 bg-primary/10 text-primary text-label-sm rounded-full mb-3 inline-block font-bold">Active Phase</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Phase 03: Technical Logistics</h3>
+<p class="text-body-md text-on-surface-variant mt-2">Venue setup coordination, AV equipment rental, and staff briefing sessions.</p>
+</div>
+<div class="flex -space-x-3 overflow-hidden">
+<img alt="" class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnxn__7bLNZ0JdRS69R8Hi0j_-Rq_JqCYSoQ9AC4Cm-AAAaIKmnhuETzybE2e_hS4aHmMQH7uCECkWS7mAJPPIc2eFdTCWRvku6_Y-a6PGmdnPXHATgGbdXKcVuVepMvDoKIzJX2CmyeivF9URGfEO2U74zpekriadDq-kVW33I7q5JCqA34K6Ekn3w6wC_MV-s87w_AIQGFcnwU_Gu9PH053qX80rp8SlAAWCnxRL_mhlF-5QEqJD7iADb1BYlgQOMFTTqakMWqnv"/>
+<img alt="" class="inline-block h-10 w-10 rounded-full ring-2 ring-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIKftQyKZUUYkSZU7aRHEuXDeJdp8Xwpv-6078wBlCb8GkRyF4Mn-d7b1T94Ho1odkqGX6qURC7uW_dEMF0_aC3UxqdVH3YCsmPlL6RVoNEHl7P6gTMMYmHhKeCy7zuPUoqPLYNJiOu5YMNaP_vARk8QHld8UCl4_zPsBUd3kUr-Gw9MtNmUDMlF88CpFakXVC_W69xbfh0ZgYMk_HnyNTQcR_XKVKLUZLAPjRH9Ot3bMyNdHoZ2yfvqLdv2dkl7gKOC3XbPCotk1Z"/>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8 bg-background-alt p-5 rounded-2xl">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-green">check_box</span>
+<span class="text-body-md">Venue Contract Signed</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">pending_actions</span>
+<span class="text-body-md">AV Rental (In Progress)</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface-variant/40">check_box_outline_blank</span>
+<span class="text-body-md text-on-surface-variant/60">Staff Training</span>
+</div>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t border-border-gray">
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Assigned Lead</p>
+<p class="font-label-md text-on-surface">Elena Rodriguez</p>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Start Date</p>
+<p class="font-label-md text-on-surface">Jan 02, 2024</p>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Target End</p>
+<p class="font-label-md text-on-surface">Feb 15, 2024</p>
+</div>
+<div class="text-right"><button class="text-on-surface-variant hover:text-primary font-label-md mr-4">Assign Team</button>
+<button class="px-4 py-2 bg-primary text-white text-label-sm rounded-lg hover:bg-on-primary-container transition-colors">Manage Tasks</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Phase 4: Execution (Pending) -->
+<div class="flex flex-col md:flex-row gap-8 items-start group">
+<div class="hidden md:flex flex-col items-center pt-2">
+<div class="w-20 h-20 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center z-10 border-4 border-white shadow-sm transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined text-[32px]">event_available</span>
+</div>
+</div>
+<div class="flex-1 bg-white/60 p-8 rounded-[24px] shadow-sm border border-border-gray opacity-70 hover:opacity-100 transition-all duration-300">
+<div class="flex flex-wrap justify-between items-start gap-4 mb-6">
+<div>
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-label-sm rounded-full mb-3 inline-block">Pending</span>
+<h3 class="font-headline-md text-headline-md text-on-surface">Phase 04: Event Execution</h3>
+<p class="text-body-md text-on-surface-variant mt-2">Live event management, guest experience handling, and real-time troubleshooting.</p>
+</div>
+<div class="p-2 bg-surface-container-low rounded-xl">
+<span class="material-symbols-outlined text-on-surface-variant">lock</span>
+</div>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t border-border-gray">
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Assigned Lead</p>
+<p class="font-label-md text-on-surface">David Vance</p>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">Start Date</p>
+<p class="font-label-md text-on-surface">Mar 10, 2024</p>
+</div>
+<div>
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider mb-1">End Date</p>
+<p class="font-label-md text-on-surface">Mar 12, 2024</p>
+</div>
+<div class="text-right">
+<button class="text-on-surface-variant/40 cursor-not-allowed font-label-md">Details</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bento Grid Section: Phase Insights -->
+<div class="mt-section-gap">
+<h3 class="font-headline-lg text-headline-lg text-on-surface mb-8">Phase Efficiency &amp; Insights</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Velocity Card -->
+<div class="md:col-span-2 bg-white p-8 rounded-[24px] border border-border-gray shadow-sm flex flex-col justify-between overflow-hidden relative">
+<div class="relative z-10">
+<h4 class="font-headline-md text-headline-md mb-2">Phase Velocity</h4>
+<p class="text-body-md text-on-surface-variant">Comparison of planned vs. actual completion time across phases.</p>
+</div>
+<div class="mt-8 flex items-end gap-6 h-48 relative z-10">
+<div class="flex-1 flex flex-col items-center">
+<div class="w-full bg-surface-container-high rounded-t-xl h-[80%] relative group">
+<div class="absolute bottom-0 w-full bg-emerald-green rounded-t-xl h-[95%] transition-all duration-500 group-hover:brightness-110"></div>
+</div>
+<span class="text-label-sm mt-3">Inception</span>
+</div>
+<div class="flex-1 flex flex-col items-center">
+<div class="w-full bg-surface-container-high rounded-t-xl h-[70%] relative group">
+<div class="absolute bottom-0 w-full bg-emerald-green rounded-t-xl h-[100%] transition-all duration-500 group-hover:brightness-110"></div>
+</div>
+<span class="text-label-sm mt-3">Planning</span>
+</div>
+<div class="flex-1 flex flex-col items-center">
+<div class="w-full bg-surface-container-high rounded-t-xl h-[90%] relative group">
+<div class="absolute bottom-0 w-full bg-primary rounded-t-xl h-[60%] transition-all duration-500 group-hover:brightness-110 animate-pulse"></div>
+</div>
+<span class="text-label-sm mt-3">Logistics</span>
+</div>
+<div class="flex-1 flex flex-col items-center">
+<div class="w-full bg-surface-container-high rounded-t-xl h-[50%]"></div>
+<span class="text-label-sm mt-3">Execution</span>
+</div>
+</div>
+</div>
+<!-- Action Card -->
+<div class="bg-primary text-white p-8 rounded-[24px] shadow-lg flex flex-col justify-between overflow-hidden relative group">
+<div class="absolute -right-12 -bottom-12 w-48 h-48 bg-white/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
+<div>
+<span class="material-symbols-outlined text-[48px] mb-6">bolt</span>
+<h4 class="font-headline-md text-headline-md leading-tight">Expedite Current Phase</h4>
+<p class="text-body-md text-white/80 mt-2">Running behind schedule? Generate a resource reallocation plan instantly.</p>
+</div>
+<button class="mt-8 py-3 bg-white text-primary font-label-md rounded-xl hover:bg-off-white transition-colors">Start Optimization</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB -->
+<button class="fixed bottom-10 right-10 w-16 h-16 rounded-full gradient-button text-white shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined text-[32px]">add</span>
+</button>
+<!-- Overlay Background for Modal -->
+<div class="fixed inset-0 bg-black/20 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-gutter" id="modal-overlay">
+<div class="glass-panel w-full max-w-lg p-8 rounded-[32px] border border-white/40 shadow-2xl scale-95 transition-transform duration-300">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-md text-headline-md">Add New Phase</h3>
+<button class="p-2 hover:bg-black/5 rounded-full" onclick="toggleModal()"><span class="material-symbols-outlined">close</span></button>
+</div>
+<div class="space-y-6">
+<div>
+<label class="block text-label-sm text-on-surface-variant uppercase mb-2">Phase Title</label>
+<input class="w-full bg-background-alt border-none rounded-xl p-4 focus:ring-2 focus:ring-primary focus:bg-white transition-all" placeholder="e.g. Wrap-up &amp; Reporting" type="text"/>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block text-label-sm text-on-surface-variant uppercase mb-2">Start Date</label>
+<input class="w-full bg-background-alt border-none rounded-xl p-4 focus:ring-2 focus:ring-primary transition-all" type="date"/>
+</div>
+<div>
+<label class="block text-label-sm text-on-surface-variant uppercase mb-2">Target End</label>
+<input class="w-full bg-background-alt border-none rounded-xl p-4 focus:ring-2 focus:ring-primary transition-all" type="date"/>
+</div>
+</div>
+<div>
+<label class="block text-label-sm text-on-surface-variant uppercase mb-2">Assign Lead</label>
+<select class="w-full bg-background-alt border-none rounded-xl p-4 focus:ring-2 focus:ring-primary transition-all">
+<option>Select team member...</option>
+<option>Sarah Mitchell</option>
+<option>Marcus Chen</option>
+<option>Elena Rodriguez</option>
+</select>
+</div>
+<button class="w-full py-4 gradient-button text-white font-label-md rounded-2xl shadow-lg mt-4">Create Phase</button>
+</div>
+</div>
+</div>
+<script>
+        function toggleModal() {
+            const overlay = document.getElementById('modal-overlay');
+            overlay.classList.toggle('hidden');
+            setTimeout(() => {
+                const modal = overlay.querySelector('div');
+                modal.classList.toggle('scale-95');
+                modal.classList.toggle('scale-100');
+            }, 10);
+        }
+
+        const addButtons = document.querySelectorAll('button');
+        addButtons.forEach(btn => {
+            if(btn.innerText.includes('Add Phase')) {
+                btn.onclick = toggleModal;
+            }
+        });
+    </script>
+</body></html>

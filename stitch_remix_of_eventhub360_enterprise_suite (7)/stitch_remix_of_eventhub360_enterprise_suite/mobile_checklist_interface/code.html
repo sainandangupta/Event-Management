@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EventPro Execution - Staff Checklist</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Hanken+Grotesk:wght@600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#240554",
+                        "on-tertiary-fixed-variant": "#513982",
+                        "outline": "#8c706f",
+                        "border-gray": "#E6EAF0",
+                        "on-primary-container": "#6d0010",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#5b4304",
+                        "tertiary": "#69519b",
+                        "surface-dim": "#d0dbed",
+                        "primary-fixed": "#ffdad8",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#d9e3f6",
+                        "on-secondary-container": "#785d1f",
+                        "secondary-container": "#fed88e",
+                        "tertiary-fixed": "#eaddff",
+                        "background-alt": "#F5F7FA",
+                        "primary-fixed-dim": "#ffb3b0",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#d9e3f6",
+                        "primary": "#ae2f34",
+                        "surface-tint": "#ae2f34",
+                        "on-surface": "#121c2a",
+                        "on-surface-variant": "#584140",
+                        "surface-container-low": "#eff4ff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "tertiary-fixed-dim": "#d3bbff",
+                        "on-primary-fixed": "#410006",
+                        "inverse-surface": "#27313f",
+                        "surface-container-high": "#dee9fc",
+                        "on-secondary-fixed": "#261a00",
+                        "secondary-fixed": "#ffdea0",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#e6eeff",
+                        "off-white": "#FAFAFA",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#a88ede",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#e6c27a",
+                        "on-tertiary": "#ffffff",
+                        "emerald-green": "#4CAF8D",
+                        "surface": "#f8f9ff",
+                        "outline-variant": "#e0bfbd",
+                        "on-background": "#121c2a",
+                        "primary-container": "#ff6b6b",
+                        "on-primary-fixed-variant": "#8c1520",
+                        "inverse-primary": "#ffb3b0",
+                        "surface-bright": "#f8f9ff",
+                        "sunset-orange": "#FF8A5B",
+                        "secondary": "#755a1d",
+                        "on-tertiary-container": "#3d246c",
+                        "background": "#f8f9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "base": "8px",
+                        "section-gap": "64px",
+                        "container-margin": "32px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "label-md": ["Inter"],
+                        "display-lg-mobile": ["Hanken Grotesk"],
+                        "body-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8f9ff; }
+        .font-headline { font-family: 'Hanken Grotesk', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(20px); border: 1px solid #E6EAF0; }
+        .shadow-soft { box-shadow: 0 4px 20px rgba(31, 41, 55, 0.08); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .task-checkbox:checked + .task-label { text-decoration: line-through; color: #584140; opacity: 0.6; }
+        .custom-gradient { background: linear-gradient(135deg, #ae2f34 0%, #FF8A5B 100%); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-off-white text-on-surface antialiased">
+<!-- Top Navigation Bar (Mobile Optimized) -->
+<header class="sticky top-0 z-50 w-full h-16 glass flex items-center px-4 justify-between border-b border-border-gray">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg custom-gradient flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[20px]">task_alt</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md text-primary font-bold leading-none">Execution</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Live: Gala Dinner 2024</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 rounded-full flex items-center justify-center hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-border-gray">
+<img alt="Staff Portrait" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMx0v2VjdzQMqhRFiV2-JaIMLEwq6gHqK8WPEPh2e7cmsaStJVcRYyQFe8PYXevFW-9X_f4GFfdfXacah6wcgsKqo-Gsbai3wUjwY02wf5MVkCERrfy9nfifqEM0ObX6sgz7TXfs5cKtC3c1wEGfsgWV-oH8MGU_ZnsNXCrSgpm0ImIIODGNWmz_AAhRiA429-fOzlWcSFrjSN_La0zqzEuOs-76kOM7gF7jujy4ldR5fzBpHaQa8zrcM3O7MQJ88K0_OztX5hTJAY"/>
+</div>
+</div>
+</header>
+<main class="pb-24">
+<!-- Checklist Switcher / Tabs -->
+<div class="w-full overflow-x-auto hide-scrollbar px-4 py-4 flex gap-3">
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-primary text-white font-label-md shadow-soft transition-all scale-95 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">engineering</span> Execution
+            </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-white text-on-surface-variant border border-border-gray font-label-md hover:bg-surface-container transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">restaurant</span> Catering
+            </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-white text-on-surface-variant border border-border-gray font-label-md hover:bg-surface-container transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">verified_user</span> Security
+            </button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-white text-on-surface-variant border border-border-gray font-label-md hover:bg-surface-container transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">podium</span> AV/Tech
+            </button>
+</div>
+<!-- Progress Header Card -->
+<div class="px-4 mb-6">
+<div class="bg-white rounded-[24px] p-6 shadow-soft border border-border-gray relative overflow-hidden">
+<div class="relative z-10">
+<div class="flex justify-between items-end mb-4">
+<div>
+<span class="text-on-surface-variant font-label-sm uppercase tracking-wider">Phase progress</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">65% Complete</h2>
+</div>
+<span class="font-label-md text-primary font-bold">13 / 20 Tasks</span>
+</div>
+<div class="w-full h-2 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full custom-gradient rounded-full" style="width: 65%"></div>
+</div>
+</div>
+<!-- Decorative element -->
+<div class="absolute -right-4 -bottom-4 opacity-5">
+<span class="material-symbols-outlined text-[120px]">assignment_turned_in</span>
+</div>
+</div>
+</div>
+<!-- Task List -->
+<div class="px-4 space-y-4">
+<h3 class="font-label-md text-label-md text-on-surface-variant px-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">schedule</span> ACTIVE TASKS
+            </h3>
+<!-- Task Item: Pending -->
+<div class="bg-white rounded-[24px] p-4 shadow-soft border border-border-gray flex flex-col gap-4 group active:scale-[0.98] transition-transform">
+<div class="flex items-start gap-4">
+<div class="mt-1">
+<input class="task-checkbox w-6 h-6 rounded-md border-border-gray text-primary focus:ring-primary transition-all cursor-pointer" id="task1" type="checkbox"/>
+</div>
+<div class="flex-1">
+<label class="task-label font-body-md text-body-md text-on-surface font-semibold block transition-all" for="task1">AV Setup & Sound Check</label>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Main Ballroom • Priority: High</p>
+<div class="flex gap-2 mt-3">
+<span class="px-2 py-1 bg-primary-fixed-dim/30 text-on-primary-fixed-variant text-[11px] font-bold rounded uppercase tracking-tighter flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">timer</span> Due in 15m
+                            </span>
+<span class="px-2 py-1 bg-surface-container text-on-surface-variant text-[11px] font-bold rounded uppercase tracking-tighter flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">attachment</span> 2 Photos
+                            </span>
+</div>
+</div>
+</div>
+<div class="flex gap-2 pt-2 border-t border-border-gray">
+<button class="flex-1 py-2 rounded-xl bg-background-alt text-on-surface-variant font-label-md flex items-center justify-center gap-2 hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-[18px]">note_add</span> Add Note
+                    </button>
+<button class="flex-1 py-2 rounded-xl bg-background-alt text-on-surface-variant font-label-md flex items-center justify-center gap-2 hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-[18px]">photo_camera</span> Capture
+                    </button>
+</div>
+</div>
+<!-- Task Item: Ongoing -->
+<div class="bg-white rounded-[24px] p-4 shadow-soft border border-border-gray flex flex-col gap-4 active:scale-[0.98] transition-transform">
+<div class="flex items-start gap-4">
+<div class="mt-1">
+<input class="task-checkbox w-6 h-6 rounded-md border-border-gray text-primary focus:ring-primary transition-all cursor-pointer" id="task2" type="checkbox"/>
+</div>
+<div class="flex-1">
+<label class="task-label font-body-md text-body-md text-on-surface font-semibold block transition-all" for="task2">VIP Arrival Greeting</label>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">North Entrance Lobby</p>
+<div class="mt-3 p-3 bg-tertiary-fixed/30 rounded-xl border border-tertiary-fixed-dim/50">
+<p class="text-[13px] text-on-tertiary-fixed italic">"Mr. Anderson's flight delayed by 10 mins. Keep the car waiting at Bay 4."</p>
+<p class="text-[11px] text-on-tertiary-fixed-variant mt-1 font-bold">— Updated by Concierge Team</p>
+</div>
+</div>
+</div>
+<div class="flex gap-2 pt-2 border-t border-border-gray">
+<button class="flex-1 py-2 rounded-xl bg-background-alt text-on-surface-variant font-label-md flex items-center justify-center gap-2 hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-[18px]">edit</span> Edit Note
+                    </button>
+<button class="flex-1 py-2 rounded-xl bg-background-alt text-on-surface-variant font-label-md flex items-center justify-center gap-2 hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-[18px]">visibility</span> View Media
+                    </button>
+</div>
+</div>
+<!-- Completed Task (Visual Demo) -->
+<div class="bg-surface-container/50 rounded-[24px] p-4 border border-dashed border-border-gray flex flex-col gap-4 opacity-70">
+<div class="flex items-start gap-4">
+<div class="mt-1">
+<span class="material-symbols-outlined text-emerald-green">check_circle</span>
+</div>
+<div class="flex-1">
+<span class="font-body-md text-body-md text-on-surface-variant font-semibold line-through">Stage Lighting Calibration</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Completed by Sarah L. at 18:45</p>
+</div>
+</div>
+</div>
+<h3 class="font-label-md text-label-md text-on-surface-variant px-2 pt-4 flex items-center gap-2 uppercase tracking-wide">
+                Upcoming
+            </h3>
+<!-- Upcoming Task -->
+<div class="bg-white rounded-[24px] p-4 shadow-soft border border-border-gray flex flex-col gap-4 opacity-90">
+<div class="flex items-start gap-4">
+<div class="mt-1">
+<div class="w-6 h-6 rounded-md border-2 border-border-gray bg-background-alt"></div>
+</div>
+<div class="flex-1">
+<span class="font-body-md text-body-md text-on-surface-variant font-semibold">Doors Opening & Guest Flow</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Expected start: 19:30</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB -->
+<div class="fixed bottom-24 right-6 z-50">
+<button class="w-14 h-14 rounded-2xl custom-gradient text-white shadow-lg flex items-center justify-center active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[28px]">add</span>
+</button>
+</div>
+<!-- Bottom Navigation Shell (From JSON Guidance) -->
+<nav class="fixed bottom-0 w-full bg-white/80 backdrop-blur-xl border-t border-border-gray h-20 flex justify-around items-center px-4 z-50 md:hidden">
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-[10px]">Home</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-primary font-bold">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">task_alt</span>
+<span class="font-label-sm text-[10px]">Tasks</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-sm text-[10px]">Schedule</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">forum</span>
+<span class="font-label-sm text-[10px]">Chat</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-[10px]">Profile</span>
+</button>
+</nav>
+<!-- Note Addition Modal (Hidden by Default) -->
+<div class="fixed inset-0 bg-on-surface/40 backdrop-blur-sm z-[60] flex items-end justify-center hidden opacity-0 transition-opacity duration-300" id="noteModal">
+<div class="w-full max-w-lg bg-white rounded-t-[32px] p-6 shadow-2xl transform translate-y-full transition-transform duration-300">
+<div class="w-12 h-1.5 bg-border-gray rounded-full mx-auto mb-6"></div>
+<h3 class="font-headline-md text-headline-md mb-4">Add Task Note</h3>
+<textarea class="w-full bg-background-alt border-none rounded-2xl p-4 font-body-md focus:ring-primary h-32 mb-6" placeholder="Describe progress or any issues found..."></textarea>
+<div class="grid grid-cols-2 gap-4">
+<button class="py-4 rounded-2xl bg-surface-container text-on-surface-variant font-label-md" onclick="toggleModal('noteModal')">Cancel</button>
+<button class="py-4 rounded-2xl custom-gradient text-white font-label-md">Save Note</button>
+</div>
+</div>
+</div>
+<script>
+        function toggleModal(id) {
+            const modal = document.getElementById(id);
+            const content = modal.querySelector('div');
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                setTimeout(() => {
+                    modal.classList.add('opacity-100');
+                    content.classList.remove('translate-y-full');
+                }, 10);
+            } else {
+                modal.classList.remove('opacity-100');
+                content.classList.add('translate-y-full');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        // Attach event listeners for micro-interactions
+        document.querySelectorAll('button').forEach(btn => {
+            if (btn.innerText.includes('Add Note')) {
+                btn.onclick = () => toggleModal('noteModal');
+            }
+        });
+
+        // Basic Checkbox Logic
+        document.querySelectorAll('.task-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', (e) => {
+                const card = e.target.closest('div.bg-white');
+                if (e.target.checked) {
+                    // Quick tactile feedback simulation
+                    if (window.navigator.vibrate) window.navigator.vibrate(50);
+                    card.style.opacity = '0.7';
+                    card.style.transform = 'scale(0.98)';
+                } else {
+                    card.style.opacity = '1';
+                    card.style.transform = 'scale(1)';
+                }
+            });
+        });
+    </script>
+</body></html>
