@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reporting &amp; Analytics | EventHub360</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#e0bfbd",
+                        "outline": "#8c706f",
+                        "on-primary-fixed-variant": "#8c1520",
+                        "secondary-fixed-dim": "#e6c27a",
+                        "surface-container-highest": "#d9e3f6",
+                        "on-tertiary-fixed": "#240554",
+                        "background-alt": "#F5F7FA",
+                        "secondary-container": "#fed88e",
+                        "primary-fixed": "#ffdad8",
+                        "tertiary": "#69519b",
+                        "on-tertiary-container": "#3d246c",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#d9e3f6",
+                        "background": "#f8f9ff",
+                        "primary-container": "#ff6b6b",
+                        "on-background": "#121c2a",
+                        "on-primary-container": "#6d0010",
+                        "surface": "#f8f9ff",
+                        "primary": "#ae2f34",
+                        "secondary-fixed": "#ffdea0",
+                        "on-surface-variant": "#584140",
+                        "on-primary": "#ffffff",
+                        "off-white": "#FAFAFA",
+                        "inverse-primary": "#ffb3b0",
+                        "on-secondary": "#ffffff",
+                        "emerald-green": "#4CAF8D",
+                        "on-secondary-fixed-variant": "#5b4304",
+                        "on-error": "#ffffff",
+                        "tertiary-fixed-dim": "#d3bbff",
+                        "inverse-surface": "#27313f",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-bright": "#f8f9ff",
+                        "surface-container": "#e6eeff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#513982",
+                        "tertiary-container": "#a88ede",
+                        "on-secondary-container": "#785d1f",
+                        "on-primary-fixed": "#410006",
+                        "sunset-orange": "#FF8A5B",
+                        "secondary": "#755a1d",
+                        "surface-tint": "#ae2f34",
+                        "surface-dim": "#d0dbed",
+                        "surface-container-high": "#dee9fc",
+                        "surface-container-low": "#eff4ff",
+                        "on-surface": "#121c2a",
+                        "primary-fixed-dim": "#ffb3b0",
+                        "on-secondary-fixed": "#261a00",
+                        "error-container": "#ffdad6",
+                        "border-gray": "#E6EAF0",
+                        "tertiary-fixed": "#eaddff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "64px",
+                        "container-margin": "32px",
+                        "gutter": "24px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "label-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid #E6EAF0;
+            box-shadow: 0 4px 20px rgba(31, 41, 55, 0.05);
+        }
+        .coral-gradient {
+            background: linear-gradient(135deg, #ae2f34 0%, #FF8A5B 100%);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab-indicator {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 24px;
+            background-color: #ae2f34;
+            border-radius: 0 4px 4px 0;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen">
+<!-- SideNavBar -->
+<aside class="h-screen w-72 fixed left-0 top-0 bg-surface border-r border-border-gray flex flex-col p-container-margin z-50">
+<div class="mb-10 px-2 flex items-center gap-3">
+<div class="w-10 h-10 coral-gradient rounded-xl flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">EventHub360</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">The Digital Concierge</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Navigation Items Mapping -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-body-md hover:bg-background-alt transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">calendar_month</span>
+<span>Events</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-body-md hover:bg-background-alt transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">event_note</span>
+<span>Planning</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-body-md hover:bg-background-alt transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">group</span>
+<span>Resources</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-body-md hover:bg-background-alt transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">payments</span>
+<span>Budget</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-body-md hover:bg-background-alt transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">storefront</span>
+<span>Vendors</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-body-md hover:bg-background-alt transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">task_alt</span>
+<span>Execution</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-body-md hover:bg-background-alt transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary">description</span>
+<span>Documents</span>
+</a>
+<!-- Reporting is ACTIVE -->
+<a class="relative flex items-center gap-3 px-4 py-3 text-primary font-bold bg-secondary-container/30 rounded-xl transition-transform duration-200 scale-[0.98]" href="#">
+<div class="active-tab-indicator"></div>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span>Reporting</span>
+</a>
+</nav>
+<div class="mt-auto">
+<button class="w-full coral-gradient text-white py-4 rounded-2xl font-label-md flex items-center justify-center gap-2 shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform">
+<span class="material-symbols-outlined">add</span>
+<span>New Event</span>
+</button>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-72 min-h-screen relative overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-18rem)] h-20 bg-white/60 backdrop-blur-xl border-b border-border-gray flex justify-between items-center px-gutter z-40">
+<div class="flex items-center gap-8 flex-1">
+<h2 class="font-headline-lg text-headline-lg font-bold text-on-surface whitespace-nowrap">Reporting &amp; Analytics</h2>
+<div class="relative w-full max-w-md focus-within:ring-2 focus-within:ring-primary/20 rounded-xl transition-all">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-background-alt border-none rounded-xl font-body-sm focus:bg-white transition-colors outline-none" placeholder="Search reports, metrics, or events..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-10 w-px bg-border-gray mx-2"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="font-label-md text-label-md">Alex Sterling</p>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Director of Ops</p>
+</div>
+<img alt="User profile" class="w-10 h-10 rounded-full border-2 border-white shadow-sm object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmHlA9yuGkQa4SRzF_hViNSaqcHwfc_5zacT2GoUqOsTtw7uEAcvHz1-tAiHsVTZvmk3X0o8R5_kMDYMYgLUcaHgaNeKOpBwpodJMu4-VaB46f1AVIeRKrNfFORdueylXsAjrU16bu3dxdBYfuiOsLCh9pNEKhKU-FSQB7hYscUpAqk9PEOGFRKIpzBnJAFXtGiLoNNowGsRUldXNuUtwDF3eDBPVr2-Le-L62Q-lGFTfvaNIISek3iO2crfiSjlgLRA3pYj_34rRq"/>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="mt-20 p-container-margin">
+<!-- Export Center Quick Link (Sticky Header style) -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<p class="text-on-surface-variant font-label-md mb-1">DASHBOARD OVERVIEW</p>
+<h3 class="font-headline-md text-headline-md text-on-surface">System Health &amp; Success</h3>
+</div>
+<button class="flex items-center gap-2 px-6 py-3 bg-white border border-border-gray text-primary font-label-md rounded-2xl hover:bg-primary/5 transition-colors shadow-sm group">
+<span class="material-symbols-outlined group-hover:rotate-12 transition-transform">ios_share</span>
+<span>Export Center</span>
+</button>
+</div>
+<!-- Bento Grid Section 1: Success Metrics -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-gutter">
+<!-- NPS Card -->
+<div class="glass-card p-6 rounded-2xl relative overflow-hidden group">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-xl bg-tertiary-container/30 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">thumb_up</span>
+</div>
+<span class="text-emerald-green font-label-md flex items-center">+12% vs LY</span>
+</div>
+<p class="text-on-surface-variant font-label-sm uppercase tracking-wider">Net Promoter Score</p>
+<h4 class="font-display-lg text-display-lg mt-1 text-on-surface">84.2</h4>
+<div class="mt-4 h-1 w-full bg-border-gray rounded-full overflow-hidden">
+<div class="h-full bg-tertiary transition-all duration-1000" style="width: 84%;"></div>
+</div>
+</div>
+<!-- Attendance Rate Card -->
+<div class="glass-card p-6 rounded-2xl relative overflow-hidden group">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-xl bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">group</span>
+</div>
+<span class="text-on-surface-variant font-label-md">Target: 90%</span>
+</div>
+<p class="text-on-surface-variant font-label-sm uppercase tracking-wider">Attendance Rate</p>
+<h4 class="font-display-lg text-display-lg mt-1 text-on-surface">94.8<span class="text-headline-md">%</span></h4>
+<div class="mt-4 flex gap-1">
+<div class="h-2 flex-1 rounded-full bg-primary"></div>
+<div class="h-2 flex-1 rounded-full bg-primary"></div>
+<div class="h-2 flex-1 rounded-full bg-primary"></div>
+<div class="h-2 flex-1 rounded-full bg-primary/20"></div>
+</div>
+</div>
+<!-- Client Satisfaction Card -->
+<div class="glass-card p-6 rounded-2xl relative overflow-hidden group">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-xl bg-secondary-container/40 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">star</span>
+</div>
+<div class="flex -space-x-2">
+<img alt="avatar" class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC94BDuBzSlMbivCInKLJbvX2BkHE3GWjxmlkKHeqdNYvFVfR1__HrLrd-LvincfDy8Vg5hIU8-YvhKpgfCxbJ2s4BoFJy3sCIvg-d3sjohDFm-4-ro4kLZN7hCXs6aU8cTkY4Adp6ZAEQwJRLMo0iEk0IovvbP6zf6mvplFWhFB_0i4VEUvk-Nj8FHqjJOkCbGtqs6CQmfgJQWIT2zBUaoCExDY0cxcmx4kqj47-zbsn0KrAV0rYsbWv-e3sur3i4_OOS4I6WkYLE2"/>
+<img alt="avatar" class="w-8 h-8 rounded-full border-2 border-white object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4ilbVEAPu4K_7DATFtFt3c7xmTa5SZdk2RoW0joseoYvtTI0M8Ufioy0ja0l_sDfovSP9K2EqhXPIPspO2DuoBGdK7MEsAnW2P-20RPDgc7gqq_iFZeqlpcggMy86j2HorD6qgEnkZzZZUFOOFVkTvV1Ltdk7dL_g5iitBqdwPskRlMYz_GoOzcuz8-QwAJSnGqixm3tztiTI_S_DkuzZCWsrKr57m_3z3zGeX0JoJ3PyCHYdZJTtwGESE81myO2PKOn2xmaPq7bG"/>
+<div class="w-8 h-8 rounded-full bg-off-white border-2 border-white flex items-center justify-center text-[10px] font-bold text-on-surface-variant">+4</div>
+</div>
+</div>
+<p class="text-on-surface-variant font-label-sm uppercase tracking-wider">Client Satisfaction</p>
+<h4 class="font-display-lg text-display-lg mt-1 text-on-surface">4.9<span class="text-headline-md">/5</span></h4>
+<p class="text-on-surface-variant text-body-sm mt-2">Based on 128 recent client reviews</p>
+</div>
+</div>
+<!-- Comparison Section -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mb-gutter">
+<div class="lg:col-span-8 glass-card rounded-2xl p-8">
+<div class="flex justify-between items-center mb-8">
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface">Actual vs. Projected Performance</h4>
+<p class="text-on-surface-variant text-body-sm">Major Summits Q1 - Q3 2024</p>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-primary"></span>
+<span class="text-body-sm text-on-surface-variant">Actual</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-border-gray"></span>
+<span class="text-body-sm text-on-surface-variant">Projected</span>
+</div>
+</div>
+</div>
+<!-- Chart Placeholder -->
+<div class="relative h-64 w-full flex items-end justify-between gap-8 pt-8">
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none">
+<div class="border-t border-border-gray w-full h-0"></div>
+<div class="border-t border-border-gray w-full h-0"></div>
+<div class="border-t border-border-gray w-full h-0"></div>
+<div class="border-t border-border-gray w-full h-0"></div>
+</div>
+<!-- Bars -->
+<div class="flex-1 flex flex-col items-center group cursor-pointer">
+<div class="flex items-end gap-1 w-full h-full justify-center">
+<div class="w-6 bg-border-gray rounded-t-sm h-[60%] transition-all group-hover:opacity-70"></div>
+<div class="w-6 bg-primary rounded-t-sm h-[85%] transition-all shadow-lg shadow-primary/10"></div>
+</div>
+<p class="mt-4 font-label-sm text-label-sm text-on-surface-variant">TechSummit '24</p>
+</div>
+<div class="flex-1 flex flex-col items-center group cursor-pointer">
+<div class="flex items-end gap-1 w-full h-full justify-center">
+<div class="w-6 bg-border-gray rounded-t-sm h-[75%] transition-all group-hover:opacity-70"></div>
+<div class="w-6 bg-primary rounded-t-sm h-[72%] transition-all"></div>
+</div>
+<p class="mt-4 font-label-sm text-label-sm text-on-surface-variant">Global FinCon</p>
+</div>
+<div class="flex-1 flex flex-col items-center group cursor-pointer">
+<div class="flex items-end gap-1 w-full h-full justify-center">
+<div class="w-6 bg-border-gray rounded-t-sm h-[40%] transition-all group-hover:opacity-70"></div>
+<div class="w-6 bg-primary rounded-t-sm h-[90%] transition-all shadow-lg shadow-primary/20"></div>
+</div>
+<p class="mt-4 font-label-sm text-label-sm text-on-surface-variant">EcoExpo APAC</p>
+</div>
+<div class="flex-1 flex flex-col items-center group cursor-pointer">
+<div class="flex items-end gap-1 w-full h-full justify-center">
+<div class="w-6 bg-border-gray rounded-t-sm h-[65%] transition-all group-hover:opacity-70"></div>
+<div class="w-6 bg-primary rounded-t-sm h-[78%] transition-all"></div>
+</div>
+<p class="mt-4 font-label-sm text-label-sm text-on-surface-variant">MedTech Forum</p>
+</div>
+</div>
+</div>
+<div class="lg:col-span-4 glass-card rounded-2xl p-8 flex flex-col justify-between bg-primary text-on-primary">
+<div class="relative z-10">
+<h4 class="font-headline-md text-headline-md mb-2">Quarterly Outlook</h4>
+<p class="text-white/80 text-body-sm leading-relaxed">Performance is trending 18% higher than the previous fiscal year. Most significant gains seen in attendee retention metrics.</p>
+</div>
+<div class="mt-8 space-y-4 relative z-10">
+<div class="bg-white/10 rounded-xl p-4 flex items-center justify-between">
+<span class="font-label-md">ROI Average</span>
+<span class="font-headline-md text-secondary-container">245%</span>
+</div>
+<div class="bg-white/10 rounded-xl p-4 flex items-center justify-between">
+<span class="font-label-md">Conversion</span>
+<span class="font-headline-md text-secondary-container">12.4%</span>
+</div>
+</div>
+<img class="mt-8 rounded-xl opacity-30 mix-blend-overlay object-cover h-32 w-full" data-alt="A sophisticated data visualization dashboard displayed on a sleek glass tablet. The lighting is warm and cinematic, emphasizing the premium quality of the interface. A palette of deep red and glowing orange accents punctuates the clean, light-mode background. The overall aesthetic is one of high-end corporate hospitality and modern technological precision." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5XJ7mwEFlzuTsCurCH4j8P71mt3nYIheU-PW6ad9K1j2M6kXUwQcY9dbX2rK4M_1zVJ_VDEMQiRoU3hfR8PtodI-hv8Ay83KbYoOccFr2haFHoOyVdQUuqauaWgkilQPitvNdpwmbOMCrwb1yLYa2EIqXRrJSYOwiiBNwYq9g1x0XH7jOI07i3yyAVtTxFm1mYUdnFlTsE5dYl9Shmt5PmBZ19AsTo2zNAZ0lVmJwH83OsHgOzemqVO9U2wQ5SzXqe9Qz1yhypa3S"/>
+</div>
+</div>
+<!-- Detailed Events Table -->
+<div class="glass-card rounded-2xl overflow-hidden mb-section-gap">
+<div class="px-8 py-6 border-b border-border-gray flex justify-between items-center bg-white/40">
+<h4 class="font-headline-md text-headline-md text-on-surface">Recent Event Performance</h4>
+<div class="flex gap-2">
+<button class="p-2 border border-border-gray rounded-lg hover:bg-background-alt transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">filter_list</span>
+</button>
+<button class="p-2 border border-border-gray rounded-lg hover:bg-background-alt transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">download</span>
+</button>
+</div>
+</div>
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-background-alt/50">
+<th class="px-8 py-4 font-label-md text-on-surface-variant">Event Name</th>
+<th class="px-8 py-4 font-label-md text-on-surface-variant text-center">Status</th>
+<th class="px-8 py-4 font-label-md text-on-surface-variant">Attendees</th>
+<th class="px-8 py-4 font-label-md text-on-surface-variant">Engagement</th>
+<th class="px-8 py-4 font-label-md text-on-surface-variant">Rating</th>
+<th class="px-8 py-4 font-label-md text-on-surface-variant text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-gray">
+<!-- Table Row 1 -->
+<tr class="hover:bg-background-alt/30 transition-colors">
+<td class="px-8 py-5">
+<div>
+<p class="font-body-md font-bold text-on-surface">TechSummit 2024 - SF</p>
+<p class="text-[12px] text-on-surface-variant">Sep 12-14 • Moscone Center</p>
+</div>
+</td>
+<td class="px-8 py-5 text-center">
+<span class="px-3 py-1 bg-emerald-green/10 text-emerald-green text-[11px] font-bold uppercase tracking-wider rounded-full border border-emerald-green/20">Elite Performance</span>
+</td>
+<td class="px-8 py-5 font-body-md">4,280 / 4,500</td>
+<td class="px-8 py-5">
+<div class="flex items-center gap-2">
+<div class="w-20 h-1.5 bg-border-gray rounded-full">
+<div class="h-full bg-primary rounded-full" style="width: 88%;"></div>
+</div>
+<span class="text-body-sm font-bold">88%</span>
+</div>
+</td>
+<td class="px-8 py-5 font-bold">
+<div class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>4.9</span>
+</div>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Table Row 2 -->
+<tr class="hover:bg-background-alt/30 transition-colors">
+<td class="px-8 py-5">
+<div>
+<p class="font-body-md font-bold text-on-surface">Global FinCon London</p>
+<p class="text-[12px] text-on-surface-variant">Aug 22-24 • ExCeL London</p>
+</div>
+</td>
+<td class="px-8 py-5 text-center">
+<span class="px-3 py-1 bg-tertiary-container/20 text-tertiary text-[11px] font-bold uppercase tracking-wider rounded-full border border-tertiary-container/30">Stable</span>
+</td>
+<td class="px-8 py-5 font-body-md">1,820 / 2,000</td>
+<td class="px-8 py-5">
+<div class="flex items-center gap-2">
+<div class="w-20 h-1.5 bg-border-gray rounded-full">
+<div class="h-full bg-primary rounded-full" style="width: 72%;"></div>
+</div>
+<span class="text-body-sm font-bold">72%</span>
+</div>
+</td>
+<td class="px-8 py-5 font-bold">
+<div class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>4.2</span>
+</div>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Table Row 3 -->
+<tr class="hover:bg-background-alt/30 transition-colors">
+<td class="px-8 py-5">
+<div>
+<p class="font-body-md font-bold text-on-surface">EcoExpo APAC</p>
+<p class="text-[12px] text-on-surface-variant">Jul 05-07 • Marina Bay Sands</p>
+</div>
+</td>
+<td class="px-8 py-5 text-center">
+<span class="px-3 py-1 bg-primary-container/20 text-primary text-[11px] font-bold uppercase tracking-wider rounded-full border border-primary-container/30">Breakthrough</span>
+</td>
+<td class="px-8 py-5 font-body-md">9,450 / 8,000</td>
+<td class="px-8 py-5">
+<div class="flex items-center gap-2">
+<div class="w-20 h-1.5 bg-border-gray rounded-full">
+<div class="h-full bg-primary rounded-full" style="width: 95%;"></div>
+</div>
+<span class="text-body-sm font-bold">95%</span>
+</div>
+</td>
+<td class="px-8 py-5 font-bold">
+<div class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>4.8</span>
+</div>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Table Row 4 -->
+<tr class="hover:bg-background-alt/30 transition-colors">
+<td class="px-8 py-5">
+<div>
+<p class="font-body-md font-bold text-on-surface">MedTech Forum</p>
+<p class="text-[12px] text-on-surface-variant">Jun 18-20 • Virtual Arena</p>
+</div>
+</td>
+<td class="px-8 py-5 text-center">
+<span class="px-3 py-1 bg-surface-container-highest/50 text-on-surface-variant text-[11px] font-bold uppercase tracking-wider rounded-full border border-border-gray">Pending Review</span>
+</td>
+<td class="px-8 py-5 font-body-md">550 / 600</td>
+<td class="px-8 py-5">
+<div class="flex items-center gap-2">
+<div class="w-20 h-1.5 bg-border-gray rounded-full">
+<div class="h-full bg-primary rounded-full" style="width: 61%;"></div>
+</div>
+<span class="text-body-sm font-bold">61%</span>
+</div>
+</td>
+<td class="px-8 py-5 font-bold">
+<div class="flex items-center gap-1 text-on-surface-variant/40">
+<span class="material-symbols-outlined text-[18px]">star</span>
+<span>N/A</span>
+</div>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interactions for dashboard elements
+        document.querySelectorAll('.glass-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-4px)';
+                card.style.transition = 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Simple mock behavior for Export Center button
+        const exportBtn = document.querySelector('button:contains("Export Center")');
+        if(exportBtn) {
+            exportBtn.addEventListener('click', () => {
+                const originalText = exportBtn.innerHTML;
+                exportBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Preparing...';
+                setTimeout(() => {
+                    exportBtn.innerHTML = '<span class="material-symbols-outlined">check</span> Ready';
+                    setTimeout(() => {
+                        exportBtn.innerHTML = originalText;
+                    }, 2000);
+                }, 1500);
+            });
+        }
+    </script>
+</body></html>

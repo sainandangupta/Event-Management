@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profitability Reports - EventHub360</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#e0bfbd",
+                    "outline": "#8c706f",
+                    "on-primary-fixed-variant": "#8c1520",
+                    "secondary-fixed-dim": "#e6c27a",
+                    "surface-container-highest": "#d9e3f6",
+                    "on-tertiary-fixed": "#240554",
+                    "background-alt": "#F5F7FA",
+                    "secondary-container": "#fed88e",
+                    "primary-fixed": "#ffdad8",
+                    "tertiary": "#69519b",
+                    "on-tertiary-container": "#3d246c",
+                    "on-error-container": "#93000a",
+                    "surface-variant": "#d9e3f6",
+                    "background": "#f8f9ff",
+                    "primary-container": "#ff6b6b",
+                    "on-background": "#121c2a",
+                    "on-primary-container": "#6d0010",
+                    "surface": "#f8f9ff",
+                    "primary": "#ae2f34",
+                    "secondary-fixed": "#ffdea0",
+                    "on-surface-variant": "#584140",
+                    "on-primary": "#ffffff",
+                    "off-white": "#FAFAFA",
+                    "inverse-primary": "#ffb3b0",
+                    "on-secondary": "#ffffff",
+                    "emerald-green": "#4CAF8D",
+                    "on-secondary-fixed-variant": "#5b4304",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed-dim": "#d3bbff",
+                    "inverse-surface": "#27313f",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-bright": "#f8f9ff",
+                    "surface-container": "#e6eeff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#513982",
+                    "tertiary-container": "#a88ede",
+                    "on-secondary-container": "#785d1f",
+                    "on-primary-fixed": "#410006",
+                    "sunset-orange": "#FF8A5B",
+                    "secondary": "#755a1d",
+                    "surface-tint": "#ae2f34",
+                    "surface-dim": "#d0dbed",
+                    "surface-container-high": "#dee9fc",
+                    "surface-container-low": "#eff4ff",
+                    "on-surface": "#121c2a",
+                    "primary-fixed-dim": "#ffb3b0",
+                    "on-secondary-fixed": "#261a00",
+                    "error-container": "#ffdad6",
+                    "border-gray": "#E6EAF0",
+                    "tertiary-fixed": "#eaddff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-gap": "64px",
+                    "container-margin": "32px",
+                    "gutter": "24px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "label-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "display-lg": ["Hanken Grotesk"],
+                    "display-lg-mobile": ["Hanken Grotesk"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f8f9ff;
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid #E6EAF0;
+            box-shadow: 0 4px 20px rgba(31, 41, 55, 0.05);
+            border-radius: 24px;
+        }
+        .sidebar-item-active {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .sidebar-item-active:active {
+            transform: scale(0.98);
+        }
+        .primary-gradient {
+            background: linear-gradient(135deg, #ae2f34 0%, #FF8A5B 100%);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- SideNavBar -->
+<aside class="h-screen w-72 fixed left-0 top-0 bg-surface dark:bg-inverse-surface border-r border-border-gray dark:border-outline-variant shadow-sm flex flex-col p-container-margin z-50">
+<div class="mb-10">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary leading-tight">EventHub360</h1>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-70">The Digital Concierge</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-body-md hover:bg-background-alt dark:hover:bg-surface-container-highest transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span>Events</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-body-md hover:bg-background-alt dark:hover:bg-surface-container-highest transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined">event_note</span>
+<span>Planning</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-body-md hover:bg-background-alt dark:hover:bg-surface-container-highest transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined">group</span>
+<span>Resources</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-body-md hover:bg-background-alt dark:hover:bg-surface-container-highest transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span>Budget</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-body-md hover:bg-background-alt dark:hover:bg-surface-container-highest transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span>Vendors</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-body-md hover:bg-background-alt dark:hover:bg-surface-container-highest transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined">task_alt</span>
+<span>Execution</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-body-md hover:bg-background-alt dark:hover:bg-surface-container-highest transition-colors rounded-xl group" href="#">
+<span class="material-symbols-outlined">description</span>
+<span>Documents</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary font-bold bg-secondary-container/30 dark:bg-secondary-container/10 rounded-xl sidebar-item-active" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span>Reporting</span>
+</a>
+</nav>
+<button class="mt-auto primary-gradient text-white font-label-md py-4 rounded-xl flex items-center justify-center gap-2 shadow-lg hover:scale-[1.02] transition-transform active:scale-95">
+<span class="material-symbols-outlined">add</span>
+            New Event
+        </button>
+</aside>
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-18rem)] h-20 bg-white/60 dark:bg-surface/60 backdrop-blur-xl border-b border-border-gray z-40 flex justify-between items-center px-gutter">
+<div class="flex items-center gap-8 flex-1">
+<h2 class="font-headline-md text-headline-md font-bold text-on-surface">Reporting &amp; Analytics</h2>
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-background-alt border-none rounded-full focus:ring-2 focus:ring-primary/20 font-body-sm" placeholder="Search reports..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="text-on-surface-variant hover:text-primary transition-all relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full"></span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-all">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-white shadow-sm">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A professional headshot of a senior event analyst in a well-lit modern office. The lighting is soft and natural, reflecting a sophisticated corporate atmosphere with neutral tones and clean lines. He is wearing a crisp white shirt, exuding professionalism and meticulous attention to detail consistent with a luxury concierge service." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2kv1cljdRu3O9NS2K-QnCLLAjiTk4sFZAesk04dP6zHBSZGTRKMPNcm9PWayXcZ_85fQePRM14n2l4hDXedEamgKwH0II-tyfED0CwAyIRpxh_WT3i_WRuKqdut-P3KhSHuilMWmgDg4RK7ZxZa2nS8Bekea0Lsspyzn78s9NvzT6_538XbR4qaP2odAu7ug3BU6f34voAGdTctLPjjsjbDb7u7QVMte0PdRj8uBdtu2uo-UuYJH1rAK7qFp8NBonLd_O9zknNmFN"/>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-72 mt-20 p-container-margin max-w-[1440px] mx-auto min-h-[calc(100vh-5rem)]">
+<!-- Filters Section -->
+<section class="flex flex-wrap items-center justify-between gap-gutter mb-10">
+<div class="flex items-center gap-4">
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-on-surface-variant">Date Range</label>
+<select class="bg-white border border-border-gray rounded-xl px-4 py-2 font-body-sm min-w-[180px] focus:ring-primary focus:border-primary">
+<option>Last 12 Months</option>
+<option>Q3 2023</option>
+<option>Q4 2023</option>
+<option>Year to Date</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-on-surface-variant">Category</label>
+<select class="bg-white border border-border-gray rounded-xl px-4 py-2 font-body-sm min-w-[160px] focus:ring-primary focus:border-primary">
+<option>All Categories</option>
+<option>Corporate</option>
+<option>Wedding</option>
+<option>Exhibition</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-on-surface-variant">Venue</label>
+<select class="bg-white border border-border-gray rounded-xl px-4 py-2 font-body-sm min-w-[200px] focus:ring-primary focus:border-primary">
+<option>All Venues</option>
+<option>Grand Plaza Hotel</option>
+<option>The Sky Loft</option>
+<option>Riverside Convention Center</option>
+</select>
+</div>
+</div>
+<div class="flex gap-3 mt-auto">
+<button class="bg-white border border-border-gray text-on-surface font-label-md px-6 py-2.5 rounded-xl hover:bg-background-alt transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">download</span>
+                    Export PDF
+                </button>
+<button class="primary-gradient text-white font-label-md px-6 py-2.5 rounded-xl hover:shadow-lg transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">refresh</span>
+                    Run Analysis
+                </button>
+</div>
+</section>
+<!-- Bento Grid: Analytics Overviews -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Net Profitability Trend Line Chart -->
+<div class="col-span-12 lg:col-span-8 glass-card p-8 min-h-[400px] relative overflow-hidden">
+<div class="flex justify-between items-start mb-8">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Net Profitability Trend</h3>
+<p class="font-body-sm text-on-surface-variant">Monthly breakdown of net margins across all events.</p>
+</div>
+<div class="flex items-center gap-2 bg-emerald-green/10 text-emerald-green px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span class="font-label-sm">+12.4%</span>
+</div>
+</div>
+<!-- Simulated Chart Container -->
+<div class="w-full h-64 flex items-end justify-between gap-2 px-2 relative">
+<!-- Grid Lines -->
+<div class="absolute inset-x-0 top-0 h-px bg-border-gray/50"></div>
+<div class="absolute inset-x-0 top-1/4 h-px bg-border-gray/50"></div>
+<div class="absolute inset-x-0 top-2/4 h-px bg-border-gray/50"></div>
+<div class="absolute inset-x-0 top-3/4 h-px bg-border-gray/50"></div>
+<!-- Bars for background or visual texture -->
+<div class="flex-1 bg-primary/10 rounded-t-lg h-[40%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-lg h-[55%]"></div>
+<div class="flex-1 bg-primary/15 rounded-t-lg h-[48%]"></div>
+<div class="flex-1 bg-primary/30 rounded-t-lg h-[70%]"></div>
+<div class="flex-1 bg-primary/25 rounded-t-lg h-[62%]"></div>
+<div class="flex-1 bg-primary/40 rounded-t-lg h-[85%]"></div>
+<div class="flex-1 bg-primary/35 rounded-t-lg h-[78%]"></div>
+<div class="flex-1 bg-primary/50 rounded-t-lg h-[95%]"></div>
+<!-- Trend Line Overlay SVG -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" preserveaspectratio="none" viewbox="0 0 800 256">
+<path d="M0,150 Q100,140 200,120 T400,90 T600,60 T800,20" fill="none" stroke="#ae2f34" stroke-linecap="round" stroke-width="4"></path>
+<path d="M0,150 Q100,140 200,120 T400,90 T600,60 T800,20 L800,256 L0,256 Z" fill="url(#grad1)" opacity="0.1"></path>
+<defs>
+<lineargradient id="grad1" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#ae2f34;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#ae2f34;stop-opacity:0"></stop>
+</lineargradient>
+</defs>
+</svg>
+</div>
+<div class="flex justify-between mt-4 px-2 font-label-sm text-on-surface-variant">
+<span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span><span>Jul</span><span>Aug</span>
+</div>
+</div>
+<!-- Profit Margin by Category (Corporate, Wedding, Exhibition) -->
+<div class="col-span-12 lg:col-span-4 glass-card p-8 flex flex-col justify-between">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Category Performance</h3>
+<p class="font-body-sm text-on-surface-variant mb-6">Comparative margin analysis by type.</p>
+</div>
+<div class="space-y-6">
+<!-- Corporate -->
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-label-md">Corporate</span>
+<span class="font-bold text-primary">34.2%</span>
+</div>
+<div class="w-full h-3 bg-background-alt rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 34.2%"></div>
+</div>
+</div>
+<!-- Wedding -->
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-label-md">Wedding</span>
+<span class="font-bold text-tertiary">28.5%</span>
+</div>
+<div class="w-full h-3 bg-background-alt rounded-full overflow-hidden">
+<div class="h-full bg-tertiary" style="width: 28.5%"></div>
+</div>
+</div>
+<!-- Exhibition -->
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-label-md">Exhibition</span>
+<span class="font-bold text-secondary">42.1%</span>
+</div>
+<div class="w-full h-3 bg-background-alt rounded-full overflow-hidden">
+<div class="h-full bg-secondary" style="width: 42.1%"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-border-gray">
+<div class="flex items-center gap-4">
+<div class="p-3 bg-secondary-container/20 rounded-2xl">
+<span class="material-symbols-outlined text-secondary">workspace_premium</span>
+</div>
+<div>
+<p class="font-label-sm text-on-surface-variant">Best Performer</p>
+<p class="font-headline-md text-[20px] text-on-surface">TechCon 2024</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Highest Margin Events Table -->
+<div class="col-span-12 glass-card overflow-hidden">
+<div class="p-8 border-b border-border-gray flex justify-between items-center">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Highest Margin Events</h3>
+<p class="font-body-sm text-on-surface-variant">A detailed breakdown of top-performing contracts.</p>
+</div>
+<button class="text-primary font-label-md flex items-center gap-1 hover:underline">
+                        View Full History <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-background-alt border-b border-border-gray">
+<tr>
+<th class="px-8 py-4 font-label-md text-on-surface-variant">Event Name</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant">Category</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant">Revenue</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant">Total Cost</th>
+<th class="px-6 py-4 font-label-md text-on-surface-variant text-right">Profit %</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-gray">
+<tr class="hover:bg-background-alt/50 transition-colors">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">rocket_launch</span>
+</div>
+<span class="font-bold text-on-surface">Global Tech Summit</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-surface-container rounded-full text-on-surface-variant font-label-sm uppercase tracking-wider">Corporate</span>
+</td>
+<td class="px-6 py-5 font-body-md">$145,000</td>
+<td class="px-6 py-5 font-body-md text-on-surface-variant">$82,300</td>
+<td class="px-6 py-5 text-right font-bold text-emerald-green">43.2%</td>
+</tr>
+<tr class="hover:bg-background-alt/50 transition-colors">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">favorite</span>
+</div>
+<span class="font-bold text-on-surface">Anderson-Lee Wedding</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-tertiary-container/20 rounded-full text-tertiary font-label-sm uppercase tracking-wider">Wedding</span>
+</td>
+<td class="px-6 py-5 font-body-md">$98,200</td>
+<td class="px-6 py-5 font-body-md text-on-surface-variant">$61,000</td>
+<td class="px-6 py-5 text-right font-bold text-emerald-green">37.9%</td>
+</tr>
+<tr class="hover:bg-background-alt/50 transition-colors">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">palette</span>
+</div>
+<span class="font-bold text-on-surface">Modern Art Expo</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-secondary-container/20 rounded-full text-secondary font-label-sm uppercase tracking-wider">Exhibition</span>
+</td>
+<td class="px-6 py-5 font-body-md">$212,000</td>
+<td class="px-6 py-5 font-body-md text-on-surface-variant">$135,500</td>
+<td class="px-6 py-5 text-right font-bold text-emerald-green">36.1%</td>
+</tr>
+<tr class="hover:bg-background-alt/50 transition-colors">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">hub</span>
+</div>
+<span class="font-bold text-on-surface">AI Future Forum</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-surface-container rounded-full text-on-surface-variant font-label-sm uppercase tracking-wider">Corporate</span>
+</td>
+<td class="px-6 py-5 font-body-md">$76,000</td>
+<td class="px-6 py-5 font-body-md text-on-surface-variant">$49,200</td>
+<td class="px-6 py-5 text-right font-bold text-emerald-green">35.3%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interactions for table rows and buttons
+        document.querySelectorAll('tr').forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.style.cursor = 'pointer';
+            });
+        });
+
+        // Simple smooth scroll and subtle animation on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.glass-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = `all 0.6s cubic-bezier(0.22, 1, 0.36, 1) ${index * 0.1}s`;
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100);
+            });
+        });
+    </script>
+</body></html>

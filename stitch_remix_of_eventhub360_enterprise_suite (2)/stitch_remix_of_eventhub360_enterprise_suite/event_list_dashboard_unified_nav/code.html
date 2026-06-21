@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Events | EventHub360</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#6d0010",
+                    "on-background": "#121c2a",
+                    "off-white": "#FAFAFA",
+                    "inverse-surface": "#27313f",
+                    "tertiary-fixed": "#eaddff",
+                    "surface-container-highest": "#d9e3f6",
+                    "primary-container": "#ff6b6b",
+                    "on-primary-fixed-variant": "#8c1520",
+                    "sunset-orange": "#FF8A5B",
+                    "on-error-container": "#93000a",
+                    "surface": "#f8f9ff",
+                    "surface-container-high": "#dee9fc",
+                    "surface-bright": "#f8f9ff",
+                    "surface-container": "#e6eeff",
+                    "on-tertiary-fixed-variant": "#513982",
+                    "surface-dim": "#d0dbed",
+                    "primary-fixed-dim": "#ffb3b0",
+                    "on-tertiary-fixed": "#240554",
+                    "primary": "#ae2f34",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-container": "#785d1f",
+                    "emerald-green": "#4CAF8D",
+                    "on-secondary-fixed": "#261a00",
+                    "on-primary": "#ffffff",
+                    "background-alt": "#F5F7FA",
+                    "background": "#f8f9ff",
+                    "surface-container-low": "#eff4ff",
+                    "inverse-primary": "#ffb3b0",
+                    "border-gray": "#E6EAF0",
+                    "on-surface-variant": "#584140",
+                    "on-secondary": "#ffffff",
+                    "secondary": "#755a1d",
+                    "on-primary-fixed": "#410006",
+                    "on-secondary-fixed-variant": "#5b4304",
+                    "secondary-fixed": "#ffdea0",
+                    "outline-variant": "#e0bfbd",
+                    "tertiary-fixed-dim": "#d3bbff",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#e6c27a",
+                    "primary-fixed": "#ffdad8",
+                    "on-surface": "#121c2a",
+                    "on-error": "#ffffff",
+                    "tertiary": "#69519b",
+                    "outline": "#8c706f",
+                    "tertiary-container": "#a88ede",
+                    "surface-variant": "#d9e3f6",
+                    "surface-tint": "#ae2f34",
+                    "secondary-container": "#fed88e",
+                    "inverse-on-surface": "#eaf1ff",
+                    "on-tertiary-container": "#3d246c",
+                    "surface-container-lowest": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px",
+                    "card": "24px"
+            },
+            "spacing": {
+                    "container-margin": "32px",
+                    "base": "8px",
+                    "section-gap": "64px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Hanken Grotesk"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "label-md": ["Inter"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "body-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display-lg-mobile": ["Hanken Grotesk"],
+                    "body-sm": ["Inter"],
+                    "label-sm": ["Inter"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #FAFAFA;
+            color: #121c2a;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(230, 234, 240, 0.8);
+        }
+        .btn-gradient {
+            background: linear-gradient(135deg, #ae2f34 0%, #FF8A5B 100%);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-gradient:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px -5px rgba(174, 47, 52, 0.3);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #E6EAF0;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- Sidebar Navigation -->
+<aside class="flex flex-col h-screen fixed left-0 top-0 py-base px-gutter bg-surface-container-low dark:bg-inverse-surface shadow-sm left-0 w-64 z-50">
+<div class="mt-4 px-4 mb-8"><h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary leading-tight">EventHub360</h1><p class="font-label-sm text-label-sm tracking-widest uppercase opacity-60">Concierge Suite</p></div>
+<nav class="flex-1 space-y-1 overflow-y-auto custom-scrollbar pr-2">
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors duration-200 text-on-surface-variant dark:text-surface-variant" href="#">
+<span class="material-symbols-outlined text-[22px]">space_dashboard</span>
+<span class="font-label-md text-label-md">Event Workspace</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl text-primary dark:text-inverse-primary font-bold border-r-4 border-primary dark:border-inverse-primary bg-surface-container-high" href="#">
+<span class="material-symbols-outlined text-[22px]">calendar_today</span>
+<span class="font-label-md text-label-md">Events (Active)</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors duration-200 text-on-surface-variant dark:text-surface-variant" href="#">
+<span class="material-symbols-outlined text-[22px]">architecture</span>
+<span class="font-label-md text-label-md">Planning</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors duration-200 text-on-surface-variant dark:text-surface-variant" href="#">
+<span class="material-symbols-outlined text-[22px]">category</span>
+<span class="font-label-md text-label-md">Resources</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors duration-200 text-on-surface-variant dark:text-surface-variant" href="#">
+<span class="material-symbols-outlined text-[22px]">payments</span>
+<span class="font-label-md text-label-md">Budget</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors duration-200 text-on-surface-variant dark:text-surface-variant" href="#">
+<span class="material-symbols-outlined text-[22px]">store</span>
+<span class="font-label-md text-label-md">Vendors</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors duration-200 text-on-surface-variant dark:text-surface-variant" href="#">
+<span class="material-symbols-outlined text-[22px]">play_circle</span>
+<span class="font-label-md text-label-md">Execution</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors duration-200 text-on-surface-variant dark:text-surface-variant" href="#">
+<span class="material-symbols-outlined text-[22px]">description</span>
+<span class="font-label-md text-label-md">Documents</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors duration-200 text-on-surface-variant dark:text-surface-variant" href="#">
+<span class="material-symbols-outlined text-[22px]">analytics</span>
+<span class="font-label-md text-label-md">Reporting</span>
+</a>
+</nav>
+<div class="pt-4 border-t border-border-gray mt-auto pb-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 rounded-xl hover:bg-surface-container-high transition-colors text-on-surface-variant" href="#">
+<span class="material-symbols-outlined text-[20px]">help</span>
+<span class="font-label-md text-label-md">Help</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-xl hover:bg-surface-container-high transition-colors text-on-surface-variant" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</div>
+</aside>
+<!-- Top Navigation -->
+<header class="flex justify-between items-center w-[calc(100%-16rem)] h-16 px-gutter fixed top-0 z-40 ml-64 bg-surface/60 backdrop-blur-xl border-b border-border-gray shadow-sm">
+<div class="flex items-center gap-6 flex-1">
+<div class="relative w-full max-w-md group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant opacity-50 group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-background-alt border-none rounded-full py-2 pl-10 pr-4 text-body-sm focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all outline-none" placeholder="Search events, venues, or owners..." type="text"/>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-primary border-b-2 border-primary pb-1 font-label-md text-label-md" href="#">Overview</a>
+<a class="text-on-surface-variant hover:text-primary transition-all font-label-md text-label-md" href="#">Phases</a>
+<a class="text-on-surface-variant hover:text-primary transition-all font-label-md text-label-md" href="#">Team</a>
+<a class="text-on-surface-variant hover:text-primary transition-all font-label-md text-label-md" href="#">Timeline</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-surface-container-high transition-colors relative">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border-2 border-surface"></span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-border-gray">
+<img alt="Manager profile" class="w-full h-full object-cover" data-alt="A professional headshot of a refined event manager with a warm expression, dressed in a sophisticated dark charcoal suit. The lighting is soft and cinematic, characteristic of high-end corporate photography, set against a blurred, airy minimalist office background with soft neutral tones. The image conveys hospitality, expertise, and premium service." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB50DnlD7wFsrWaWo8Bv78YoDS3vDuLqe9YHkrYK7NMQNilSRVl9qdwFB4JBfZdC1AqvBxH-w1vjHfp-3iI0Rlxdr8kT-VZ8ID1S_-7Di_llRjY1cSb4pLZ9nL6IF_XH645TvU2VXjpc0ykFawB8-Z0yDi_u-VgDFRECQkJeWakllbPzu_vXUIaztx6PG5Cl26TI92fJ0SvXwnvtMVnGwDVKZK2NNoKty7BZqqrAARpzumbBtIG3IH1IBv1EgFV3AbMqr3nEYwkKMAI"/>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-64 pt-24 px-container-margin pb-12 min-h-screen">
+<!-- Header & Action Row -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-section-gap gap-6">
+<div>
+<nav class="flex items-center gap-2 text-label-sm text-on-surface-variant mb-2"><span class="hover:text-primary cursor-pointer">Event Hub</span><span class="material-symbols-outlined text-[16px]">chevron_right</span><span class="text-primary font-medium">Events</span></nav><h2 class="font-headline-lg text-headline-lg text-on-background">Events</h2>
+<p class="text-on-surface-variant mt-1">Manage and monitor your upcoming boutique experiences.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-3 rounded-full border border-border-gray hover:bg-white transition-all font-label-md text-label-md flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">archive</span>
+                    Archive
+                </button>
+<button class="btn-gradient px-8 py-3 rounded-full text-white font-label-md text-label-md flex items-center gap-2 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-[20px]">add_circle</span>
+                    Create Event
+                </button>
+</div>
+</div>
+<!-- Filter Bar -->
+<div class="bg-white rounded-card shadow-sm p-6 mb-8 border border-border-gray flex flex-wrap items-end gap-6">
+<div class="flex-1 min-w-[200px]">
+<label class="block text-label-sm text-on-surface-variant mb-2 px-1">Status</label>
+<select class="w-full bg-background-alt border-none rounded-xl py-3 px-4 text-body-sm focus:ring-2 focus:ring-primary/20 focus:bg-white appearance-none cursor-pointer">
+<option>All Statuses</option>
+<option>Planned</option>
+<option>In Progress</option>
+<option>Completed</option>
+</select>
+</div>
+<div class="flex-1 min-w-[200px]">
+<label class="block text-label-sm text-on-surface-variant mb-2 px-1">Category</label>
+<select class="w-full bg-background-alt border-none rounded-xl py-3 px-4 text-body-sm focus:ring-2 focus:ring-primary/20 focus:bg-white appearance-none cursor-pointer">
+<option>All Categories</option>
+<option>Corporate</option>
+<option>Wedding</option>
+<option>Gala</option>
+</select>
+</div>
+<div class="flex-1 min-w-[200px]">
+<label class="block text-label-sm text-on-surface-variant mb-2 px-1">Date Range</label>
+<div class="relative">
+<input class="w-full bg-background-alt border-none rounded-xl py-3 px-4 pl-11 text-body-sm focus:ring-2 focus:ring-primary/20 focus:bg-white" placeholder="Select dates" type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant opacity-60">calendar_month</span>
+</div>
+</div>
+<div class="flex-1 min-w-[200px]">
+<label class="block text-label-sm text-on-surface-variant mb-2 px-1">Event Owner</label>
+<select class="w-full bg-background-alt border-none rounded-xl py-3 px-4 text-body-sm focus:ring-2 focus:ring-primary/20 focus:bg-white appearance-none cursor-pointer">
+<option>Everyone</option>
+<option>Julianne Moore</option>
+<option>David Chen</option>
+<option>Elena Rodriguez</option>
+</select>
+</div>
+<button class="h-[48px] px-6 bg-surface-container text-primary font-label-md text-label-md rounded-xl hover:bg-surface-container-high transition-colors">
+                Apply Filters
+            </button>
+</div>
+<!-- Data Table Section -->
+<div class="bg-white rounded-card shadow-sm border border-border-gray overflow-hidden">
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50 border-b border-border-gray">
+<th class="px-8 py-5 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Event Name</th>
+<th class="px-6 py-5 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Category</th>
+<th class="px-6 py-5 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Dates</th>
+<th class="px-6 py-5 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Estimated Revenue</th><th class="px-6 py-5 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Team</th>
+<th class="px-6 py-5 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Status</th>
+<th class="px-8 py-5 font-label-md text-label-md text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-gray">
+<!-- Table Row 1 -->
+<tr class="hover:bg-surface/50 transition-colors group">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">apartment</span>
+</div>
+<div>
+<div class="font-semibold text-on-background">TechVision Summit 2024</div>
+<div class="text-body-sm text-on-surface-variant">Grand Hyatt Ballroom</div>
+<div class="mt-2 w-32 h-1.5 bg-surface-container rounded-full overflow-hidden"><div class="h-full bg-emerald-green w-[40%]"></div></div></div>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant rounded-full text-label-sm font-medium">Corporate</span>
+</td>
+<td class="px-6 py-6 text-body-sm text-on-surface">Oct 12 - 14, 2024</td>
+<td class="px-6 py-6 font-semibold text-on-surface">$145,000.00</td><td class="px-6 py-6"><div class="flex -space-x-2"><div class="w-8 h-8 rounded-full border-2 border-white bg-surface-container flex items-center justify-center text-[10px] font-bold">JM</div><div class="w-8 h-8 rounded-full border-2 border-white bg-surface-container flex items-center justify-center text-[10px] font-bold">DC</div><div class="w-8 h-8 rounded-full border-2 border-white bg-primary-fixed text-primary text-[10px] font-bold">+3</div></div></td>
+<td class="px-6 py-6">
+<div class="flex items-center gap-2 text-emerald-green">
+<span class="w-2 h-2 rounded-full bg-emerald-green"></span>
+<span class="text-label-md">Planned</span>
+</div>
+</td>
+<td class="px-8 py-6 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors" title="View"><span class="material-symbols-outlined">visibility</span></button>
+<button class="p-2 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors" title="Edit"><span class="material-symbols-outlined">edit_note</span></button>
+<button class="p-2 hover:bg-error-container rounded-lg text-error transition-colors" title="Archive"><span class="material-symbols-outlined">archive</span></button>
+</div>
+</td>
+</tr>
+<!-- Table Row 2 -->
+<tr class="hover:bg-surface/50 transition-colors group">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">favorite</span>
+</div>
+<div>
+<div class="font-semibold text-on-background">The Sterling Wedding</div>
+<div class="text-body-sm text-on-surface-variant">Belmond Riviera Maya</div>
+<div class="mt-2 w-32 h-1.5 bg-surface-container rounded-full overflow-hidden"><div class="h-full bg-sunset-orange w-[75%]"></div></div></div>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant rounded-full text-label-sm font-medium">Wedding</span>
+</td>
+<td class="px-6 py-6 text-body-sm text-on-surface">Nov 03, 2024</td>
+<td class="px-6 py-6 font-semibold text-on-surface">$82,400.00</td><td class="px-6 py-6"><div class="flex -space-x-2"><div class="w-8 h-8 rounded-full border-2 border-white bg-surface-container flex items-center justify-center text-[10px] font-bold">ER</div><div class="w-8 h-8 rounded-full border-2 border-white bg-primary-fixed text-primary text-[10px] font-bold">+1</div></div></td>
+<td class="px-6 py-6">
+<div class="flex items-center gap-2 text-sunset-orange">
+<span class="w-2 h-2 rounded-full bg-sunset-orange"></span>
+<span class="text-label-md">In Progress</span>
+</div>
+</td>
+<td class="px-8 py-6 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+<button class="p-2 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors"><span class="material-symbols-outlined">edit_note</span></button>
+<button class="p-2 hover:bg-error-container rounded-lg text-error transition-colors"><span class="material-symbols-outlined">archive</span></button>
+</div>
+</td>
+</tr>
+<!-- Table Row 3 -->
+<tr class="hover:bg-surface/50 transition-colors group">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">celebration</span>
+</div>
+<div>
+<div class="font-semibold text-on-background">Ocean Conservatory Gala</div>
+<div class="text-body-sm text-on-surface-variant">The Metropolitan Museum</div>
+<div class="mt-2 w-32 h-1.5 bg-surface-container rounded-full overflow-hidden"><div class="h-full bg-on-surface-variant w-full"></div></div></div>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant rounded-full text-label-sm font-medium">Gala</span>
+</td>
+<td class="px-6 py-6 text-body-sm text-on-surface">Dec 15, 2024</td>
+<td class="px-6 py-6 font-semibold text-on-surface">$210,000.00</td><td class="px-6 py-6"><div class="flex -space-x-2"><div class="w-8 h-8 rounded-full border-2 border-white bg-surface-container flex items-center justify-center text-[10px] font-bold">JM</div><div class="w-8 h-8 rounded-full border-2 border-white bg-surface-container flex items-center justify-center text-[10px] font-bold">ER</div><div class="w-8 h-8 rounded-full border-2 border-white bg-primary-fixed text-primary text-[10px] font-bold">+4</div></div></td>
+<td class="px-6 py-6">
+<div class="flex items-center gap-2 text-on-surface-variant opacity-60">
+<span class="w-2 h-2 rounded-full bg-on-surface-variant"></span>
+<span class="text-label-md">Completed</span>
+</div>
+</td>
+<td class="px-8 py-6 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+<button class="p-2 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors"><span class="material-symbols-outlined">edit_note</span></button>
+<button class="p-2 hover:bg-error-container rounded-lg text-error transition-colors"><span class="material-symbols-outlined">archive</span></button>
+</div>
+</td>
+</tr>
+<!-- Table Row 4 -->
+<tr class="hover:bg-surface/50 transition-colors group">
+<td class="px-8 py-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">work</span>
+</div>
+<div>
+<div class="font-semibold text-on-background">Venture Capitalist Forum</div>
+<div class="text-body-sm text-on-surface-variant">Silicon Valley Marriott</div>
+<div class="mt-2 w-32 h-1.5 bg-surface-container rounded-full overflow-hidden"><div class="h-full bg-emerald-green w-[15%]"></div></div></div>
+</div>
+</td>
+<td class="px-6 py-6">
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant rounded-full text-label-sm font-medium">Corporate</span>
+</td>
+<td class="px-6 py-6 text-body-sm text-on-surface">Jan 22, 2025</td>
+<td class="px-6 py-6 font-semibold text-on-surface">$55,000.00</td><td class="px-6 py-6"><div class="flex -space-x-2"><div class="w-8 h-8 rounded-full border-2 border-white bg-surface-container flex items-center justify-center text-[10px] font-bold">DC</div><div class="w-8 h-8 rounded-full border-2 border-white bg-primary-fixed text-primary text-[10px] font-bold">+2</div></div></td>
+<td class="px-6 py-6">
+<div class="flex items-center gap-2 text-emerald-green">
+<span class="w-2 h-2 rounded-full bg-emerald-green"></span>
+<span class="text-label-md">Planned</span>
+</div>
+</td>
+<td class="px-8 py-6 text-right">
+<div class="flex justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors"><span class="material-symbols-outlined">visibility</span></button>
+<button class="p-2 hover:bg-surface-container rounded-lg text-on-surface-variant transition-colors"><span class="material-symbols-outlined">edit_note</span></button>
+<button class="p-2 hover:bg-error-container rounded-lg text-error transition-colors"><span class="material-symbols-outlined">archive</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-between px-8 py-5 bg-surface-container-low/30 border-t border-border-gray">
+<div class="text-body-sm text-on-surface-variant">
+                    Showing <span class="font-semibold text-on-surface">1</span> to <span class="font-semibold text-on-surface">4</span> of <span class="font-semibold text-on-surface">24</span> events
+                </div>
+<div class="flex items-center gap-1">
+<button class="p-2 rounded-lg hover:bg-surface-container transition-colors disabled:opacity-30" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-primary text-white font-label-md text-label-md flex items-center justify-center">1</button>
+<button class="w-10 h-10 rounded-lg hover:bg-surface-container text-on-surface-variant font-label-md text-label-md transition-colors">2</button>
+<button class="w-10 h-10 rounded-lg hover:bg-surface-container text-on-surface-variant font-label-md text-label-md transition-colors">3</button>
+<span class="px-2 text-on-surface-variant">...</span>
+<button class="w-10 h-10 rounded-lg hover:bg-surface-container text-on-surface-variant font-label-md text-label-md transition-colors">6</button>
+<button class="p-2 rounded-lg hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Atmospheric Footer Decor -->
+<div class="mt-section-gap relative h-64 rounded-card overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-r from-primary/10 to-sunset-orange/10 flex items-center justify-center px-12 text-center">
+<div class="max-w-2xl">
+<h3 class="font-headline-md text-headline-md text-primary mb-4">Planning a New Concept?</h3>
+<p class="text-on-surface-variant mb-6">Our concierge-level AI assistant can help draft your event schedule and revenue estimations in seconds.</p>
+<button class="text-primary font-bold hover:underline flex items-center gap-2 mx-auto">
+                        Learn more about EventHub AI
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+</div>
+<div class="absolute -right-20 -bottom-20 w-80 h-80 bg-primary/5 rounded-full blur-3xl"></div>
+<div class="absolute -left-20 -top-20 w-80 h-80 bg-sunset-orange/5 rounded-full blur-3xl"></div>
+</div>
+</main>
+<script>
+        // Simple micro-interaction for rows
+        document.querySelectorAll('tbody tr').forEach(row => {
+            row.addEventListener('click', (e) => {
+                if (!e.target.closest('button')) {
+                    // Logic for row selection or navigation
+                    console.log('Row clicked');
+                }
+            });
+        });
+
+        // Search bar focus effect
+        const searchInput = document.querySelector('input[type="text"]');
+        if (searchInput) {
+            searchInput.addEventListener('focus', () => {
+                searchInput.parentElement.classList.add('ring-2', 'ring-primary/20');
+            });
+            searchInput.addEventListener('blur', () => {
+                searchInput.parentElement.classList.remove('ring-2', 'ring-primary/20');
+            });
+        }
+    </script>
+</body></html>

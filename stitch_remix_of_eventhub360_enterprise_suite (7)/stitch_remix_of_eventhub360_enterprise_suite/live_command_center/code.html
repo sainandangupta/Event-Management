@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Live Command Center | EventPro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary-fixed": "#240554",
+            "on-tertiary-fixed-variant": "#513982",
+            "outline": "#8c706f",
+            "border-gray": "#E6EAF0",
+            "on-primary-container": "#6d0010",
+            "on-error": "#ffffff",
+            "on-secondary-fixed-variant": "#5b4304",
+            "tertiary": "#69519b",
+            "surface-dim": "#d0dbed",
+            "primary-fixed": "#ffdad8",
+            "error-container": "#ffdad6",
+            "surface-container-highest": "#d9e3f6",
+            "on-secondary-container": "#785d1f",
+            "secondary-container": "#fed88e",
+            "tertiary-fixed": "#eaddff",
+            "background-alt": "#F5F7FA",
+            "primary-fixed-dim": "#ffb3b0",
+            "on-secondary": "#ffffff",
+            "on-primary": "#ffffff",
+            "surface-variant": "#d9e3f6",
+            "primary": "#ae2f34",
+            "surface-tint": "#ae2f34",
+            "on-surface": "#121c2a",
+            "on-surface-variant": "#584140",
+            "surface-container-low": "#eff4ff",
+            "inverse-on-surface": "#eaf1ff",
+            "tertiary-fixed-dim": "#d3bbff",
+            "on-primary-fixed": "#410006",
+            "inverse-surface": "#27313f",
+            "surface-container-high": "#dee9fc",
+            "on-secondary-fixed": "#261a00",
+            "secondary-fixed": "#ffdea0",
+            "on-error-container": "#93000a",
+            "surface-container": "#e6eeff",
+            "off-white": "#FAFAFA",
+            "error": "#ba1a1a",
+            "tertiary-container": "#a88ede",
+            "surface-container-lowest": "#ffffff",
+            "secondary-fixed-dim": "#e6c27a",
+            "on-tertiary": "#ffffff",
+            "emerald-green": "#4CAF8D",
+            "surface": "#f8f9ff",
+            "outline-variant": "#e0bfbd",
+            "on-background": "#121c2a",
+            "primary-container": "#ff6b6b",
+            "on-primary-fixed-variant": "#8c1520",
+            "inverse-primary": "#ffb3b0",
+            "surface-bright": "#f8f9ff",
+            "sunset-orange": "#FF8A5B",
+            "secondary": "#755a1d",
+            "on-tertiary-container": "#3d246c",
+            "background": "#f8f9ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "2xl": "24px",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter": "24px",
+            "base": "8px",
+            "section-gap": "64px",
+            "container-margin": "32px"
+          },
+          "fontFamily": {
+            "body-lg": ["Inter"],
+            "headline-lg": ["Hanken Grotesk"],
+            "body-md": ["Inter"],
+            "headline-md": ["Hanken Grotesk"],
+            "label-md": ["Inter"],
+            "display-lg": ["Hanken Grotesk"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(230, 234, 240, 0.8);
+      box-shadow: 0 4px 20px -2px rgba(31, 41, 55, 0.08);
+    }
+    .status-pulse {
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .5; }
+    }
+    .gradient-btn {
+      background: linear-gradient(135deg, #ae2f34 0%, #FF8A5B 100%);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .gradient-btn:hover {
+      transform: scale(1.02);
+      box-shadow: 0 10px 15px -3px rgba(174, 47, 52, 0.3);
+    }
+    body {
+      background-color: #FAFAFA;
+      color: #121c2a;
+    }
+  </style>
+</head>
+<body class="font-body-md text-body-md overflow-hidden h-screen flex">
+<!-- Side Navigation Bar -->
+<aside class="h-screen w-72 flex-shrink-0 bg-surface dark:bg-inverse-surface border-r border-border-gray dark:border-outline flex flex-col py-container-margin px-gutter shadow-sm dark:shadow-none">
+<div class="mb-10">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-xl flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard_customize</span>
+</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary leading-tight">EventPro</h1>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-70">Enterprise Suite</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Active Item: Execution -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Event Workspace</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">event</span>
+<span class="font-label-md text-label-md">Events</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-label-md text-label-md">Planning</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-md text-label-md">Resources</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Budget</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">handshake</span>
+<span class="font-label-md text-label-md">Vendors</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-primary dark:text-inverse-primary font-bold bg-primary-fixed-dim dark:bg-primary-container rounded-lg group active:scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">task_alt</span>
+<span class="font-label-md text-label-md">Execution</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Documents</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Reporting</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-border-gray pt-6">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Sign Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col min-w-0 overflow-hidden relative">
+<!-- Top Navigation Bar -->
+<header class="w-full h-20 sticky top-0 z-50 bg-surface/60 backdrop-blur-xl border-b border-border-gray flex justify-between items-center px-container-margin">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-background-alt border-none rounded-full py-2.5 pl-10 pr-4 focus:ring-2 focus:ring-primary focus:ring-opacity-50 transition-all font-body-sm text-body-sm" placeholder="Search commands, logs, or staff..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-full hover:bg-background-alt flex items-center justify-center transition-all">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full hover:bg-background-alt flex items-center justify-center transition-all">
+<span class="material-symbols-outlined text-on-surface-variant">settings</span>
+</button>
+</div>
+<div class="h-10 w-[1px] bg-border-gray mx-2"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="font-label-md text-label-md text-on-surface">Alex Stratton</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Ops Director</p>
+</div>
+<img alt="User Profile Avatar" class="w-10 h-10 rounded-full border border-border-gray object-cover" data-alt="A professional headshot of a middle-aged executive man with a kind expression, wearing a tailored navy suit. The lighting is soft and corporate, with a clean, light gray background that emphasizes professional authority and hospitality-focused leadership." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAu-uAVQ5n9A3nEfqzVE13Gn7XXwzeliaau7_2wWs8WMELnV8u5CO7-e6D1nX4M-p6g5ZKVxrTeRRbZjI4slHC1nW2VVVMqmpCnNTGPhQgelBM40O68jFxzVZVXUmGiXkOgo5wz7IVw-AyFHKiSIdmTF2bFkuDYutBGhzIPx47GrU-9fbqz3c3-VeYIN0C9ooPUqK_LMyi8lJ6n4XVg1EouM09gRjPd-oOplZkQtAwpCksrW2JsMJqpyCjFF4SAqtf_ZNwiR8pWK4X7"/>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<main class="flex-1 overflow-y-auto p-container-margin relative">
+<!-- Background Atmospheric Shader (Abstract) -->
+<div class="absolute inset-0 -z-10 opacity-20 pointer-events-none">
+
+</div>
+<div class="max-w-[1440px] mx-auto space-y-gutter">
+<!-- Header & Primary Actions -->
+<div class="flex justify-between items-end">
+<div>
+<nav class="flex gap-4 mb-2">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md" href="#">Command Center</a>
+<a class="text-on-surface-variant hover:text-primary transition-all font-label-md text-label-md" href="#">Incident Management</a>
+<a class="text-on-surface-variant hover:text-primary transition-all font-label-md text-label-md" href="#">Activity Logs</a>
+<a class="text-on-surface-variant hover:text-primary transition-all font-label-md text-label-md" href="#">Checklists</a>
+</nav>
+<h2 class="font-display-lg text-display-lg text-on-surface tracking-tight">Live Command Center</h2>
+</div>
+<div class="flex gap-4">
+<button class="px-6 py-3 bg-background-alt border border-border-gray text-on-surface rounded-xl flex items-center gap-2 font-label-md text-label-md hover:bg-white transition-all">
+<span class="material-symbols-outlined text-emerald-green">assignment_turned_in</span>
+              Launch Checklist
+            </button>
+<button class="px-6 py-3 gradient-btn text-white rounded-xl flex items-center gap-2 font-label-md text-label-md">
+<span class="material-symbols-outlined">warning</span>
+              Report Incident
+            </button>
+</div>
+</div>
+<!-- KPI Grid (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter">
+<!-- Live Events -->
+<div class="glass-card rounded-2xl p-6 flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary p-2 bg-primary-fixed-dim rounded-lg">stream</span>
+<span class="text-emerald-green font-label-sm text-label-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">trending_up</span> +2 Active
+              </span>
+</div>
+<div class="mt-4">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Live Events</h3>
+<p class="font-display-lg text-[40px] text-on-surface mt-1">12</p>
+</div>
+</div>
+<!-- Staff On-Site -->
+<div class="glass-card rounded-2xl p-6 flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-secondary p-2 bg-secondary-fixed rounded-lg">groups</span>
+<span class="text-on-surface-variant font-label-sm text-label-sm">84% Shift Fill</span>
+</div>
+<div class="mt-4">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Active Staff</h3>
+<p class="font-display-lg text-[40px] text-on-surface mt-1">142</p>
+</div>
+</div>
+<!-- Open Incidents -->
+<div class="glass-card rounded-2xl p-6 flex flex-col justify-between border-l-4 border-l-error">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-error p-2 bg-error-container rounded-lg">emergency_home</span>
+<div class="flex gap-1">
+<span class="w-2 h-2 rounded-full bg-error status-pulse"></span>
+<span class="w-2 h-2 rounded-full bg-error status-pulse"></span>
+</div>
+</div>
+<div class="mt-4">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Open Incidents</h3>
+<p class="font-display-lg text-[40px] text-on-surface mt-1">03</p>
+</div>
+</div>
+<!-- System Status -->
+<div class="glass-card rounded-2xl p-6 flex flex-col justify-between">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-emerald-green p-2 bg-surface-container-low rounded-lg">router</span>
+<span class="font-label-sm text-label-sm text-emerald-green">All Clear</span>
+</div>
+<div class="mt-4">
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest">Network Pulse</h3>
+<p class="font-headline-md text-headline-md text-on-surface mt-1">99.8% Up</p>
+</div>
+</div>
+</div>
+<!-- Main Dashboard Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter h-[600px]">
+<!-- Live Pulse Visualization (Left 2/3) -->
+<div class="lg:col-span-2 glass-card rounded-2xl overflow-hidden flex flex-col">
+<div class="p-6 border-b border-border-gray flex justify-between items-center">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Live Pulse Visualization</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Real-time attendance and task throughput across all venues</p>
+</div>
+<div class="flex bg-background-alt p-1 rounded-lg">
+<button class="px-3 py-1 bg-white shadow-sm rounded-md text-label-sm font-label-sm text-primary">Map View</button>
+<button class="px-3 py-1 text-label-sm font-label-sm text-on-surface-variant hover:text-on-surface transition-all">Timeline View</button>
+</div>
+</div>
+<div class="flex-1 relative bg-surface-container-low/30 overflow-hidden">
+<!-- Placeholder for Interactive Map/Viz -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-50">
+<div class="w-full h-full" data-location="London" style="">
+<img alt="Abstract visualization of data nodes" class="w-full h-full object-cover" data-alt="A futuristic and sophisticated data visualization map featuring glowing nodes and interconnected web lines over a dark minimalist floor plan of a massive event venue. The lighting uses soft cool blues and sharp coral highlights, reflecting a high-tech hospitality environment with an elegant, airy glass-like feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOwHXrku_kVpap49nPOXsAWnFeDV0BbbJIiRUSyaHMs517oo1LmL3yZ8bITGzK8zTd4eCYxAJIxk02x7FbNaeMF_Drnedhfg0sc8MWHzD38uSbpal62x_0JT7rroZgWlHGY-o_IrM01Y9JKVqKv8b9BWP2cWLIucMLbiEclRpHmi0YgT11FoNSTZs3ohv9TwfLte5EkpQdSNwNjOvgNwKn450tL-tudYlPohDJMBW1Er8D4VwZn6n30_r3MhX6pHXYuzmClIzSCQtB"/>
+</div>
+</div>
+<!-- Floating Overlay Statuses -->
+<div class="absolute top-6 left-6 flex flex-col gap-3">
+<div class="bg-white/90 backdrop-blur p-4 rounded-xl shadow-lg border border-border-gray max-w-xs animate-in slide-in-from-left duration-700">
+<div class="flex items-center gap-2 mb-2">
+<span class="w-2 h-2 rounded-full bg-emerald-green"></span>
+<h4 class="font-label-md text-label-md text-on-surface">Main Ballroom B</h4>
+</div>
+<p class="text-[12px] text-on-surface-variant leading-snug">Gala Dinner in progress. Service staff optimized. 420/500 seated.</p>
+</div>
+<div class="bg-white/90 backdrop-blur p-4 rounded-xl shadow-lg border border-border-gray max-w-xs animate-in slide-in-from-left duration-700 delay-150">
+<div class="flex items-center gap-2 mb-2">
+<span class="w-2 h-2 rounded-full bg-sunset-orange status-pulse"></span>
+<h4 class="font-label-md text-label-md text-on-surface">Tech Pavilion</h4>
+</div>
+<p class="text-[12px] text-on-surface-variant leading-snug">High traffic at Registration West. Redirecting flow to East entrance.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Real-time Activity Feed (Right 1/3) -->
+<div class="glass-card rounded-2xl flex flex-col">
+<div class="p-6 border-b border-border-gray">
+<h3 class="font-headline-md text-headline-md text-on-surface">Activity Stream</h3>
+<div class="mt-2 flex gap-2 overflow-x-auto pb-1 no-scrollbar">
+<span class="px-3 py-1 bg-primary/10 text-primary rounded-full text-[10px] font-bold uppercase tracking-tighter">Critical</span>
+<span class="px-3 py-1 bg-on-surface-variant/10 text-on-surface-variant rounded-full text-[10px] font-bold uppercase tracking-tighter">Updates</span>
+<span class="px-3 py-1 bg-on-surface-variant/10 text-on-surface-variant rounded-full text-[10px] font-bold uppercase tracking-tighter">Staff</span>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto p-4 space-y-4">
+<!-- Feed Item 1 -->
+<div class="flex gap-4 p-3 rounded-xl hover:bg-background-alt transition-colors group">
+<div class="flex-shrink-0 w-8 h-8 rounded-full bg-error/10 text-error flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">report</span>
+</div>
+<div>
+<p class="text-body-sm font-medium text-on-surface"><span class="font-bold">Incident Logged:</span> Medical Assist in Zone C.</p>
+<p class="text-label-sm text-on-surface-variant mt-1">2 mins ago • Venue A1</p>
+</div>
+</div>
+<!-- Feed Item 2 -->
+<div class="flex gap-4 p-3 rounded-xl hover:bg-background-alt transition-colors group">
+<div class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-green/10 text-emerald-green flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+</div>
+<div>
+<p class="text-body-sm font-medium text-on-surface"><span class="font-bold">Checklist Complete:</span> VIP Greenroom Prep.</p>
+<p class="text-label-sm text-on-surface-variant mt-1">12 mins ago • Sarah J.</p>
+</div>
+</div>
+<!-- Feed Item 3 -->
+<div class="flex gap-4 p-3 rounded-xl hover:bg-background-alt transition-colors group">
+<div class="flex-shrink-0 w-8 h-8 rounded-full bg-on-tertiary-fixed-variant/10 text-on-tertiary-fixed-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">person_pin_circle</span>
+</div>
+<div>
+<p class="text-body-sm font-medium text-on-surface"><span class="font-bold">Staff Relocation:</span> 4 stewards moved to Entrance B.</p>
+<p class="text-label-sm text-on-surface-variant mt-1">25 mins ago • Ops Control</p>
+</div>
+</div>
+<!-- Feed Item 4 -->
+<div class="flex gap-4 p-3 rounded-xl hover:bg-background-alt transition-colors group border border-dashed border-border-gray">
+<div class="flex-shrink-0 w-8 h-8 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">cloud_sync</span>
+</div>
+<div>
+<p class="text-body-sm font-medium text-on-surface">Data Sync: Vendor delivery confirmed.</p>
+<p class="text-label-sm text-on-surface-variant mt-1">40 mins ago • Catering Portal</p>
+</div>
+</div>
+<!-- Feed Item 5 -->
+<div class="flex gap-4 p-3 rounded-xl hover:bg-background-alt transition-colors group">
+<div class="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-green/10 text-emerald-green flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">mic</span>
+</div>
+<div>
+<p class="text-body-sm font-medium text-on-surface"><span class="font-bold">Stage Alert:</span> Keynote started.</p>
+<p class="text-label-sm text-on-surface-variant mt-1">1 hour ago • Main Stage</p>
+</div>
+</div>
+</div>
+<div class="p-4 border-t border-border-gray text-center">
+<button class="text-primary font-label-md text-label-md hover:underline">View Full Log History</button>
+</div>
+</div>
+</div>
+<!-- Secondary Section: Active Events Cards -->
+<div class="space-y-4 pt-4">
+<div class="flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md text-on-surface">Live Events Breakdown</h3>
+<div class="flex gap-2">
+<button class="w-8 h-8 rounded-lg bg-surface border border-border-gray flex items-center justify-center"><span class="material-symbols-outlined text-[16px]">grid_view</span></button>
+<button class="w-8 h-8 rounded-lg bg-background-alt border border-border-gray flex items-center justify-center"><span class="material-symbols-outlined text-[16px]">list</span></button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Event Card 1 -->
+<div class="glass-card rounded-2xl overflow-hidden group">
+<div class="h-32 bg-surface-container-highest relative">
+<img alt="Conference hall" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500" data-alt="An expansive, high-end corporate conference hall filled with rows of modern seating and large projection screens. The atmosphere is professional and brightly lit with high-key neutral tones and sophisticated architectural lighting, reflecting a premium enterprise event execution environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-6j-CnsJnq4UU3ewaL2Gd16JbO8mA1wzCh9Ev5v7YF6VjaQsLGf7oMkuf1b5W60qugD0EpqORL9MnBWylfHpWVLIcomXtgatJmLPUX7K-tKjXk7Ri4PwiafG2kqz2_2yM_gb41k2iBjGnZxvyHBmrbZkjNKolNr8llGvdd8mH8S9xgIYblYNH0Aw9WBgR_8qVYawMK7Q-s8m6cp8aRtbswPLZ-kAC-ZrcbkX5wMxSUSxLv2iq6zFdany_eE6GrYoVisqOWm6EYkA6"/>
+<div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-2 py-1 rounded-md text-[10px] font-bold text-primary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary status-pulse"></span> LIVE
+                </div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-headline-md text-label-md font-bold text-on-surface">TechGlobal Summit 2024</h4>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">more_horiz</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mb-4">Main Convention Center • Day 2 of 3</p>
+<div class="space-y-3">
+<div class="flex justify-between text-label-sm font-label-sm">
+<span class="text-on-surface-variant">Task Completion</span>
+<span class="text-on-surface">88%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 88%"></div>
+</div>
+</div>
+<div class="mt-4 flex justify-between items-center">
+<div class="flex -space-x-2">
+<img class="w-7 h-7 rounded-full border-2 border-white object-cover" data-alt="Close-up portrait of a young professional woman in a light-colored business casual outfit, set against a clean, modern workspace background with soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBH6A-7gIecFm3c-4rqzemtVVQyIh-3VLdl8Qh-_NJFFg2CytZ9klotcJeeNlNe8RhLnxNkywZtvpTEd8e349Z2LmmjBGEjNKR6_-1iddr7T6zfnisU5KWgKCBRZSID4FO7ZJDRFNEezR1kNcvcTi5KVnSTupYEzTtcX9Mh-_V9Av1RTHzwIsL732jT4-vY9uDC3FYRu_Ni7XPzI15r3vLNNfnwzrROfMWAPXQog3Bd_upetNzjqJdK-n8QQBmm4FjNzW1FzJddfh9M"/>
+<img class="w-7 h-7 rounded-full border-2 border-white object-cover" data-alt="Portrait of a diverse male professional smiling warmly, wearing a crisp white shirt in a modern office with natural light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdj3oAQev44OFw2bQGr2wRUQYLssyJKrhhE5T8LLp50ckiBuqmRUB0kyQ7f9ZrD0qVMsZMoOE6L0PBDSpOFo70tVfGW-WRKmwKeYYwEG-VSoK8jf2b14aUMR5ywJ0W5jyLoGXUfSQzGYHQ2GvGJnUpCvCcDVDtyj7u_aPAInwyH6DR2JPLQU7q3IamQQUeBDMWRwAdxzniRkllxTB7iwF1LobeY1ExQ9AB2G_8mUJKNPXWYX6Rd6yK53ZxGi6By2DYRMmoaErXKDkn"/>
+<div class="w-7 h-7 rounded-full bg-surface-container-highest border-2 border-white flex items-center justify-center text-[10px] font-bold text-on-surface-variant">+8</div>
+</div>
+<button class="text-primary font-label-md text-label-md flex items-center gap-1 group-hover:gap-2 transition-all">
+                    Open Control <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Event Card 2 -->
+<div class="glass-card rounded-2xl overflow-hidden group">
+<div class="h-32 bg-surface-container-highest relative">
+<img alt="Gala Dinner" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500" data-alt="A luxurious ballroom set for a grand gala dinner, with glowing crystal chandeliers and elegant round tables draped in fine white linen. The color palette is warm gold and champagne, creating a high-end, hospitable atmosphere that represents luxury event management." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVsMf0x8sytNMev1pYllyLzn8CLNypruL2JukVzmRteYT9SsqW6UWBvuKVmZ-EQncAFxKbs1lqHKvvf25yyZD4Ell7GNs2PDoxSQtvoJ1iu46VeNBA-eiEEfdeGz1NQsmSqORMJbVZJ0t7OduvxTeqgcZP7Cm-G4Nd-F-6k2dQWHECYTQGrMzFituxETFpo7jZASTo88NDJpGtvBfkEPcsQiWRe460rBKl2CvosKVnLfhVrNZIX1Ku4us_Chj9Lx42KPHhP5Npmiju"/>
+<div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-2 py-1 rounded-md text-[10px] font-bold text-primary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary status-pulse"></span> LIVE
+                </div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-headline-md text-label-md font-bold text-on-surface">Lumina Charity Gala</h4>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">more_horiz</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mb-4">The Grand Hotel Ballroom • Active Now</p>
+<div class="space-y-3">
+<div class="flex justify-between text-label-sm font-label-sm">
+<span class="text-on-surface-variant">Task Completion</span>
+<span class="text-on-surface">95%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-emerald-green h-full rounded-full" style="width: 95%"></div>
+</div>
+</div>
+<div class="mt-4 flex justify-between items-center">
+<div class="flex -space-x-2">
+<img class="w-7 h-7 rounded-full border-2 border-white object-cover" data-alt="Portrait of a sophisticated female manager in a modern hospitality setting, with soft lighting highlighting professional elegance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3nykqgOsy-P4tlObw4d6D-AzcO1t2lu6WbXcA08TC2Y-FIcY8fT5NROG81IQA3JnKjcckej9b8ZPA-FFLl85FdKoxA9VW866ruu4itR26NaP6dTSwM8gHE3tlrrAAz7xvPqkhNP-zlpCu8NBrD5G9w2q2qToAhj-6n7tsswp4cC-7w7RVCsGomVqf0tSX_uMKjmNM1qvteN8R1ztydXv-Ohc6iBx650KS58KxB1uBIudFj_MnPB1I0JyQYaHgjBGKYEWltE9NuSHN"/>
+<div class="w-7 h-7 rounded-full bg-surface-container-highest border-2 border-white flex items-center justify-center text-[10px] font-bold text-on-surface-variant">+4</div>
+</div>
+<button class="text-primary font-label-md text-label-md flex items-center gap-1 group-hover:gap-2 transition-all">
+                    Open Control <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Event Card 3 -->
+<div class="glass-card rounded-2xl overflow-hidden group">
+<div class="h-32 bg-surface-container-highest relative">
+<img alt="Music Festival Entrance" class="w-full h-full object-cover opacity-80 group-hover:scale-105 transition-transform duration-500" data-alt="A high-energy outdoor event entrance with modern branding, vibrant sunset lighting, and organized crowds. The visual style is energetic and contemporary, with a balance of warm orange and cool evening sky tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgdUK6lCIYiYGe_oUa4TYzcE7sNMo53tJl3iCzARfYF_IwWZtWlmybVjtNJ0yGt-qHhdlCqtW3786XcfA4Jp2XAgnTwr-9imPqHpfi8EGA3rpWmpZRCYNP5K2juiZUJ9q1Ir8gZ0FATwiE_GSc-vHafRCcytHRUaEn6rpt679dTGQMbZYKdZzQpiHi0wC78RCg_Vn3T-_Naw3OkM7Q2qQz-Ga_FfzM_jAFLuX9Pzq91iBffaS6r_K1U3GQ5_4EJZMqTBpT4_CNZ69d"/>
+<div class="absolute top-4 left-4 bg-white/90 backdrop-blur px-2 py-1 rounded-md text-[10px] font-bold text-primary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary status-pulse"></span> LIVE
+                </div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-2">
+<h4 class="font-headline-md text-label-md font-bold text-on-surface">Nexus Outdoor Festival</h4>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer">more_horiz</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant line-clamp-1 mb-4">West Pier Arena • Day 1 of 2</p>
+<div class="space-y-3">
+<div class="flex justify-between text-label-sm font-label-sm">
+<span class="text-on-surface-variant">Task Completion</span>
+<span class="text-on-surface">62%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-sunset-orange h-full rounded-full" style="width: 62%"></div>
+</div>
+</div>
+<div class="mt-4 flex justify-between items-center">
+<div class="flex -space-x-2">
+<img class="w-7 h-7 rounded-full border-2 border-white object-cover" data-alt="Portrait of a professional man in a casual business style, smiling in an outdoor, bright environment with a focused look." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXuR2WoJnr-zVjN6yIXDa4n0iZZTxkqP-6sKBAnHbthYybgkononHJ641Sh4JcbmDYHkivkznbDPYqDasjKtvHdN8QK8DSdJYoq3x3a82E3ONT9xFrigVSMlV5ec3PeT02ybnEzCZLYRXxLH-Yhfefb7MjRmMcIfTrtZBFG8DVrkG2qv4uwsQ_LrWIQL5LLsrxY-j-YQO95A1xHJgYny4CzIEsxRx8TIRdcsGLQOoZI5Kw3M8sSRFxdnwogVd5a2IUVB6mY406JtR8"/>
+<img class="w-7 h-7 rounded-full border-2 border-white object-cover" data-alt="Headshot of a modern professional woman with a bright, friendly expression in a clean outdoor setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGVSgtvP3Enq1vae9hkw8KzfqyTH8_EjwP66p_zI6Cqtc7zDFjoa-n9NIKu5AcAyDw_cyIPXJg8RMMmq_c5_0hiH3YOKPzgr6QD2oOg2FzC_pGEeIXhHKsOn9KxFqUCl2L7Ayip4DaK0FVSAwrikfTTHVKAhsJc09ZcsN6xzDHnSAk-yz7hJWbXBu1SXBHSOuZoUVOUsFX7s7MNNKIm9qN--oh4vbU-2h5J7nrgMKjECIMjgNMkCIkBpaNgDhVnyRJ9_KqBtcChYN3"/>
+<div class="w-7 h-7 rounded-full bg-surface-container-highest border-2 border-white flex items-center justify-center text-[10px] font-bold text-on-surface-variant">+12</div>
+</div>
+<button class="text-primary font-label-md text-label-md flex items-center gap-1 group-hover:gap-2 transition-all">
+                    Open Control <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Quick Launch Bar (Mobile Friendly Context) -->
+<div class="fixed bottom-8 right-8 flex flex-col gap-3 md:hidden">
+<button class="w-14 h-14 bg-error text-white rounded-full shadow-2xl flex items-center justify-center">
+<span class="material-symbols-outlined">warning</span>
+</button>
+<button class="w-14 h-14 gradient-btn text-white rounded-full shadow-2xl flex items-center justify-center">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+</div>
+<script>
+    // Micro-interactions for the "Pulse"
+    document.addEventListener('DOMContentLoaded', () => {
+      const feedItems = document.querySelectorAll('.group');
+      feedItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+          // Subtle highlight effect could go here
+        });
+      });
+      
+      // Auto-refresh simulation for the activity log
+      const logs = [
+        { type: 'staff', text: 'Cleaning crew dispatched to Suite 402.', time: 'Just now', icon: 'cleaning_services', color: 'bg-on-secondary-fixed-variant/10', textColor: 'text-on-secondary-fixed-variant' },
+        { type: 'incident', text: 'Spill reported in Food Hall A.', time: 'Just now', icon: 'emergency', color: 'bg-error/10', textColor: 'text-error' }
+      ];
+      
+      const feed = document.querySelector('.overflow-y-auto.p-4');
+      setInterval(() => {
+        // Logic to occasionally prepend a new log would go here for realism
+      }, 15000);
+    });
+  </script>
+</body></html>
