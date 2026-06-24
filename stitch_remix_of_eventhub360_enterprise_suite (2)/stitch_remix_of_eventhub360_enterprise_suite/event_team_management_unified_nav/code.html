@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Team Management | EventHub360</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#6d0010",
+                        "on-background": "#121c2a",
+                        "off-white": "#FAFAFA",
+                        "inverse-surface": "#27313f",
+                        "tertiary-fixed": "#eaddff",
+                        "surface-container-highest": "#d9e3f6",
+                        "primary-container": "#ff6b6b",
+                        "on-primary-fixed-variant": "#8c1520",
+                        "sunset-orange": "#FF8A5B",
+                        "on-error-container": "#93000a",
+                        "surface": "#f8f9ff",
+                        "surface-container-high": "#dee9fc",
+                        "surface-bright": "#f8f9ff",
+                        "surface-container": "#e6eeff",
+                        "on-tertiary-fixed-variant": "#513982",
+                        "surface-dim": "#d0dbed",
+                        "primary-fixed-dim": "#ffb3b0",
+                        "on-tertiary-fixed": "#240554",
+                        "primary": "#ae2f34",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#785d1f",
+                        "emerald-green": "#4CAF8D",
+                        "on-secondary-fixed": "#261a00",
+                        "on-primary": "#ffffff",
+                        "background-alt": "#F5F7FA",
+                        "background": "#f8f9ff",
+                        "surface-container-low": "#eff4ff",
+                        "inverse-primary": "#ffb3b0",
+                        "border-gray": "#E6EAF0",
+                        "on-surface-variant": "#584140",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#755a1d",
+                        "on-primary-fixed": "#410006",
+                        "on-secondary-fixed-variant": "#5b4304",
+                        "secondary-fixed": "#ffdea0",
+                        "outline-variant": "#e0bfbd",
+                        "tertiary-fixed-dim": "#d3bbff",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#e6c27a",
+                        "primary-fixed": "#ffdad8",
+                        "on-surface": "#121c2a",
+                        "on-error": "#ffffff",
+                        "tertiary": "#69519b",
+                        "outline": "#8c706f",
+                        "tertiary-container": "#a88ede",
+                        "surface-variant": "#d9e3f6",
+                        "surface-tint": "#ae2f34",
+                        "secondary-container": "#fed88e",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-tertiary-container": "#3d246c",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "card": "24px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-margin": "32px",
+                        "base": "8px",
+                        "section-gap": "64px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg-mobile": ["Hanken Grotesk"],
+                        "body-sm": ["Inter"],
+                        "label-sm": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255, 255, 255, 0.4);
+        }
+        .tonal-card {
+            box-shadow: 0 4px 20px rgba(31, 41, 55, 0.08);
+            transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease;
+        }
+        .tonal-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(31, 41, 55, 0.12);
+        }
+        .primary-gradient {
+            background: linear-gradient(135deg, #ae2f34 0%, #FF8A5B 100%);
+        }
+        .shimmer {
+            background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+</head>
+<body class="bg-background font-body-md text-on-surface">
+<!-- Side Navigation Bar -->
+<aside class="flex flex-col h-screen fixed left-0 top-0 py-base px-gutter bg-surface-container-low dark:bg-inverse-surface shadow-sm docked left-0 h-full w-64 z-40 overflow-y-auto">
+<div class="pt-6 px-4 mb-8">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary leading-tight">EventHub360</h1>
+<p class="text-on-surface-variant font-label-sm tracking-widest uppercase mt-1">Concierge Suite</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors duration-200 text-on-surface-variant dark:text-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="space_dashboard">space_dashboard</span>
+<span class="font-label-md text-label-md">Event Workspace</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl transition-colors duration-200 text-primary border-r-4 border-primary bg-surface-container-high font-bold" href="#">
+<span class="material-symbols-outlined" data-icon="event_available">event_available</span>
+<span class="font-label-md text-label-md">Events</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors duration-200 text-on-surface-variant dark:text-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="assignment">assignment</span>
+<span class="font-label-md text-label-md">Planning</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors duration-200 text-on-surface-variant dark:text-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-label-md text-label-md">Resources</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors duration-200 text-on-surface-variant dark:text-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label-md text-label-md">Budget</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors duration-200 text-on-surface-variant dark:text-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-label-md text-label-md">Vendors</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors duration-200 text-on-surface-variant dark:text-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="task_alt">task_alt</span>
+<span class="font-label-md text-label-md">Execution</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors duration-200 text-on-surface-variant dark:text-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="font-label-md text-label-md">Documents</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-xl hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors duration-200 text-on-surface-variant dark:text-surface-variant" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-md text-label-md">Reporting</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-border-gray pt-6 pb-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-md text-label-md">Help</span>
+</a>
+</div>
+</aside>
+<!-- Top Navigation Bar -->
+<header class="flex justify-between items-center w-[calc(100%-16rem)] h-16 px-gutter fixed top-0 right-0 z-50 glass-panel border-b border-border-gray">
+<div class="flex items-center gap-8">
+<div class="relative group">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant">search</span>
+<input class="bg-background-alt border-none rounded-full py-2 pl-10 pr-4 w-64 focus:ring-2 focus:ring-primary focus:bg-white transition-all text-body-sm" placeholder="Search team members..." type="text"/>
+</div>
+<nav class="hidden md:flex items-center gap-6"><a class="text-on-surface-variant hover:text-primary font-label-md text-label-md transition-all" href="#">Overview</a><a class="text-on-surface-variant hover:text-primary font-label-md text-label-md transition-all" href="#">Phases</a><a class="text-primary border-b-2 border-primary pb-1 font-label-md text-label-md transition-all" href="#">Team</a><a class="text-on-surface-variant hover:text-primary font-label-md text-label-md transition-all" href="#">Timeline</a><a class="text-on-surface-variant hover:text-primary font-label-md text-label-md transition-all" href="#">Planning</a><a class="text-on-surface-variant hover:text-primary font-label-md text-label-md transition-all" href="#">Resources</a><a class="text-on-surface-variant hover:text-primary font-label-md text-label-md transition-all" href="#">Budget</a><a class="text-on-surface-variant hover:text-primary font-label-md text-label-md transition-all" href="#">Vendors</a><a class="text-on-surface-variant hover:text-primary font-label-md text-label-md transition-all" href="#">Documents</a><a class="text-on-surface-variant hover:text-primary font-label-md text-label-md transition-all" href="#">Reports</a></nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full"></span>
+</button>
+<div class="h-8 w-[1px] bg-border-gray mx-2"></div>
+<div class="flex items-center gap-3 cursor-pointer group">
+<div class="text-right">
+<p class="font-label-md text-label-md leading-none">Julian Thorne</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter mt-1">Sr. Event Director</p>
+</div>
+<img alt="Manager profile" class="w-10 h-10 rounded-full border-2 border-primary/20 group-hover:border-primary transition-all" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCF4QCoX7PoS3H2ai1nJDfQVgxHXK8yh3NjZK8UDjidTxrYyIkrog0ENnRGaZBGuXaxB-ACf3LWHT7Wq_-JQ-8PzfZTcDfkZf6RO4_uGSNk_xMDldmS9QN8GD9D_-66Ok1rYIZhrfkrv3z5rS9-kxAAJ0bHw89JK6BB2Gxf6mpaCDOrHaJ0_Avftj5182ZlCD5HFx8uN6TE5OiT4_8T1k2_f0f5M0HzlyUH3H5ESTWynYxe6cCHkNvdYKa8jDR26xpGXh46A-H5vsO4"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 mt-16 p-container-margin min-h-screen max-w-[1440px] mx-auto">
+<!-- Page Header Section -->
+<section class="flex justify-between items-end mb-12"><nav class="flex items-center gap-2 mb-4 text-body-sm text-on-surface-variant"><a class="hover:text-primary transition-colors" href="#">Events</a><span class="material-symbols-outlined text-xs">chevron_right</span><a class="hover:text-primary transition-colors" href="#">Grand Emerald Gala 2024</a><span class="material-symbols-outlined text-xs">chevron_right</span><span class="text-on-surface font-medium">Team</span></nav>
+<div>
+<div class="flex items-center gap-2 mb-2 text-primary">
+<span class="material-symbols-outlined text-sm">auto_awesome</span>
+<span class="font-label-sm uppercase tracking-widest">Grand Emerald Gala 2024</span>
+</div>
+<h2 class="font-display-lg text-display-lg">Collaborators &amp; Staff</h2>
+<p class="text-on-surface-variant max-w-xl mt-4 font-body-lg text-body-lg">Manage the dedicated specialists assigned to this project. Review roles, contact details, and current workloads for the gala event.</p>
+</div>
+<button class="primary-gradient text-white px-8 py-4 rounded-full font-label-md text-label-md shadow-lg flex items-center gap-2 hover:scale-[1.02] active:scale-[0.98] transition-all" onclick="document.getElementById('assignModal').classList.remove('hidden')">
+<span class="material-symbols-outlined">person_add</span>
+                Assign Team Member
+            </button>
+</section>
+<!-- Stats Overview Row -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-section-gap">
+<div class="bg-white p-6 rounded-card border border-border-gray flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">group</span>
+</div>
+<div>
+<p class="text-on-surface-variant font-label-sm uppercase tracking-tight">Total Staff</p>
+<p class="text-headline-md font-headline-md">12</p>
+</div>
+</div>
+<div class="bg-white p-6 rounded-card border border-border-gray flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">verified_user</span>
+</div>
+<div>
+<p class="text-on-surface-variant font-label-sm uppercase tracking-tight">Leads Assigned</p>
+<p class="text-headline-md font-headline-md">3</p>
+</div>
+</div>
+<div class="bg-white p-6 rounded-card border border-border-gray flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">assignment_turned_in</span>
+</div>
+<div>
+<p class="text-on-surface-variant font-label-sm uppercase tracking-tight">Tasks Active</p>
+<p class="text-headline-md font-headline-md">48</p>
+</div>
+</div>
+<div class="bg-white p-6 rounded-card border border-border-gray flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface">forum</span>
+</div>
+<div>
+<p class="text-on-surface-variant font-label-sm uppercase tracking-tight">Open Channels</p>
+<p class="text-headline-md font-headline-md">8</p>
+</div>
+</div>
+</div>
+<!-- Team Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Lead Planner Card -->
+<div class="tonal-card bg-white p-gutter rounded-card border border-border-gray relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4">
+<span class="bg-primary-fixed text-on-primary-fixed-variant px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Lead</span>
+</div>
+<div class="flex items-start gap-6 mb-8">
+<img alt="Lead Planner Avatar" class="w-20 h-20 rounded-2xl object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDinhii5JY-eRKB_xIcAv_TH1TIHhRxjqdITPxU--0bpLMp5xXjhNSixtkU6HT7zcr_dE-yuv2pUw-uWV3oFdCDDq6R2PPd5i5SV7g6yN0v0K9v7IJ8m2-Emk5gWdK1YTgWnFElvaEVmQTwwJuQu1YrzwegVuQkdGwbbP3bUyk3YynNx3WTnnK9WYyo25P2dvwdVLHH-LzOegdBEStpitd6AdSz0Ewx71GM74SvUkE-xNL_vkzPDYh2-0GdB3XrRSzFZMfWqRqr7JOl"/>
+<div>
+<h3 class="font-headline-md text-headline-md">Sienna Westbrook</h3>
+<p class="text-on-surface-variant font-label-md">Lead Planner</p>
+<div class="flex gap-1 mt-2">
+<span class="material-symbols-outlined text-sunset-orange text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sunset-orange text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sunset-orange text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sunset-orange text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sunset-orange text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+</div>
+<div class="space-y-4 mb-8">
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary">mail</span>
+<span class="text-body-sm">s.westbrook@eventhub.com</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary">call</span>
+<span class="text-body-sm">+1 (555) 092-4412</span>
+</div>
+</div>
+<div class="pt-6 border-t border-border-gray flex justify-between items-center">
+<button class="text-primary font-label-md hover:underline decoration-2">View Portfolio</button>
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border-2 border-white flex items-center justify-center text-[10px] font-bold">SW</div>
+<div class="w-8 h-8 rounded-full bg-secondary-fixed border-2 border-white flex items-center justify-center text-[10px] font-bold">2+</div>
+</div>
+</div>
+</div>
+<!-- Coordinator Card -->
+<div class="tonal-card bg-white p-gutter rounded-card border border-border-gray relative overflow-hidden group">
+<div class="flex items-start gap-6 mb-8">
+<img alt="Coordinator Avatar" class="w-20 h-20 rounded-2xl object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA30vFevrgKVpAe8rc-W8dMN_DGr8i2QNL_fJ466AkxM_6ip4BAuKqAsmFB7Vvf1sqZ_9uKRlPZsrIDIFqFm_TpbK01nrPrhiZqXTZaxlVKLkxAEpTGpUUxjmvtYr7aK4XFjPluamGhWhOOfos1TwNUHGPp7TnMOednH3VqSs61O9CNGlhU39aHDWyr4BrxLOZI_iINZ3IG31hU-JORAykvxgJoDzq2GQwMfPJ-QvoRv8Zn5DbhpvlxmHb7Bc36AjbbEdTlP4BqUsxL"/>
+<div>
+<h3 class="font-headline-md text-headline-md">Marcus Chen</h3>
+<p class="text-on-surface-variant font-label-md">Operations Coordinator</p>
+<p class="text-emerald-green text-xs font-bold uppercase mt-2">Available</p>
+</div>
+</div>
+<div class="space-y-4 mb-8">
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary">mail</span>
+<span class="text-body-sm">m.chen@eventhub.com</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary">call</span>
+<span class="text-body-sm">+1 (555) 883-2201</span>
+</div>
+</div>
+<div class="pt-6 border-t border-border-gray flex justify-between items-center">
+<button class="text-primary font-label-md hover:underline decoration-2">Assign Tasks</button>
+<span class="bg-surface-container-low text-on-surface-variant px-2 py-1 rounded text-[10px] font-medium">8 Active Tasks</span>
+</div>
+</div>
+<!-- Finance Card -->
+<div class="tonal-card bg-white p-gutter rounded-card border border-border-gray relative overflow-hidden group">
+<div class="flex items-start gap-6 mb-8">
+<div class="w-20 h-20 rounded-2xl bg-tertiary-container flex items-center justify-center text-white text-3xl font-bold">ER</div>
+<div>
+<h3 class="font-headline-md text-headline-md">Elena Rodriguez</h3>
+<p class="text-on-surface-variant font-label-md">Finance Officer</p>
+<p class="text-on-surface-variant text-xs mt-2 italic">On-site specialized</p>
+</div>
+</div>
+<div class="space-y-4 mb-8">
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary">mail</span>
+<span class="text-body-sm">e.rodriguez@eventhub.com</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant">
+<span class="material-symbols-outlined text-primary">call</span>
+<span class="text-body-sm">+1 (555) 441-9088</span>
+</div>
+</div>
+<div class="pt-6 border-t border-border-gray flex justify-between items-center">
+<button class="text-primary font-label-md hover:underline decoration-2">Audit Access</button>
+<span class="bg-error-container text-on-error-container px-2 py-1 rounded text-[10px] font-medium">Overloaded</span>
+</div>
+</div>
+<!-- Add Specialist Card -->
+<div class="tonal-card bg-white/40 border-2 border-dashed border-border-gray p-gutter rounded-card flex flex-col items-center justify-center text-center hover:bg-white hover:border-primary transition-all group cursor-pointer" onclick="document.getElementById('assignModal').classList.remove('hidden')">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center mb-4 group-hover:bg-primary-fixed transition-colors">
+<span class="material-symbols-outlined text-3xl text-on-surface-variant group-hover:text-primary">add</span>
+</div>
+<h4 class="font-headline-md text-on-surface-variant group-hover:text-primary">Add Specialist</h4>
+<p class="text-body-sm text-on-surface-variant px-4">Browse our concierge network for niche experts and local coordinators.</p>
+</div>
+</div>
+</main>
+<!-- Assign Team Member Modal -->
+<div class="hidden fixed inset-0 z-[100] flex items-center justify-center p-gutter" id="assignModal">
+<div class="absolute inset-0 bg-on-background/40 backdrop-blur-sm" onclick="this.parentElement.classList.add('hidden')"></div>
+<div class="glass-panel relative w-full max-w-2xl bg-white rounded-card shadow-2xl overflow-hidden scale-100 transition-transform">
+<div class="p-8 border-b border-border-gray flex justify-between items-center">
+<div>
+<h3 class="font-headline-lg text-headline-lg">Assign Specialist</h3>
+<p class="text-on-surface-variant font-body-sm">Select a professional from your organization to join this event team.</p>
+</div>
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-colors" onclick="document.getElementById('assignModal').classList.add('hidden')">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-8 max-h-[614px] overflow-y-auto space-y-4">
+<!-- Search within modal -->
+<div class="relative mb-6">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant">search</span>
+<input class="w-full bg-background-alt border-none rounded-xl py-4 pl-12 pr-4 focus:ring-2 focus:ring-primary" placeholder="Search by name, role, or skillset..." type="text"/>
+</div><div class="mb-6"><label class="block text-label-sm font-medium text-on-surface-variant mb-2 uppercase tracking-wider">Assign Event Role</label><select class="w-full bg-background-alt border-none rounded-xl py-4 px-4 focus:ring-2 focus:ring-primary text-body-md"><option>Lead Planner</option><option>Operations Coordinator</option><option>Finance Officer</option><option>Logistics Specialist</option><option>Catering Manager</option><option>Security Consultant</option></select></div>
+<!-- List items -->
+<div class="space-y-2">
+<div class="flex items-center gap-4 p-4 rounded-xl hover:bg-surface-container-low cursor-pointer transition-colors border border-transparent hover:border-border-gray group">
+<img alt="Specialist Profile" class="w-12 h-12 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3NM4voewoe-u4Kd5FFqpfMvc5f3SsVXc3dxKmx5xKUNE9xBzJpd5YpJfP73IwfnwPZYVmCY4a7bN8nFHnM-kIXlMA9SDxziC4ny69knM3okd0C-BZbsExZsgOgp3U6h9qKd-xIjKpG7nkEIhJhclqq8nw4o4QguKtpJ6hntL0bp2_XtZzx2WnPgnpLbcEU3WfvP-KezcUIwePXlFrMA9DPdrYVrZPrSJd_ygTKn0dTQ_BAPqqinzLH-sVSvUBL52j94o5x8VwoYRc"/>
+<div class="flex-1">
+<p class="font-bold">David Okonjo</p>
+<p class="text-xs text-on-surface-variant uppercase font-medium">Logistics Specialist • London</p>
+</div>
+<button class="bg-primary-container text-on-primary-container px-4 py-2 rounded-full text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">Select</button>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-xl hover:bg-surface-container-low cursor-pointer transition-colors border border-transparent hover:border-border-gray group">
+<img alt="Specialist Profile" class="w-12 h-12 rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcQ31Szozvfvm_gtK8MVL-BO796hWT6BMzRGfzbdZCUxB-V1XK_kJLN1w3BwWokW28kjD21DHEQT_qXrGrTPlTNKMbtEYaMsWj5YNI_qm-Uo4BAp4S22O_-xlPJcS-S188pXzlmO9K1GUA8uz0VeR8F3P7L7jKJnN4PJr_gV8a-dxhOWCglU0cPUPZ9qp6F6ykrUdLksVuTpjHYzU48d1dT6bQXSDgNDh5646YWqhBXSk0t88o2raNGAVPeJbRw2So9Scim2OvEoQc"/>
+<div class="flex-1">
+<p class="font-bold">Sarah Jenkins</p>
+<p class="text-xs text-on-surface-variant uppercase font-medium">Catering Manager • Paris</p>
+</div>
+<button class="bg-primary-container text-on-primary-container px-4 py-2 rounded-full text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">Select</button>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-xl hover:bg-surface-container-low cursor-pointer transition-colors border border-transparent hover:border-border-gray group">
+<div class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center font-bold">TL</div>
+<div class="flex-1">
+<p class="font-bold">Thomas Low</p>
+<p class="text-xs text-on-surface-variant uppercase font-medium">Security Consultant • Global</p>
+</div>
+<button class="bg-primary-container text-on-primary-container px-4 py-2 rounded-full text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">Select</button>
+</div>
+</div>
+</div>
+<div class="p-8 bg-surface-container-low border-t border-border-gray flex justify-end gap-4">
+<button class="px-6 py-2 text-on-surface-variant font-label-md" onclick="document.getElementById('assignModal').classList.add('hidden')">Cancel</button>
+<button class="primary-gradient text-white px-8 py-3 rounded-full font-label-md shadow-md">Confirm Team Update</button>
+</div>
+</div>
+</div>
+<!-- Micro-interaction Scripts -->
+<script>
+        // Modal functionality
+        window.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.getElementById('assignModal').classList.add('hidden');
+            }
+        });
+
+        // Dashboard search animation
+        const searchInput = document.querySelector('header input[type="text"]');
+        if (searchInput) {
+            searchInput.addEventListener('focus', () => {
+                searchInput.parentElement.classList.add('ring-offset-2');
+            });
+        }
+    </script>
+</body></html>

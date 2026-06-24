@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vendor Performance Analytics | Events Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #E6EAF0;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-off-white text-on-surface font-body-md min-h-screen">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "emerald-green": "#4CAF8D",
+                        "surface": "#f8f9ff",
+                        "on-secondary-container": "#785d1f",
+                        "inverse-primary": "#ffb3b0",
+                        "on-tertiary-container": "#3d246c",
+                        "tertiary-container": "#a88ede",
+                        "on-tertiary-fixed-variant": "#513982",
+                        "surface-bright": "#f8f9ff",
+                        "outline": "#8c706f",
+                        "secondary-fixed-dim": "#e6c27a",
+                        "inverse-on-surface": "#eaf1ff",
+                        "secondary": "#755a1d",
+                        "on-tertiary-fixed": "#240554",
+                        "primary-fixed": "#ffdad8",
+                        "on-secondary-fixed": "#261a00",
+                        "secondary-container": "#fed88e",
+                        "on-primary-fixed-variant": "#8c1520",
+                        "surface-tint": "#ae2f34",
+                        "on-error": "#ffffff",
+                        "inverse-surface": "#27313f",
+                        "on-primary-fixed": "#410006",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-highest": "#d9e3f6",
+                        "surface-container-low": "#eff4ff",
+                        "background-alt": "#F5F7FA",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "border-gray": "#E6EAF0",
+                        "primary-container": "#ff6b6b",
+                        "on-error-container": "#93000a",
+                        "off-white": "#FAFAFA",
+                        "on-primary": "#ffffff",
+                        "on-background": "#121c2a",
+                        "primary": "#ae2f34",
+                        "error": "#ba1a1a",
+                        "on-surface": "#121c2a",
+                        "tertiary-fixed": "#eaddff",
+                        "surface-container-high": "#dee9fc",
+                        "sunset-orange": "#FF8A5B",
+                        "secondary-fixed": "#ffdea0",
+                        "surface-container": "#e6eeff",
+                        "tertiary": "#69519b",
+                        "surface-dim": "#d0dbed",
+                        "on-secondary-fixed-variant": "#5b4304",
+                        "background": "#f8f9ff",
+                        "outline-variant": "#e0bfbd",
+                        "surface-variant": "#d9e3f6",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#d3bbff",
+                        "primary-fixed-dim": "#ffb3b0",
+                        "on-surface-variant": "#584140",
+                        "on-primary-container": "#6d0010"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px",
+                        "card": "24px"
+                    },
+                    "spacing": {
+                        "section-gap": "64px",
+                        "gutter": "24px",
+                        "base": "8px",
+                        "container-margin": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Hanken Grotesk"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<!-- Sidebar Navigation -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface shadow-[4px_0_20px_rgba(31,41,55,0.05)] flex flex-col py-8 px-4 z-50">
+<div class="mb-10 px-4">
+<h1 class="text-headline-md font-headline-md font-bold text-primary">Digital Concierge</h1>
+<p class="text-label-sm text-on-surface-variant tracking-wider uppercase opacity-70">Enterprise Management</p>
+</div>
+<nav class="flex-grow space-y-1 custom-scrollbar overflow-y-auto pr-2">
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Event Workspace</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Events</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">event_note</span>
+<span class="font-label-md text-label-md">Planning</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-md text-label-md">Resources</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Budget</span>
+</a>
+<!-- Active Tab -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-primary font-bold border-r-4 border-primary bg-surface-container-low" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">storefront</span>
+<span class="font-label-md text-label-md">Vendors</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">play_circle</span>
+<span class="font-label-md text-label-md">Execution</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Documents</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Reporting</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-border-gray">
+<button class="w-full mb-4 bg-gradient-to-r from-primary to-sunset-orange text-white py-3 rounded-xl font-bold shadow-lg hover:scale-[1.02] transition-transform duration-200 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">add</span>
+                New Event
+            </button>
+<div class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">help</span>
+<span class="text-label-md">Help Center</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">logout</span>
+<span class="text-label-md">Log Out</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 right-0 w-[calc(100%-256px)] h-20 glass-panel border-b border-border-gray z-40 px-gutter flex justify-between items-center shadow-sm">
+<div class="flex items-center gap-4 flex-1 max-w-xl">
+<div class="relative w-full group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-background-alt border-none rounded-full py-2.5 pl-12 pr-4 focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all text-body-md" placeholder="Search vendors, metrics, or reports..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full"></span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-high">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="h-10 w-[1px] bg-border-gray"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-label-md font-bold text-on-surface">Alex Rivera</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-tighter">Strategic Procurement</p>
+</div>
+<img alt="User Profile" class="w-10 h-10 rounded-full border-2 border-primary/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAletdiaSAojgbdhxNGKsYJCNL9t9NvISoY1UWyXEBd4PA3J3Z7uhtVO6hsJ9dT-DDQK2qeEzmvjAJk9ZoU_RObPXOBOcfFmdqHSX_UCzmjmai34hd7HXgFfhWkAg_sraf6CjDDjR04V7eFObj7XiiTlW5jCk0f01CBpE8vdbF8eRlqY3doN-el-9xppMAnQSOuADqveOwmkBIp9-5G4PgZl8W3iFZXc_JtwRu-yUAB_g7UcawUUVr4D3IttgJflNf3XWy9hoMFgGPp"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-20 p-gutter min-h-screen">
+<div class="max-w-[1440px] mx-auto py-8">
+<!-- Header Section -->
+<div class="flex justify-between items-end mb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-background">Vendor Performance Insights</h2>
+<p class="text-body-lg text-on-surface-variant">Evaluating partnership efficiency across the Q3 enterprise landscape.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-5 py-2.5 bg-white border border-border-gray rounded-xl text-label-md font-bold flex items-center gap-2 hover:bg-background-alt transition-colors">
+<span class="material-symbols-outlined text-base">calendar_today</span>
+                        Last 90 Days
+                    </button>
+<button class="px-5 py-2.5 bg-primary text-white rounded-xl text-label-md font-bold flex items-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-base">download</span>
+                        Export Full Report
+                    </button>
+</div>
+</div>
+<!-- Bento Grid - Key Metrics -->
+<div class="grid grid-cols-4 gap-6 mb-10">
+<div class="bg-white p-6 rounded-card border border-border-gray shadow-sm hover:shadow-md transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">timer</span>
+</div>
+<span class="text-emerald-green text-label-sm font-bold flex items-center">+2.4%</span>
+</div>
+<p class="text-on-surface-variant text-label-md uppercase tracking-wide">On-time Delivery</p>
+<h3 class="text-headline-lg font-headline-lg mt-1">94.8%</h3>
+<div class="w-full bg-background-alt h-1.5 rounded-full mt-4">
+<div class="bg-emerald-green h-full rounded-full" style="width: 94.8%"></div>
+</div>
+</div>
+<div class="bg-white p-6 rounded-card border border-border-gray shadow-sm hover:shadow-md transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-2xl bg-tertiary-container/20 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">verified</span>
+</div>
+<span class="text-emerald-green text-label-sm font-bold flex items-center">+1.1%</span>
+</div>
+<p class="text-on-surface-variant text-label-md uppercase tracking-wide">Quality Score</p>
+<h3 class="text-headline-lg font-headline-lg mt-1">4.7/5.0</h3>
+<div class="w-full bg-background-alt h-1.5 rounded-full mt-4">
+<div class="bg-tertiary h-full rounded-full" style="width: 88%"></div>
+</div>
+</div>
+<div class="bg-white p-6 rounded-card border border-border-gray shadow-sm hover:shadow-md transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-2xl bg-secondary-container/30 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">chat_bubble</span>
+</div>
+<span class="text-error text-label-sm font-bold flex items-center">-12m</span>
+</div>
+<p class="text-on-surface-variant text-label-md uppercase tracking-wide">Avg. Response Time</p>
+<h3 class="text-headline-lg font-headline-lg mt-1">1.2 hrs</h3>
+<p class="text-label-sm text-on-surface-variant mt-4 italic">Faster than Q2 average</p>
+</div>
+<div class="bg-white p-6 rounded-card border border-border-gray shadow-sm hover:shadow-md transition-all">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-2xl bg-emerald-green/10 flex items-center justify-center text-emerald-green">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<span class="text-emerald-green text-label-sm font-bold flex items-center">Under</span>
+</div>
+<p class="text-on-surface-variant text-label-md uppercase tracking-wide">Budget Adherence</p>
+<h3 class="text-headline-lg font-headline-lg mt-1">98.2%</h3>
+<div class="w-full bg-background-alt h-1.5 rounded-full mt-4 overflow-hidden flex">
+<div class="bg-emerald-green h-full" style="width: 98.2%"></div>
+</div>
+</div>
+</div>
+<!-- Main Analytics Section -->
+<div class="grid grid-cols-3 gap-8">
+<!-- Performance Chart (Top Performing Vendors) -->
+<div class="col-span-2 bg-white rounded-card border border-border-gray shadow-sm overflow-hidden flex flex-col">
+<div class="p-6 border-b border-border-gray flex justify-between items-center">
+<h4 class="font-headline-md text-headline-md">Performance Comparison Matrix</h4>
+<div class="flex gap-2">
+<span class="flex items-center gap-1.5 text-label-sm text-on-surface-variant">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span> Quality
+                            </span>
+<span class="flex items-center gap-1.5 text-label-sm text-on-surface-variant">
+<span class="w-2.5 h-2.5 rounded-full bg-tertiary"></span> Delivery
+                            </span>
+</div>
+</div>
+<div class="p-8 flex-grow flex flex-col justify-end min-h-[400px]">
+<!-- Mock Chart Visualization -->
+<div class="flex items-end justify-between h-full w-full gap-4 relative">
+<!-- Background Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-20">
+<div class="w-full h-[1px] bg-on-surface"></div>
+<div class="w-full h-[1px] bg-on-surface"></div>
+<div class="w-full h-[1px] bg-on-surface"></div>
+<div class="w-full h-[1px] bg-on-surface"></div>
+<div class="w-full h-[1px] bg-on-surface border-b-2"></div>
+</div>
+<div class="flex flex-col items-center flex-1 z-10">
+<div class="flex items-end gap-1 mb-2">
+<div class="w-8 bg-primary rounded-t-lg transition-all hover:opacity-80" style="height: 180px"></div>
+<div class="w-8 bg-tertiary rounded-t-lg transition-all hover:opacity-80" style="height: 220px"></div>
+</div>
+<p class="text-label-sm font-bold text-on-surface text-center">Luxe Decor Co.</p>
+</div>
+<div class="flex flex-col items-center flex-1 z-10">
+<div class="flex items-end gap-1 mb-2">
+<div class="w-8 bg-primary rounded-t-lg transition-all hover:opacity-80" style="height: 240px"></div>
+<div class="w-8 bg-tertiary rounded-t-lg transition-all hover:opacity-80" style="height: 190px"></div>
+</div>
+<p class="text-label-sm font-bold text-on-surface text-center">Elite Catering</p>
+</div>
+<div class="flex flex-col items-center flex-1 z-10">
+<div class="flex items-end gap-1 mb-2">
+<div class="w-8 bg-primary rounded-t-lg transition-all hover:opacity-80" style="height: 160px"></div>
+<div class="w-8 bg-tertiary rounded-t-lg transition-all hover:opacity-80" style="height: 250px"></div>
+</div>
+<p class="text-label-sm font-bold text-on-surface text-center">SoundWave Tech</p>
+</div>
+<div class="flex flex-col items-center flex-1 z-10">
+<div class="flex items-end gap-1 mb-2">
+<div class="w-8 bg-primary rounded-t-lg transition-all hover:opacity-80" style="height: 210px"></div>
+<div class="w-8 bg-tertiary rounded-t-lg transition-all hover:opacity-80" style="height: 200px"></div>
+</div>
+<p class="text-label-sm font-bold text-on-surface text-center">Vista Floral</p>
+</div>
+<div class="flex flex-col items-center flex-1 z-10">
+<div class="flex items-end gap-1 mb-2">
+<div class="w-8 bg-primary rounded-t-lg transition-all hover:opacity-80" style="height: 260px"></div>
+<div class="w-8 bg-tertiary rounded-t-lg transition-all hover:opacity-80" style="height: 270px"></div>
+</div>
+<p class="text-label-sm font-bold text-on-surface text-center">Global Logistics</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Side Panel: Vendor Report Cards Summary -->
+<div class="bg-white rounded-card border border-border-gray shadow-sm flex flex-col h-full">
+<div class="p-6 border-b border-border-gray">
+<h4 class="font-headline-md text-headline-md">Top Tier Reports</h4>
+<p class="text-body-sm text-on-surface-variant">Immediate action required for 2 flagging partners.</p>
+</div>
+<div class="flex-grow p-4 space-y-4 overflow-y-auto custom-scrollbar max-h-[480px]">
+<!-- Report Card 1 -->
+<div class="p-4 rounded-xl bg-background-alt border border-transparent hover:border-primary/20 transition-all cursor-pointer">
+<div class="flex justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-emerald-green/20 text-emerald-green flex items-center justify-center font-bold text-xs">LD</span>
+<div>
+<p class="text-label-md font-bold">Luxe Decor Co.</p>
+<p class="text-[10px] text-on-surface-variant">ID: #VND-9921</p>
+</div>
+</div>
+<span class="px-2 py-1 bg-emerald-green/10 text-emerald-green text-[10px] font-bold rounded uppercase">A+ Rating</span>
+</div>
+<div class="grid grid-cols-2 gap-2 text-[11px]">
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Delivery:</span>
+<span class="font-bold">99%</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Quality:</span>
+<span class="font-bold">4.9</span>
+</div>
+</div>
+</div>
+<!-- Report Card 2 -->
+<div class="p-4 rounded-xl bg-background-alt border border-transparent hover:border-primary/20 transition-all cursor-pointer">
+<div class="flex justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-tertiary/20 text-tertiary flex items-center justify-center font-bold text-xs">SW</span>
+<div>
+<p class="text-label-md font-bold">SoundWave Tech</p>
+<p class="text-[10px] text-on-surface-variant">ID: #VND-8843</p>
+</div>
+</div>
+<span class="px-2 py-1 bg-emerald-green/10 text-emerald-green text-[10px] font-bold rounded uppercase">B+ Rating</span>
+</div>
+<div class="grid grid-cols-2 gap-2 text-[11px]">
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Delivery:</span>
+<span class="font-bold">92%</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Quality:</span>
+<span class="font-bold">4.4</span>
+</div>
+</div>
+</div>
+<!-- Report Card 3 (Warning) -->
+<div class="p-4 rounded-xl bg-error-container/20 border border-error/10 hover:border-error/30 transition-all cursor-pointer">
+<div class="flex justify-between mb-3">
+<div class="flex items-center gap-2">
+<span class="w-8 h-8 rounded-full bg-error/20 text-error flex items-center justify-center font-bold text-xs">VF</span>
+<div>
+<p class="text-label-md font-bold">Vista Floral</p>
+<p class="text-[10px] text-error font-medium">Critical Latency</p>
+</div>
+</div>
+<span class="px-2 py-1 bg-error/10 text-error text-[10px] font-bold rounded uppercase">C- Rating</span>
+</div>
+<div class="grid grid-cols-2 gap-2 text-[11px]">
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Delivery:</span>
+<span class="font-bold text-error">74%</span>
+</div>
+<div class="flex justify-between">
+<span class="text-on-surface-variant">Quality:</span>
+<span class="font-bold">4.1</span>
+</div>
+</div>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low border-t border-border-gray">
+<button class="w-full py-3 text-label-md font-bold text-primary hover:bg-white rounded-xl transition-all">View All 124 Vendors</button>
+</div>
+</div>
+</div>
+<!-- Detailed Performance Table (Individual Vendor Report Cards) -->
+<div class="mt-10">
+<div class="flex justify-between items-center mb-6">
+<h4 class="font-headline-md text-headline-md">Strategic Vendor Analysis</h4>
+<div class="flex gap-4">
+<select class="bg-white border border-border-gray rounded-xl text-body-sm focus:ring-primary focus:border-primary py-2 px-4">
+<option>All Categories</option>
+<option>Catering</option>
+<option>Audio/Visual</option>
+<option>Logistics</option>
+</select>
+</div>
+</div>
+<div class="bg-white rounded-card border border-border-gray shadow-sm overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead class="bg-background-alt border-b border-border-gray">
+<tr>
+<th class="p-5 text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">Vendor Entity</th>
+<th class="p-5 text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">Reliability</th>
+<th class="p-5 text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">Quality Score</th>
+<th class="p-5 text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">Response</th>
+<th class="p-5 text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">Budget Status</th>
+<th class="p-5 text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-gray">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="p-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A professional team in a modern, glass-walled office space collaborating around a minimalist oak table. The atmosphere is upscale and high-end, featuring soft natural lighting and a clean, luxury corporate aesthetic with subtle red and black color accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvG1jPo8PXRgS-ON2sdH8DuWfsWKJ4A9-0k-mjdcavjZfecgLPgJLpBKva3wO6KAZ7nEKIJW26YBqOYqvcwPvqhakHV5jrKvwPphyLWxLyUIFK7bZXdNhh5qeSiFWhyrP6Oi5uDDWh9agMr8UA_-WRRfCHa8W0EV7hfLIHM_N3hc9N2sSALOlfulr-yf-KVgGot85zG2sBEyLwVqlunnfpM8Ki7uegW2HmOgt5wmOhsLoIWjPvG7LgzpwNGRH6NWrHSKbRDxHVhYfj"/>
+</div>
+<div>
+<p class="text-body-md font-bold text-on-surface">Elite Catering Partners</p>
+<p class="text-body-sm text-on-surface-variant">Gastronomy &amp; Events</p>
+</div>
+</div>
+</td>
+<td class="p-5">
+<div class="flex items-center gap-2">
+<div class="w-24 bg-background-alt h-1.5 rounded-full">
+<div class="bg-emerald-green h-full rounded-full" style="width: 96%"></div>
+</div>
+<span class="text-label-sm font-bold">96%</span>
+</div>
+</td>
+<td class="p-5">
+<div class="flex gap-0.5 text-secondary">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+</td>
+<td class="p-5 text-body-sm font-medium">45 min avg</td>
+<td class="p-5">
+<span class="px-3 py-1 bg-emerald-green/10 text-emerald-green rounded-full text-label-sm font-bold">ON TARGET</span>
+</td>
+<td class="p-5">
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-primary/10 hover:text-primary transition-all">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="p-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A futuristic event technology stage setup with multiple vibrant LED screens and high-quality audio equipment. The lighting is dramatic and cinematic, featuring a sophisticated blend of deep reds and cool greys to match a premium digital concierge brand identity. The scene feels energetic and professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6iFkrFYgLIx3o5Pawgrle78QshM4jkdCjvYXln3Wtxskkw7BB07ou5b1MQkJ8yrfnjj_KQlUXJJjKsDzE7KaYxSxOPjfIgWbzTvkxCJ_39lDxPoGHkmM0AqR-FPxAVUzNU94_a-K4MdPqmpZmDXVmQ8WcS0-EzjRIeIdxr5EcuVZSXbqppoajjwo2y4xmMYKFgUDzJMrjS8Xk0HRZ0sIoGi8vTzUFv8ImzKtgtT_oktWR9LLnvz9f0Pl9x9cOFkIjn_DCr9F0YEsu"/>
+</div>
+<div>
+<p class="text-body-md font-bold text-on-surface">Global Logistics Group</p>
+<p class="text-body-sm text-on-surface-variant">Shipping &amp; Fulfillment</p>
+</div>
+</div>
+</td>
+<td class="p-5">
+<div class="flex items-center gap-2">
+<div class="w-24 bg-background-alt h-1.5 rounded-full">
+<div class="bg-emerald-green h-full rounded-full" style="width: 88%"></div>
+</div>
+<span class="text-label-sm font-bold">88%</span>
+</div>
+</td>
+<td class="p-5">
+<div class="flex gap-0.5 text-secondary">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]">star</span>
+</div>
+</td>
+<td class="p-5 text-body-sm font-medium">3.2 hrs avg</td>
+<td class="p-5">
+<span class="px-3 py-1 bg-secondary-container/30 text-on-secondary-container rounded-full text-label-sm font-bold">OVER 5%</span>
+</td>
+<td class="p-5">
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-primary/10 hover:text-primary transition-all">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-lowest transition-colors group">
+<td class="p-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A luxury hotel floral arrangement featuring deep red roses and exotic greenery set against a minimalist white marble pedestal. The lighting is soft and ambient, creating a high-end hospitality atmosphere that is both warm and meticulously organized. The composition is clean and elegant." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAD-28j_ZzU_9nKLlSgO27oKkg1eq5e2oFtQsEpTaQRqAAkJhixvU9XhpjB7U-kfm-wPWIeMyX6Bwoo6D7dHI5n89vN-Mzd-d0Haf2yVRaSjepnd6XhoS3sSpa90LZlUvKwUsSdQ8l6AgWkfA2j9S_6xx4guleHe-CFx21HrIRMsLR8NaAoK5D7odoWhNc_cZVwQkyAXfqavAcsra-EcxZVkimBSXDRSdgA-llmnH6z5s1xV_MRq9XFP-YkM6953gAL-B2isIkCOtEx"/>
+</div>
+<div>
+<p class="text-body-md font-bold text-on-surface">Vista Floral Studios</p>
+<p class="text-body-sm text-on-surface-variant">Decor &amp; Ambiance</p>
+</div>
+</div>
+</td>
+<td class="p-5">
+<div class="flex items-center gap-2">
+<div class="w-24 bg-background-alt h-1.5 rounded-full">
+<div class="bg-error h-full rounded-full" style="width: 74%"></div>
+</div>
+<span class="text-label-sm font-bold text-error">74%</span>
+</div>
+</td>
+<td class="p-5">
+<div class="flex gap-0.5 text-secondary">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]">star</span>
+<span class="material-symbols-outlined text-[18px]">star</span>
+</div>
+</td>
+<td class="p-5 text-body-sm font-medium">1.5 hrs avg</td>
+<td class="p-5">
+<span class="px-3 py-1 bg-emerald-green/10 text-emerald-green rounded-full text-label-sm font-bold">ON TARGET</span>
+</td>
+<td class="p-5">
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-primary/10 hover:text-primary transition-all">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+<!-- Micro-interaction Scripts -->
+<script>
+        // Simple scale effect for report cards on hover
+        document.querySelectorAll('.cursor-pointer').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-2px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Search bar focus effect
+        const searchInput = document.querySelector('input[type="text"]');
+        const searchIcon = searchInput.previousElementSibling;
+        
+        searchInput.addEventListener('focus', () => {
+            searchIcon.classList.add('text-primary');
+        });
+        
+        searchInput.addEventListener('blur', () => {
+            searchIcon.classList.remove('text-primary');
+        });
+    </script>
+</body></html>

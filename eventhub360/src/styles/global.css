@@ -1,0 +1,427 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ═══════════════════════════════════════
+   DESIGN TOKENS — Hospitality Modernism
+   ═══════════════════════════════════════ */
+
+:root {
+  /* Colors */
+  --color-primary: #ae2f34;
+  --color-primary-container: #ff6b6b;
+  --color-sunset-orange: #FF8A5B;
+  --color-on-primary: #ffffff;
+  --color-secondary: #755a1d;
+  --color-secondary-container: #fed88e;
+  --color-on-secondary-container: #785d1f;
+  --color-tertiary: #69519b;
+  --color-tertiary-container: #a88ede;
+  --color-on-tertiary-container: #3d246c;
+  --color-emerald: #4CAF8D;
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+  --color-background: #f8f9ff;
+  --color-off-white: #FAFAFA;
+  --color-surface: #ffffff;
+  --color-border: #E6EAF0;
+  --color-bg-alt: #F5F7FA;
+  --color-on-surface: #121c2a;
+  --color-on-surface-variant: #584140;
+  --color-inverse-surface: #27313f;
+
+  /* Typography */
+  --font-headline: 'Hanken Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Spacing */
+  --spacing-base: 8px;
+  --spacing-2: 16px;
+  --spacing-3: 24px;
+  --spacing-4: 32px;
+  --spacing-5: 40px;
+  --spacing-6: 48px;
+  --spacing-8: 64px;
+  --container-margin: 32px;
+  --gutter: 24px;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-default: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-level1: 0 4px 20px rgba(31, 41, 55, 0.08);
+  --shadow-level2: 0 8px 32px rgba(31, 41, 55, 0.12);
+  --shadow-button: 0 2px 8px rgba(174, 47, 52, 0.25);
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #ae2f34 0%, #FF8A5B 100%);
+  --gradient-coral: linear-gradient(135deg, #ff6b6b 0%, #FF8A5B 100%);
+  --gradient-ai-insight: linear-gradient(135deg, #ae2f34 0%, #ff6b6b 50%, #FF8A5B 100%);
+}
+
+/* ═══════════════════════════════════════
+   GLOBAL RESETS & BASE
+   ═══════════════════════════════════════ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-on-surface);
+  background-color: var(--color-off-white);
+  line-height: 1.5;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* ═══════════════════════════════════════
+   TYPOGRAPHY UTILITIES
+   ═══════════════════════════════════════ */
+
+.text-display-lg {
+  font-family: var(--font-headline);
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 56px;
+  letter-spacing: -0.02em;
+}
+
+.text-headline-lg {
+  font-family: var(--font-headline);
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 40px;
+  letter-spacing: -0.01em;
+}
+
+.text-headline-md {
+  font-family: var(--font-headline);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+}
+
+.text-body-lg {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+}
+
+.text-body-md {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.text-body-sm {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.text-label-md {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.text-label-sm {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+/* ═══════════════════════════════════════
+   CARD STYLES (Design System Level 1)
+   ═══════════════════════════════════════ */
+
+.card-level1 {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-level1);
+}
+
+.card-level2 {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ═══════════════════════════════════════
+   BUTTON STYLES
+   ═══════════════════════════════════════ */
+
+.btn-primary-gradient {
+  background: var(--gradient-primary) !important;
+  border: none !important;
+  color: white !important;
+  border-radius: var(--radius-default) !important;
+  font-weight: 600 !important;
+  box-shadow: var(--shadow-button) !important;
+  transition: all 0.2s ease !important;
+}
+
+.btn-primary-gradient:hover {
+  transform: scale(1.02) !important;
+  box-shadow: 0 4px 16px rgba(174, 47, 52, 0.35) !important;
+}
+
+.btn-secondary-outline {
+  background: rgba(117, 90, 29, 0.05) !important;
+  border: 1px solid var(--color-secondary) !important;
+  color: var(--color-secondary) !important;
+  border-radius: var(--radius-default) !important;
+  font-weight: 600 !important;
+}
+
+/* ═══════════════════════════════════════
+   STATUS TAGS
+   ═══════════════════════════════════════ */
+
+.status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+
+.status-dot--active { background: var(--color-emerald); }
+.status-dot--warning { background: var(--color-sunset-orange); }
+.status-dot--error { background: var(--color-error); }
+.status-dot--info { background: var(--color-tertiary); }
+.status-dot--neutral { background: #94a3b8; }
+
+/* ═══════════════════════════════════════
+   SIDEBAR OVERRIDES
+   ═══════════════════════════════════════ */
+
+.sidebar-nav .ant-menu-item-selected {
+  background: rgba(174, 47, 52, 0.08) !important;
+  color: var(--color-primary) !important;
+  border-right: 3px solid var(--color-primary);
+  font-weight: 600;
+}
+
+.sidebar-nav .ant-menu-item-selected .anticon {
+  color: var(--color-primary) !important;
+}
+
+.sidebar-nav .ant-menu-item {
+  margin: 2px 8px !important;
+  border-radius: var(--radius-default) !important;
+}
+
+/* ═══════════════════════════════════════
+   AI INSIGHT CARD
+   ═══════════════════════════════════════ */
+
+.ai-insight-card {
+  background: var(--gradient-ai-insight);
+  border-radius: var(--radius-xl);
+  color: white;
+  padding: var(--spacing-3);
+}
+
+.ai-insight-card .ant-btn {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.4) !important;
+  color: white !important;
+  backdrop-filter: blur(10px);
+}
+
+/* ═══════════════════════════════════════
+   GLASSMORPHISM OVERLAY
+   ═══════════════════════════════════════ */
+
+.glass-overlay {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ═══════════════════════════════════════
+   STAT CARD ICON CONTAINERS
+   ═══════════════════════════════════════ */
+
+.stat-icon-container {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.stat-icon-container--primary {
+  background: rgba(174, 47, 52, 0.1);
+  color: var(--color-primary);
+}
+
+.stat-icon-container--success {
+  background: rgba(76, 175, 141, 0.1);
+  color: var(--color-emerald);
+}
+
+.stat-icon-container--warning {
+  background: rgba(255, 138, 91, 0.1);
+  color: var(--color-sunset-orange);
+}
+
+.stat-icon-container--tertiary {
+  background: rgba(105, 81, 155, 0.1);
+  color: var(--color-tertiary);
+}
+
+.stat-icon-container--secondary {
+  background: rgba(117, 90, 29, 0.1);
+  color: var(--color-secondary);
+}
+
+.stat-icon-container--error {
+  background: rgba(186, 26, 26, 0.1);
+  color: var(--color-error);
+}
+
+/* ═══════════════════════════════════════
+   ANT DESIGN CARD OVERRIDES
+   ═══════════════════════════════════════ */
+
+.ant-card {
+  border-radius: var(--radius-xl) !important;
+  border-color: var(--color-border) !important;
+  box-shadow: var(--shadow-level1) !important;
+}
+
+.ant-card-bordered {
+  border: 1px solid var(--color-border) !important;
+}
+
+/* ═══════════════════════════════════════
+   SCROLLBAR STYLING
+   ═══════════════════════════════════════ */
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(31, 41, 55, 0.15);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(31, 41, 55, 0.25);
+}
+
+/* ═══════════════════════════════════════
+   PROGRESS BAR COLORS
+   ═══════════════════════════════════════ */
+
+.progress-primary .ant-progress-bg {
+  background: var(--gradient-primary) !important;
+}
+
+.progress-emerald .ant-progress-bg {
+  background: var(--color-emerald) !important;
+}
+
+.progress-secondary .ant-progress-bg {
+  background: var(--color-secondary) !important;
+}
+
+/* ═══════════════════════════════════════
+   PAGE LAYOUT
+   ═══════════════════════════════════════ */
+
+.page-content {
+  padding: var(--spacing-4);
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-family: var(--font-headline);
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 40px;
+  letter-spacing: -0.01em;
+  color: var(--color-on-surface);
+  margin-bottom: 4px;
+}
+
+.page-subtitle {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--color-on-surface-variant);
+  line-height: 24px;
+}
+
+/* ═══════════════════════════════════════
+   DASHED ADD CARD
+   ═══════════════════════════════════════ */
+
+.add-card-dashed {
+  border: 2px dashed var(--color-border) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add-card-dashed:hover {
+  border-color: var(--color-primary) !important;
+  background: rgba(174, 47, 52, 0.02) !important;
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .page-content {
+    padding: var(--spacing-2);
+  }
+
+  .text-display-lg {
+    font-size: 36px;
+    line-height: 44px;
+  }
+
+  .page-title {
+    font-size: 24px;
+    line-height: 32px;
+  }
+}

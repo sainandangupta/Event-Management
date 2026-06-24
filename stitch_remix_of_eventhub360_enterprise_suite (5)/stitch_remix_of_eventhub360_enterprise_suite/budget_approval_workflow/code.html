@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Budget Approval Workflow | EventHub360</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background-alt": "#F5F7FA",
+                    "surface-container-high": "#dee9fc",
+                    "surface": "#f8f9ff",
+                    "tertiary-container": "#a88ede",
+                    "tertiary": "#69519b",
+                    "on-primary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#ffb3b0",
+                    "surface-container": "#e6eeff",
+                    "sunset-orange": "#FF8A5B",
+                    "on-surface-variant": "#584140",
+                    "on-error": "#ffffff",
+                    "primary-container": "#ff6b6b",
+                    "error-container": "#ffdad6",
+                    "outline-variant": "#e0bfbd",
+                    "surface-container-low": "#eff4ff",
+                    "on-tertiary-container": "#3d246c",
+                    "tertiary-fixed": "#eaddff",
+                    "secondary-container": "#fed88e",
+                    "primary": "#ae2f34",
+                    "primary-fixed-dim": "#ffb3b0",
+                    "on-tertiary-fixed": "#240554",
+                    "secondary-fixed": "#ffdea0",
+                    "on-tertiary": "#ffffff",
+                    "border-gray": "#E6EAF0",
+                    "surface-bright": "#f8f9ff",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#d3bbff",
+                    "surface-variant": "#d9e3f6",
+                    "on-surface": "#121c2a",
+                    "error": "#ba1a1a",
+                    "off-white": "#FAFAFA",
+                    "inverse-surface": "#27313f",
+                    "on-secondary-fixed": "#261a00",
+                    "on-primary-container": "#6d0010",
+                    "secondary": "#755a1d",
+                    "outline": "#8c706f",
+                    "surface-tint": "#ae2f34",
+                    "on-secondary-fixed-variant": "#5b4304",
+                    "emerald-green": "#4CAF8D",
+                    "inverse-on-surface": "#eaf1ff",
+                    "primary-fixed": "#ffdad8",
+                    "on-primary-fixed": "#410006",
+                    "on-secondary-container": "#785d1f",
+                    "secondary-fixed-dim": "#e6c27a",
+                    "on-background": "#121c2a",
+                    "on-tertiary-fixed-variant": "#513982",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed-variant": "#8c1520",
+                    "surface-dim": "#d0dbed",
+                    "surface-container-highest": "#d9e3f6",
+                    "background": "#f8f9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "container-margin": "32px",
+                    "base": "8px",
+                    "section-gap": "64px"
+            },
+            "fontFamily": {
+                    "body-sm": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Hanken Grotesk"],
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Hanken Grotesk"],
+                    "display-lg-mobile": ["Hanken Grotesk"],
+                    "headline-lg": ["Hanken Grotesk"]
+            },
+            "fontSize": {
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-panel { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(20px); border: 1px solid #E6EAF0; }
+        .bento-card { background: #FFFFFF; border-radius: 24px; border: 1px solid #E6EAF0; box-shadow: 0 4px 20px -2px rgba(31, 41, 55, 0.05); }
+        .primary-gradient { background: linear-gradient(135deg, #ae2f34 0%, #FF8A5B 100%); }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- Side Navigation Shell -->
+<aside class="fixed left-0 top-0 h-full w-72 flex flex-col bg-surface shadow-sm z-50 px-4 py-6 overflow-y-auto">
+<div class="mb-10 px-4">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">EventHub360</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Enterprise Edition</p>
+</div>
+<nav class="flex-1 space-y-2">
+<!-- Navigation Items Mapping -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md text-body-md">Event Workspace</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">calendar_today</span>
+<span class="font-body-md text-body-md">Events</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">event_note</span>
+<span class="font-body-md text-body-md">Planning</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-body-md text-body-md">Resources</span>
+</a>
+<!-- ACTIVE TAB: Budget -->
+<a class="flex items-center gap-3 px-4 py-3 text-primary font-bold bg-surface-container rounded-xl" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">payments</span>
+<span class="font-body-md text-body-md">Budget</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">handshake</span>
+<span class="font-body-md text-body-md">Vendors</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">task_alt</span>
+<span class="font-body-md text-body-md">Execution</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-body-md text-body-md">Documents</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-xl" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-body-md text-body-md">Reporting</span>
+</a>
+</nav>
+<div class="mt-auto px-4 pt-6 border-t border-border-gray">
+<button class="w-full primary-gradient text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-transform hover:scale-[1.02] shadow-lg">
+<span class="material-symbols-outlined">add</span>
+                New Event
+            </button>
+</div>
+</aside>
+<!-- Top App Bar Shell -->
+<header class="fixed top-0 right-0 left-72 h-16 flex justify-between items-center px-gutter z-40 bg-white/60 backdrop-blur-xl border-b border-border-gray">
+<div class="flex items-center gap-6">
+<h2 class="font-headline-md text-headline-md text-primary font-bold">Approval Workflow</h2>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-on-surface-variant">search</span>
+<input class="bg-background-alt border-none rounded-full pl-10 pr-4 py-2 w-64 focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all text-body-sm" placeholder="Search approvals..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-[1px] bg-border-gray mx-2"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="font-label-md text-label-md">Eleanor P. (Admin)</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Finance Lead</p>
+</div>
+<img alt="User Profile" class="w-10 h-10 rounded-full bg-surface-variant object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-AxxHiD_r_SoMxxCzHRS_EquXuLiDYtgo_Vih5ztsmg2mew-25p4ASB2MDEd50mt9Ax2VTajlWVO1MzcVEpBzM3nt-csqNw1MBq8cNr4IqHRgy3olr_sr8cFeoBXeR_nqg6EZIOa0sspIuAhPpy6zGBTmsO51qqB16ZB6v8yjqE2kjfbVmTJp9gPcjXkDVCjvF7shyldgHmCzsJiGVbslTUlodQ6EPKtwSvBFSKWZG9OCLlpa24oZFZ_erT4wRIW11i12EFIm9vv9"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-72 pt-24 pb-12 px-gutter min-h-screen">
+<div class="max-w-[1440px] mx-auto space-y-gutter">
+<!-- SECTION 1: Visual Timeline / Stepper -->
+<section class="bento-card p-8">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface">Active Budget Request: <span class="text-primary">Q4 Global Summit 2024</span></h3>
+<p class="text-on-surface-variant font-body-md mt-1">Request ID: #BUD-77291 • Submitted Oct 12, 2024</p>
+</div>
+<div class="flex gap-2">
+<span class="bg-secondary-container text-on-secondary-container px-4 py-1.5 rounded-full font-label-md">Awaiting Review</span>
+<span class="bg-surface-container-high text-on-surface-variant px-4 py-1.5 rounded-full font-label-md">Priority: High</span>
+</div>
+</div>
+<div class="relative px-12">
+<!-- Progress Line -->
+<div class="absolute top-1/2 left-12 right-12 h-0.5 bg-surface-container-high -translate-y-1/2"></div>
+<div class="absolute top-1/2 left-12 w-[62%] h-1 bg-primary -translate-y-1/2"></div>
+<div class="relative flex justify-between">
+<!-- Draft -->
+<div class="flex flex-col items-center group">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center z-10 shadow-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="mt-3 font-label-md text-primary">Draft</span>
+<span class="text-[10px] text-on-surface-variant">Oct 10</span>
+</div>
+<!-- Submitted -->
+<div class="flex flex-col items-center group">
+<div class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center z-10 shadow-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="mt-3 font-label-md text-primary">Submitted</span>
+<span class="text-[10px] text-on-surface-variant">Oct 12</span>
+</div>
+<!-- Manager Review -->
+<div class="flex flex-col items-center group">
+<div class="w-12 h-12 rounded-full border-4 border-primary bg-white text-primary flex items-center justify-center z-10 shadow-md ring-4 ring-primary-container/20">
+<span class="material-symbols-outlined animate-pulse">visibility</span>
+</div>
+<span class="mt-3 font-label-md text-on-surface font-bold">Manager Review</span>
+<span class="text-[10px] text-primary">In Progress</span>
+</div>
+<!-- Approved -->
+<div class="flex flex-col items-center group">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center z-10">
+<span class="material-symbols-outlined">pending</span>
+</div>
+<span class="mt-3 font-label-md text-on-surface-variant">Approved</span>
+<span class="text-[10px] text-on-surface-variant opacity-0">—</span>
+</div>
+<!-- Locked -->
+<div class="flex flex-col items-center group">
+<div class="w-10 h-10 rounded-full bg-surface-container-high text-on-surface-variant flex items-center justify-center z-10">
+<span class="material-symbols-outlined">lock</span>
+</div>
+<span class="mt-3 font-label-md text-on-surface-variant">Locked</span>
+<span class="text-[10px] text-on-surface-variant opacity-0">—</span>
+</div>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-12 gap-gutter">
+<!-- SECTION 2: Document Preview -->
+<div class="col-span-12 lg:col-span-8 space-y-gutter">
+<div class="bento-card overflow-hidden h-[700px] flex flex-col">
+<div class="px-6 py-4 border-b border-border-gray flex items-center justify-between bg-off-white">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">picture_as_pdf</span>
+<span class="font-label-md text-label-md">budget_proposal_q4_summit.pdf</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-surface-container-low rounded-lg"><span class="material-symbols-outlined">zoom_in</span></button>
+<button class="p-2 hover:bg-surface-container-low rounded-lg"><span class="material-symbols-outlined">download</span></button>
+<button class="p-2 hover:bg-surface-container-low rounded-lg"><span class="material-symbols-outlined">open_in_full</span></button>
+</div>
+</div>
+<div class="flex-1 bg-[#4A4A4A] p-12 overflow-y-auto scrollbar-hide">
+<!-- Simulated PDF Preview -->
+<div class="bg-white mx-auto shadow-2xl p-16 min-h-[900px] max-w-[600px] relative">
+<div class="flex justify-between items-start border-b-2 border-primary pb-8 mb-12">
+<div>
+<h4 class="text-3xl font-extrabold text-primary mb-2 uppercase tracking-tighter">Budget Proposal</h4>
+<p class="text-neutral-500 font-bold">EVENTHUB ENTERPRISE</p>
+</div>
+<div class="text-right">
+<p class="text-sm font-bold">#PRO-10293-88</p>
+<p class="text-sm text-neutral-400">Date: 12.10.2024</p>
+</div>
+</div>
+<div class="space-y-8">
+<div class="grid grid-cols-2 gap-8">
+<div>
+<p class="text-[10px] uppercase font-bold text-neutral-400 mb-1">Project Name</p>
+<p class="text-sm font-semibold">Q4 Global Tech Summit</p>
+</div>
+<div>
+<p class="text-[10px] uppercase font-bold text-neutral-400 mb-1">Department</p>
+<p class="text-sm font-semibold">Marketing Operations</p>
+</div>
+</div>
+<table class="w-full text-left text-sm border-collapse">
+<thead>
+<tr class="border-b border-neutral-200">
+<th class="py-2 text-neutral-400 uppercase text-[10px] font-bold">Description</th>
+<th class="py-2 text-neutral-400 uppercase text-[10px] font-bold text-right">Amount</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-b border-neutral-100">
+<td class="py-4 font-medium">Venue Rental - Grand Plaza</td>
+<td class="py-4 text-right font-semibold">$45,000.00</td>
+</tr>
+<tr class="border-b border-neutral-100">
+<td class="py-4 font-medium">Catering (3 Days, 500 Pax)</td>
+<td class="py-4 text-right font-semibold">$32,500.00</td>
+</tr>
+<tr class="border-b border-neutral-100">
+<td class="py-4 font-medium">Audio Visual &amp; Streaming Setup</td>
+<td class="py-4 text-right font-semibold">$18,000.00</td>
+</tr>
+<tr class="border-b border-neutral-100">
+<td class="py-4 font-medium">Speaker Fees &amp; Travel</td>
+<td class="py-4 text-right font-semibold">$25,000.00</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td class="py-6 text-lg font-bold">Total Request</td>
+<td class="py-6 text-right text-lg font-bold text-primary">$120,500.00</td>
+</tr>
+</tfoot>
+</table>
+<div class="pt-8">
+<p class="text-[10px] uppercase font-bold text-neutral-400 mb-2">Internal Note</p>
+<p class="text-xs text-neutral-600 leading-relaxed italic">"The increase in catering costs compared to Q3 reflects the addition of the networking dinner gala on night two. ROI is expected to increase by 15% due to higher attendee engagement levels."</p>
+</div>
+</div>
+<div class="absolute bottom-8 right-8 grayscale opacity-20">
+<img alt="Watermark" class="h-12" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZmCfgCy97oihJzYDBOdP75R5S9H_zhGKkspG85GxehmhIzi3BzKVtPrOxpf0uXdjrHdioJb14imPXpUzMBuc-X_OVda8B7RoNhVADJDGRfKaWwxbkjGXwnEkaeZaqnQ_trj27NbbyE5UJpjQe74HWHrDxpDe2CHf5Z79BzkkrFPRida1yx-dzjbViV2DuKZG8ufn1qOYgYeVKunc6Pg-8bYvwaV3HMkdJDGe7eLGoWpE0dBBKxBw43dRd_8OumbinCzyeH6p7hOdi"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Pending Actions Card -->
+<div class="bento-card p-6 flex items-center justify-between bg-primary-container/10 border-primary/20">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-primary shadow-sm">
+<span class="material-symbols-outlined">rate_review</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-on-surface">Confirm Decision</h4>
+<p class="text-on-surface-variant font-body-sm">Your decision will be logged and notified to the submitter immediately.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<button class="px-8 py-3 rounded-xl border border-error text-error font-bold hover:bg-error/5 transition-colors">Reject Proposal</button>
+<button class="px-8 py-3 rounded-xl primary-gradient text-white font-bold shadow-lg hover:scale-[1.02] transition-transform">Approve Budget</button>
+</div>
+</div>
+</div>
+<!-- SIDEBAR CONTENT: Audit Log & Requests List -->
+<div class="col-span-12 lg:col-span-4 space-y-gutter">
+<!-- Audit Log -->
+<div class="bento-card flex flex-col max-h-[400px]">
+<div class="px-6 py-4 border-b border-border-gray">
+<h4 class="font-label-md text-label-md uppercase text-on-surface-variant flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">history</span>
+                                Workflow Audit Log
+                            </h4>
+</div>
+<div class="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-hide">
+<!-- Log Entry 1 -->
+<div class="flex gap-4 relative">
+<div class="absolute left-[15px] top-8 bottom-0 w-[2px] bg-border-gray"></div>
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center shrink-0 z-10">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">visibility</span>
+</div>
+<div class="pb-6">
+<p class="font-label-md text-label-md">Eleanor P. viewed the request</p>
+<p class="text-xs text-on-surface-variant mt-1">Today at 10:45 AM</p>
+</div>
+</div>
+<!-- Log Entry 2 -->
+<div class="flex gap-4 relative">
+<div class="absolute left-[15px] top-8 bottom-0 w-[2px] bg-border-gray"></div>
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center shrink-0 z-10">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">forward_to_inbox</span>
+</div>
+<div class="pb-6">
+<p class="font-label-md text-label-md">Assigned to Finance Review</p>
+<p class="text-xs text-on-surface-variant mt-1">Oct 12, 2:15 PM</p>
+</div>
+</div>
+<!-- Log Entry 3 -->
+<div class="flex gap-4 relative">
+<div class="absolute left-[15px] top-8 bottom-0 w-[2px] bg-border-gray"></div>
+<div class="w-8 h-8 rounded-full bg-emerald-green/20 text-emerald-green flex items-center justify-center shrink-0 z-10">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+</div>
+<div class="pb-6">
+<p class="font-label-md text-label-md">Marcus T. submitted proposal</p>
+<p class="text-xs text-on-surface-variant mt-1">Oct 12, 11:30 AM</p>
+<div class="mt-2 p-2 bg-background-alt rounded-lg text-xs italic border-l-2 border-primary">
+                                        "Updated catering line items as requested."
+                                    </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Other Pending Requests -->
+<div class="bento-card flex flex-col">
+<div class="px-6 py-4 border-b border-border-gray flex items-center justify-between">
+<h4 class="font-label-md text-label-md uppercase text-on-surface-variant">Pending Queue</h4>
+<span class="bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full">3</span>
+</div>
+<div class="p-2">
+<!-- Request 1 -->
+<div class="p-4 hover:bg-surface-container-low rounded-xl transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-1">
+<span class="font-label-md text-label-md truncate">Vegas Launch Promo</span>
+<span class="font-bold text-on-surface text-xs">$82,000</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] text-on-surface-variant">By Sarah Jenkins</span>
+<span class="text-[10px] px-1.5 py-0.5 bg-surface-container-high rounded text-on-surface-variant">Awaiting Boss</span>
+</div>
+</div>
+<!-- Request 2 -->
+<div class="p-4 hover:bg-surface-container-low rounded-xl transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-1">
+<span class="font-label-md text-label-md truncate">Internal Workshop Q4</span>
+<span class="font-bold text-on-surface text-xs">$5,400</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] text-on-surface-variant">By David Chen</span>
+<span class="text-[10px] px-1.5 py-0.5 bg-surface-container-high rounded text-on-surface-variant">New</span>
+</div>
+</div>
+</div>
+<div class="p-4 mt-auto">
+<button class="w-full text-center py-2 text-primary font-bold text-label-md hover:underline">View All Queue (12)</button>
+</div>
+</div>
+<!-- Info/Quick Stats -->
+<div class="bento-card p-6 bg-sunset-orange/5 border-sunset-orange/20">
+<h4 class="font-label-md text-label-md text-on-surface-variant mb-4">BUDGET HEALTH</h4>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-xs font-bold mb-1">
+<span>Marketing Budget Utilization</span>
+<span>72%</span>
+</div>
+<div class="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-sunset-orange w-[72%]"></div>
+</div>
+</div>
+<p class="text-xs text-on-surface-variant leading-tight">Approving this request will leave <span class="text-primary font-bold">$12,400</span> in the Q4 Marketing pool.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Simple Micro-interaction for hover scale
+        document.querySelectorAll('.bento-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-2px)';
+                card.style.transition = 'all 0.3s ease';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Toggle focus on search
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('w-80');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('w-80');
+        });
+    </script>
+</body></html>

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Activity Logs | EventPro Enterprise Suite</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Hanken+Grotesk:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(230, 234, 240, 0.8);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #E6EAF0;
+            border-radius: 10px;
+        }
+        .active-nav-item {
+            transform: scale(0.98);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#240554",
+                        "on-tertiary-fixed-variant": "#513982",
+                        "outline": "#8c706f",
+                        "border-gray": "#E6EAF0",
+                        "on-primary-container": "#6d0010",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#5b4304",
+                        "tertiary": "#69519b",
+                        "surface-dim": "#d0dbed",
+                        "primary-fixed": "#ffdad8",
+                        "error-container": "#ffdad6",
+                        "surface-container-highest": "#d9e3f6",
+                        "on-secondary-container": "#785d1f",
+                        "secondary-container": "#fed88e",
+                        "tertiary-fixed": "#eaddff",
+                        "background-alt": "#F5F7FA",
+                        "primary-fixed-dim": "#ffb3b0",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "surface-variant": "#d9e3f6",
+                        "primary": "#ae2f34",
+                        "surface-tint": "#ae2f34",
+                        "on-surface": "#121c2a",
+                        "on-surface-variant": "#584140",
+                        "surface-container-low": "#eff4ff",
+                        "inverse-on-surface": "#eaf1ff",
+                        "tertiary-fixed-dim": "#d3bbff",
+                        "on-primary-fixed": "#410006",
+                        "inverse-surface": "#27313f",
+                        "surface-container-high": "#dee9fc",
+                        "on-secondary-fixed": "#261a00",
+                        "secondary-fixed": "#ffdea0",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#e6eeff",
+                        "off-white": "#FAFAFA",
+                        "error": "#ba1a1a",
+                        "tertiary-container": "#a88ede",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#e6c27a",
+                        "on-tertiary": "#ffffff",
+                        "emerald-green": "#4CAF8D",
+                        "surface": "#f8f9ff",
+                        "outline-variant": "#e0bfbd",
+                        "on-background": "#121c2a",
+                        "primary-container": "#ff6b6b",
+                        "on-primary-fixed-variant": "#8c1520",
+                        "inverse-primary": "#ffb3b0",
+                        "surface-bright": "#f8f9ff",
+                        "sunset-orange": "#FF8A5B",
+                        "secondary": "#755a1d",
+                        "on-tertiary-container": "#3d246c",
+                        "background": "#f8f9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "base": "8px",
+                        "section-gap": "64px",
+                        "container-margin": "32px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Hanken Grotesk"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-off-white font-body-md text-on-surface flex min-h-screen overflow-hidden">
+<!-- SideNavBar Anchor -->
+<aside class="h-screen w-72 flex-shrink-0 bg-surface dark:bg-inverse-surface border-r border-border-gray dark:border-outline shadow-sm dark:shadow-none flex flex-col py-container-margin px-gutter">
+<div class="mb-10">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary leading-tight">EventPro</h1>
+<p class="text-on-surface-variant font-label-md">Enterprise Suite</p>
+</div>
+<nav class="flex-grow space-y-1 overflow-y-auto custom-scrollbar pr-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md">Event Workspace</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="event">event</span>
+<span class="font-label-md">Events</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="calendar_today">calendar_today</span>
+<span class="font-label-md">Planning</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+<span class="font-label-md">Resources</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="payments">payments</span>
+<span class="font-label-md">Budget</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="handshake">handshake</span>
+<span class="font-label-md">Vendors</span>
+</a>
+<!-- Active Tab: Execution (Contains Activity Logs) -->
+<a class="flex items-center gap-3 px-4 py-3 text-primary dark:text-inverse-primary font-bold bg-primary-fixed-dim dark:bg-primary-container rounded-lg active-nav-item" href="#">
+<span class="material-symbols-outlined" data-icon="task_alt">task_alt</span>
+<span class="font-label-md">Execution</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span class="font-label-md">Documents</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-md">Reporting</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-border-gray space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-md">Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-md">Sign Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-grow h-screen flex flex-col relative overflow-hidden bg-background">
+<!-- TopNavBar Anchor -->
+<header class="w-full h-20 sticky top-0 z-50 bg-surface/60 backdrop-blur-xl border-b border-border-gray flex justify-between items-center px-container-margin">
+<div class="flex items-center gap-8 w-1/2">
+<div class="relative w-full max-w-md group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-12 pr-4 py-2.5 bg-background-alt border-none rounded-full focus:ring-2 focus:ring-primary focus:bg-white transition-all duration-300 font-body-sm" placeholder="Search activity logs, tags, or users..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-background-alt transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-background-alt transition-all">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-px bg-border-gray mx-2"></div>
+<div class="flex items-center gap-3">
+<img alt="User Profile Avatar" class="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm" data-alt="A professional headshot of a senior event coordinator with a friendly expression, wearing a tailored navy blazer. The lighting is soft and warm, characteristic of a high-end luxury hotel lobby, with a shallow depth of field focusing on the subject. The overall aesthetic is professional, clean, and modern." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFbacPcQ2IsTbHn8aWJn-jrFLJkP7fskK7YIUGwYcMKQiJPr69NRK1YCMXfy0ohXHuFwpOoIuLzKB8OWj6vHY4VSSoUv0qqnURzRINkw2n1cDKDgg65Fjs529E-7fqe4S63jDPXczn9lncDvqvfg34-nD3jUCFoSIAld5xgddwdZFE7XoQZXIIJaxWVim67QzU4qydxTfb-yBcyZIsE4gcgUc3GglpC68aiBCRUQKFJPGQOHsQXnQ_Bok4RGBua2xehLFUugA7O3Bw"/>
+<div class="hidden lg:block text-left">
+<p class="font-label-md text-on-surface leading-none">Julian Vance</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mt-1">Global Director</p>
+</div>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="flex-grow p-container-margin overflow-y-auto custom-scrollbar">
+<!-- Page Header -->
+<div class="flex justify-between items-end mb-10">
+<div>
+<nav class="flex items-center gap-2 text-on-surface-variant mb-2">
+<span class="font-label-sm uppercase tracking-widest">Execution</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="font-label-sm uppercase tracking-widest text-primary">Activity Logs</span>
+</nav>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Audit Trail</h2>
+<p class="text-on-surface-variant mt-2 max-w-2xl font-body-md">A comprehensive, immutable record of all operational changes, security updates, and logistical milestones across the enterprise portfolio.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-3 border border-border-gray rounded-xl font-label-md text-on-surface bg-white hover:bg-background-alt transition-all flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+                        Export Report
+                    </button>
+<button class="px-6 py-3 rounded-xl font-label-md text-white bg-gradient-to-r from-primary to-sunset-orange hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                        Create Manual Entry
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Interface -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Filters Panel (3 Columns) -->
+<div class="col-span-12 lg:col-span-3 space-y-gutter">
+<div class="glass-panel p-6 rounded-[24px] shadow-sm">
+<h3 class="font-label-md text-on-surface uppercase tracking-wider mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="filter_list">filter_list</span>
+                            Advanced Filters
+                        </h3>
+<div class="space-y-6">
+<div>
+<label class="font-label-sm text-on-surface-variant mb-2 block">Event Instance</label>
+<select class="w-full bg-background-alt border-none rounded-xl py-3 px-4 font-body-sm focus:ring-2 focus:ring-primary">
+<option>All Live Events</option>
+<option>Global Tech Summit 2024</option>
+<option>Artemis Gala Night</option>
+<option>Product Launch: Nexus</option>
+</select>
+</div>
+<div>
+<label class="font-label-sm text-on-surface-variant mb-2 block">Activity Type</label>
+<div class="space-y-2 mt-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="rounded border-border-gray text-primary focus:ring-primary w-5 h-5 transition-all" type="checkbox"/>
+<span class="font-body-sm text-on-surface group-hover:text-primary transition-colors">Logistical Updates</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="rounded border-border-gray text-primary focus:ring-primary w-5 h-5 transition-all" type="checkbox"/>
+<span class="font-body-sm text-on-surface group-hover:text-primary transition-colors">Financial Transactions</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-border-gray text-primary focus:ring-primary w-5 h-5 transition-all" type="checkbox"/>
+<span class="font-body-sm text-on-surface group-hover:text-primary transition-colors">Team &amp; Permissions</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-border-gray text-primary focus:ring-primary w-5 h-5 transition-all" type="checkbox"/>
+<span class="font-body-sm text-on-surface group-hover:text-primary transition-colors">Security Alerts</span>
+</label>
+</div>
+</div>
+<div>
+<label class="font-label-sm text-on-surface-variant mb-2 block">Date Range</label>
+<div class="grid grid-cols-1 gap-2">
+<button class="w-full text-left bg-background-alt py-3 px-4 rounded-xl font-body-sm text-on-surface-variant flex justify-between items-center hover:bg-surface-container transition-colors">
+                                        Last 24 Hours
+                                        <span class="material-symbols-outlined text-[18px]">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+<button class="w-full py-3 bg-on-surface text-white rounded-xl font-label-md hover:bg-primary transition-all">
+                                Apply Selection
+                            </button>
+<button class="w-full text-on-surface-variant font-label-md hover:text-primary transition-colors">
+                                Reset to Default
+                            </button>
+</div>
+</div>
+<!-- Insight Card -->
+<div class="bg-secondary-container p-6 rounded-[24px] relative overflow-hidden">
+<div class="relative z-10">
+<h4 class="font-headline-md text-on-secondary-container">2,482</h4>
+<p class="font-body-sm text-on-secondary-container opacity-80">Total logs recorded today</p>
+<div class="mt-4 flex items-center gap-2 text-emerald-green">
+<span class="material-symbols-outlined text-[16px]">trending_up</span>
+<span class="font-label-sm font-bold">+12.4% vs Yesterday</span>
+</div>
+</div>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-[120px] text-on-secondary-container opacity-5 rotate-12" data-icon="history">history</span>
+</div>
+</div>
+<!-- Log Table Panel (9 Columns) -->
+<div class="col-span-12 lg:col-span-9">
+<div class="bg-white border border-border-gray rounded-[24px] shadow-sm overflow-hidden flex flex-col h-full">
+<!-- Table Header -->
+<div class="p-6 border-b border-border-gray flex justify-between items-center bg-white/50 sticky top-0 z-10 backdrop-blur-md">
+<div class="flex gap-4">
+<span class="px-4 py-1.5 rounded-full bg-surface-container text-on-surface-variant font-label-sm flex items-center gap-2">
+                                    Showing: <strong>All Activities</strong>
+<button class="material-symbols-outlined text-[14px] hover:text-error transition-colors">close</button>
+</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant font-body-sm">
+<span>Sort by:</span>
+<button class="font-label-md text-on-surface flex items-center gap-1">
+                                    Newest First
+                                    <span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Main Table Wrapper -->
+<div class="overflow-x-auto">
+<table class="w-full border-collapse">
+<thead>
+<tr class="text-left border-b border-border-gray bg-background-alt/30">
+<th class="py-4 px-6 font-label-sm text-on-surface-variant uppercase tracking-widest">Timestamp</th>
+<th class="py-4 px-6 font-label-sm text-on-surface-variant uppercase tracking-widest">Initiator</th>
+<th class="py-4 px-6 font-label-sm text-on-surface-variant uppercase tracking-widest">Event &amp; Action</th>
+<th class="py-4 px-6 font-label-sm text-on-surface-variant uppercase tracking-widest text-right">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-gray">
+<!-- Row 1 -->
+<tr class="hover:bg-background-alt transition-colors group">
+<td class="py-5 px-6">
+<div class="font-body-sm text-on-surface">Oct 24, 2023</div>
+<div class="text-[12px] text-on-surface-variant font-medium">14:32:11 GMT</div>
+</td>
+<td class="py-5 px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center font-label-sm">MS</div>
+<div>
+<div class="font-label-md text-on-surface">Marcus Sterling</div>
+<div class="text-[12px] text-on-surface-variant">Lead Logistics</div>
+</div>
+</div>
+</td>
+<td class="py-5 px-6">
+<div class="font-label-md text-on-surface">Global Tech Summit 2024</div>
+<div class="text-body-sm text-on-surface-variant flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-green"></span>
+                                                Updated Vendor Contract: Elite Catering
+                                            </div>
+</td>
+<td class="py-5 px-6 text-right">
+<span class="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant text-[11px] font-bold uppercase tracking-wider">Verified</span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-background-alt transition-colors group">
+<td class="py-5 px-6">
+<div class="font-body-sm text-on-surface">Oct 24, 2023</div>
+<div class="text-[12px] text-on-surface-variant font-medium">14:28:45 GMT</div>
+</td>
+<td class="py-5 px-6">
+<div class="flex items-center gap-3">
+<img alt="Team Member" class="w-8 h-8 rounded-full object-cover shadow-sm" data-alt="A portrait of a sharp, focused female professional in a modern office environment. She is smiling confidently, wearing a silk cream blouse. The background has soft bokeh with warm interior lighting. This reflects a premium, hospitality-oriented service aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRGYa95Sy0ZN7zKjXo-A5XONIxBiRJ41wqV_CpxftbAZWWMXuDT4hRTaRh5dIhP5SvDF9tQoINKyrK2vQ3QxKkD460YV3WnkZCriceK9zEx5hLPusa3AVkMb1OsR_giggSR01wmHigUFrYX8FODw1uyZelqTVLzKcBlcUpZFB4zcPfxc3ZjGQh2HNrCQun9c4La-Ilbm4qeZWRjU5hi-ulvi4rQF2HyCCMdA1QHc5HvcSLbFPYQCBO_QZodrp7QQ346vEyy_fP0vmF"/>
+<div>
+<div class="font-label-md text-on-surface">Elena Rodriguez</div>
+<div class="text-[12px] text-on-surface-variant">Finance Controller</div>
+</div>
+</div>
+</td>
+<td class="py-5 px-6">
+<div class="font-label-md text-on-surface">Artemis Gala Night</div>
+<div class="text-body-sm text-on-surface-variant flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                                                Approved Wire Transfer: $45,000.00
+                                            </div>
+</td>
+<td class="py-5 px-6 text-right">
+<span class="px-3 py-1 rounded-full bg-primary-fixed text-on-primary-fixed-variant text-[11px] font-bold uppercase tracking-wider">Critical</span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-background-alt transition-colors group">
+<td class="py-5 px-6">
+<div class="font-body-sm text-on-surface">Oct 24, 2023</div>
+<div class="text-[12px] text-on-surface-variant font-medium">13:55:02 GMT</div>
+</td>
+<td class="py-5 px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center font-label-sm">SYS</div>
+<div>
+<div class="font-label-md text-on-surface">Automated Engine</div>
+<div class="text-[12px] text-on-surface-variant">System Service</div>
+</div>
+</div>
+</td>
+<td class="py-5 px-6">
+<div class="font-label-md text-on-surface">Nexus Launch</div>
+<div class="text-body-sm text-on-surface-variant flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-on-surface-variant"></span>
+                                                Daily Inventory Sync Complete
+                                            </div>
+</td>
+<td class="py-5 px-6 text-right">
+<span class="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant text-[11px] font-bold uppercase tracking-wider">Automated</span>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-background-alt transition-colors group">
+<td class="py-5 px-6">
+<div class="font-body-sm text-on-surface">Oct 24, 2023</div>
+<div class="text-[12px] text-on-surface-variant font-medium">13:12:30 GMT</div>
+</td>
+<td class="py-5 px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-label-sm">JV</div>
+<div>
+<div class="font-label-md text-on-surface">Julian Vance</div>
+<div class="text-[12px] text-on-surface-variant">Global Director</div>
+</div>
+</div>
+</td>
+<td class="py-5 px-6">
+<div class="font-label-md text-on-surface">Organization</div>
+<div class="text-body-sm text-on-surface-variant flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-sunset-orange"></span>
+                                                Changed User Permissions: Sarah King
+                                            </div>
+</td>
+<td class="py-5 px-6 text-right">
+<span class="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant text-[11px] font-bold uppercase tracking-wider">Security</span>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-background-alt transition-colors group">
+<td class="py-5 px-6">
+<div class="font-body-sm text-on-surface">Oct 24, 2023</div>
+<div class="text-[12px] text-on-surface-variant font-medium">12:45:19 GMT</div>
+</td>
+<td class="py-5 px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-label-sm">LK</div>
+<div>
+<div class="font-label-md text-on-surface">Lucas Knight</div>
+<div class="text-[12px] text-on-surface-variant">Floor Manager</div>
+</div>
+</div>
+</td>
+<td class="py-5 px-6">
+<div class="font-label-md text-on-surface">Global Tech Summit 2024</div>
+<div class="text-body-sm text-on-surface-variant flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-green"></span>
+                                                Marked Task "Stage Setup" as Complete
+                                            </div>
+</td>
+<td class="py-5 px-6 text-right">
+<span class="px-3 py-1 rounded-full bg-surface-container text-on-surface-variant text-[11px] font-bold uppercase tracking-wider">Verified</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Pagination -->
+<div class="p-6 border-t border-border-gray flex justify-between items-center bg-white">
+<span class="font-body-sm text-on-surface-variant">Showing 1 to 5 of 2,482 entries</span>
+<div class="flex gap-2">
+<button class="w-10 h-10 flex items-center justify-center rounded-xl border border-border-gray text-on-surface-variant hover:bg-background-alt disabled:opacity-50 transition-all" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl bg-primary text-white font-label-md shadow-md">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl border border-border-gray text-on-surface-variant hover:bg-background-alt transition-all">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl border border-border-gray text-on-surface-variant hover:bg-background-alt transition-all">3</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-xl border border-border-gray text-on-surface-variant hover:bg-background-alt transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Feedback Action (Optional for Concierge feel) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-on-surface text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all z-50 group">
+<span class="material-symbols-outlined group-hover:rotate-12 transition-transform" data-icon="support_agent">support_agent</span>
+</button>
+</main>
+<script>
+        // Micro-interactions for interactivity
+        document.querySelectorAll('tr').forEach(row => {
+            row.addEventListener('click', () => {
+                // Potential for opening details side-drawer
+                console.log('Row clicked for deeper audit trail analysis');
+            });
+        });
+
+        // Hover effect for the filters
+        const filterButton = document.querySelector('button.bg-on-surface');
+        filterButton.addEventListener('mouseenter', () => {
+            filterButton.classList.add('shadow-lg');
+        });
+        filterButton.addEventListener('mouseleave', () => {
+            filterButton.classList.remove('shadow-lg');
+        });
+    </script>
+</body></html>

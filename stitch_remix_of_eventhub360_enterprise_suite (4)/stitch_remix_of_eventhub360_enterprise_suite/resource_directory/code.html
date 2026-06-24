@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Resource Directory | EventHub360</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(230, 234, 240, 1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #E6EAF0;
+            border-radius: 10px;
+        }
+        body {
+            background-color: #FAFAFA;
+            color: #121C2A;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "emerald-green": "#4CAF8D",
+                        "on-secondary": "#ffffff",
+                        "outline": "#8c706f",
+                        "surface-container-low": "#eff4ff",
+                        "sunset-orange": "#FF8A5B",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#f8f9ff",
+                        "on-secondary-fixed-variant": "#5b4304",
+                        "surface-variant": "#d9e3f6",
+                        "tertiary-fixed": "#eaddff",
+                        "on-primary": "#ffffff",
+                        "surface": "#f8f9ff",
+                        "primary-fixed": "#ffdad8",
+                        "inverse-primary": "#ffb3b0",
+                        "primary-fixed-dim": "#ffb3b0",
+                        "on-tertiary-fixed": "#240554",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed-dim": "#d3bbff",
+                        "outline-variant": "#e0bfbd",
+                        "on-primary-container": "#6d0010",
+                        "on-background": "#121c2a",
+                        "on-tertiary-container": "#3d246c",
+                        "tertiary": "#69519b",
+                        "primary-container": "#ff6b6b",
+                        "secondary": "#755a1d",
+                        "inverse-surface": "#27313f",
+                        "surface-tint": "#ae2f34",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#e6eeff",
+                        "secondary-fixed": "#ffdea0",
+                        "on-surface-variant": "#584140",
+                        "on-secondary-container": "#785d1f",
+                        "surface-container-high": "#dee9fc",
+                        "surface-container-highest": "#d9e3f6",
+                        "on-primary-fixed-variant": "#8c1520",
+                        "on-primary-fixed": "#410006",
+                        "primary": "#ae2f34",
+                        "background-alt": "#F5F7FA",
+                        "on-surface": "#121c2a",
+                        "error-container": "#ffdad6",
+                        "background": "#f8f9ff",
+                        "tertiary-container": "#a88ede",
+                        "on-error-container": "#93000a",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#fed88e",
+                        "on-tertiary-fixed-variant": "#513982",
+                        "secondary-fixed-dim": "#e6c27a",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-secondary-fixed": "#261a00",
+                        "border-gray": "#E6EAF0",
+                        "surface-dim": "#d0dbed",
+                        "off-white": "#FAFAFA"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-margin": "32px",
+                        "base": "8px",
+                        "section-gap": "64px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Hanken Grotesk"],
+                        "body-sm": ["Inter"],
+                        "headline-lg": ["Hanken Grotesk"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Hanken Grotesk"],
+                        "body-md": ["Inter"],
+                        "display-lg-mobile": ["Hanken Grotesk"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg-mobile": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-body-md text-on-surface bg-off-white selection:bg-primary-container selection:text-on-primary-container">
+<!-- Sidebar Wrapper -->
+<div class="flex min-h-screen">
+<!-- SideNavBar (JSON Component) -->
+<aside class="w-64 h-screen fixed left-0 top-0 bg-surface-container-lowest shadow-sm flex flex-col py-base gap-base z-50">
+<div class="px-6 py-4">
+<span class="font-headline-lg text-headline-lg font-bold text-primary">EventHub360</span>
+<p class="font-label-md text-label-md text-on-surface-variant opacity-70">Enterprise Resource Management</p>
+</div>
+<nav class="flex-1 px-4 space-y-1 overflow-y-auto custom-scrollbar">
+<!-- Tabs from JSON -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors hover:bg-surface-container-high text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Event Workspace</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors hover:bg-surface-container-high text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Events</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors hover:bg-surface-container-high text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined">event_note</span>
+<span class="font-label-md text-label-md">Planning</span>
+</a>
+<!-- Resources Active -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-primary font-bold border-r-4 border-primary bg-surface-container-low" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+<span class="font-label-md text-label-md">Resources</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors hover:bg-surface-container-high text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-label-md text-label-md">Budget</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors hover:bg-surface-container-high text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-label-md text-label-md">Vendors</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors hover:bg-surface-container-high text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined">task_alt</span>
+<span class="font-label-md text-label-md">Execution</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors hover:bg-surface-container-high text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined">description</span>
+<span class="font-label-md text-label-md">Documents</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl transition-colors hover:bg-surface-container-high text-on-surface-variant font-medium" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Reporting</span>
+</a>
+</nav>
+<div class="px-4 py-6">
+<button class="w-full py-3 bg-primary text-on-primary rounded-xl font-label-md text-label-md flex items-center justify-center gap-2 transition-transform active:scale-[0.98]">
+<span class="material-symbols-outlined">add</span>
+                    Add New Resource
+                </button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 flex-1">
+<!-- TopAppBar (JSON Component) -->
+<header class="sticky top-0 z-40 bg-white/60 backdrop-blur-xl border-b border-border-gray h-20 flex justify-between items-center w-full px-container-margin max-w-[1440px] mx-auto">
+<div class="flex items-center gap-8">
+<div class="relative w-72">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-background-alt border-none rounded-full pl-10 pr-4 py-2 font-body-sm text-body-sm focus:ring-2 focus:ring-primary/20 transition-all" placeholder="Search directory..." type="text"/>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-all font-label-md text-label-md" href="#">Dashboard</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1 transition-all font-label-md text-label-md" href="#">Directory</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-all font-label-md text-label-md" href="#">Allocation</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-all font-label-md text-label-md" href="#">Conflicts</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-all font-label-md text-label-md" href="#">Utilization</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 hover:bg-surface-container-low rounded-full transition-all">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<img alt="Administrator Profile" class="w-10 h-10 rounded-full object-cover border-2 border-primary/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTY6_kIkaRGlHJuEBz-gQztEybrK3OisKtAdtAn8LPYQ8ETTqEAyealdH-MHBT1gJqjMpkXKaPrWS2SlTtUTlAREk7sSjyIxkUweOI4799US9MQ7O7B8sWOwx7ejka_YCMBs1bN9EJaGJfkuvNBpiF804AjMhhj-uuIcXF2JZGb6YU85BGp--Dm8mXTA_JM_GHjAv6UXW37tpj0xeuJJM1bGO6mheZlAjalLkEMI1SIQYywYmqFssTTf-B7hsFrPz0hUlB8Xq2zkzs"/>
+</div>
+</header>
+<div class="max-w-[1440px] mx-auto px-container-margin py-8">
+<!-- Page Header & Main Actions -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Resource Directory</h1>
+<p class="text-on-surface-variant font-body-md text-body-md mt-2">Manage personnel, logistics, and high-value assets across your event ecosystem.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-3 border border-border-gray bg-white rounded-xl font-label-md text-label-md flex items-center gap-2 hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined">download</span>
+                            Export Directory
+                        </button>
+<button class="px-6 py-3 bg-gradient-to-r from-primary to-sunset-orange text-white rounded-xl font-label-md text-label-md flex items-center gap-2 hover:scale-[1.02] shadow-lg shadow-primary/20 transition-all">
+<span class="material-symbols-outlined">add_circle</span>
+                            Add Resource
+                        </button>
+</div>
+</div>
+<!-- Interactive Filter Bar -->
+<section class="glass-card rounded-[24px] p-6 mb-8 flex flex-wrap items-center gap-6">
+<div class="flex flex-col gap-2 min-w-[200px]">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Category</label>
+<select class="bg-background-alt border-none rounded-xl font-body-sm text-body-sm px-4 py-2.5 focus:ring-primary">
+<option>All Resources</option>
+<option>Staff</option>
+<option>Equipment</option>
+<option>Venues</option>
+<option>Vehicles</option>
+</select>
+</div>
+<div class="flex flex-col gap-2 min-w-[200px]">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Status</label>
+<select class="bg-background-alt border-none rounded-xl font-body-sm text-body-sm px-4 py-2.5 focus:ring-primary">
+<option>Any Status</option>
+<option>Available</option>
+<option>Allocated</option>
+<option>Maintenance</option>
+</select>
+</div>
+<div class="flex flex-col gap-2 flex-1 min-w-[240px]">
+<label class="font-label-sm text-label-sm text-on-surface-variant">Availability Date Range</label>
+<div class="flex items-center gap-2">
+<input class="bg-background-alt border-none rounded-xl font-body-sm text-body-sm px-4 py-2.5 focus:ring-primary w-full" type="date"/>
+<span class="text-on-surface-variant">to</span>
+<input class="bg-background-alt border-none rounded-xl font-body-sm text-body-sm px-4 py-2.5 focus:ring-primary w-full" type="date"/>
+</div>
+</div>
+<div class="flex items-end self-stretch pt-6">
+<button class="h-[42px] px-6 bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-label-md text-label-md rounded-xl transition-all">
+                            Reset Filters
+                        </button>
+</div>
+</section>
+<!-- Resources Table - Premium List View -->
+<div class="glass-card rounded-[24px] overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-6 py-5 font-label-md text-label-md text-on-surface-variant border-b border-border-gray">Resource Name / ID</th>
+<th class="px-6 py-5 font-label-md text-label-md text-on-surface-variant border-b border-border-gray">Category</th>
+<th class="px-6 py-5 font-label-md text-label-md text-on-surface-variant border-b border-border-gray">Status</th>
+<th class="px-6 py-5 font-label-md text-label-md text-on-surface-variant border-b border-border-gray">Capacity / Specs</th>
+<th class="px-6 py-5 font-label-md text-label-md text-on-surface-variant border-b border-border-gray">Current Location</th>
+<th class="px-6 py-5 font-label-md text-label-md text-on-surface-variant border-b border-border-gray text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-gray">
+<!-- Row 1 -->
+<tr class="group hover:bg-surface-container-low/30 transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface">Marcus Thorne</div>
+<div class="text-xs text-on-surface-variant opacity-60">STF-8821</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full bg-surface-container text-tertiary font-label-sm text-label-sm">Staff (Lead Tech)</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2 text-emerald-green font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-emerald-green animate-pulse"></span>
+                                            Available
+                                        </div>
+</td>
+<td class="px-6 py-5 font-body-sm text-body-sm text-on-surface-variant">Lvl 4 AV Certified</td>
+<td class="px-6 py-5 font-body-sm text-body-sm text-on-surface-variant">Central Hub</td>
+<td class="px-6 py-5 text-right">
+<button class="text-primary font-label-sm text-label-sm hover:underline">View Details</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="group hover:bg-surface-container-low/30 transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">stadium</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface">The Grand Atrium</div>
+<div class="text-xs text-on-surface-variant opacity-60">VEN-004</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full bg-surface-container text-tertiary font-label-sm text-label-sm">Venues</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2 text-primary font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+                                            Allocated
+                                        </div>
+</td>
+<td class="px-6 py-5 font-body-sm text-body-sm text-on-surface-variant">800 Pax Capacity</td>
+<td class="px-6 py-5 font-body-sm text-body-sm text-on-surface-variant">North District</td>
+<td class="px-6 py-5 text-right">
+<button class="text-primary font-label-sm text-label-sm hover:underline">View Details</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="group hover:bg-surface-container-low/30 transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">precision_manufacturing</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface">4K Laser Projector Set</div>
+<div class="text-xs text-on-surface-variant opacity-60">EQP-9092</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full bg-surface-container text-tertiary font-label-sm text-label-sm">Equipment</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2 text-sunset-orange font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-sunset-orange"></span>
+                                            Maintenance
+                                        </div>
+</td>
+<td class="px-6 py-5 font-body-sm text-body-sm text-on-surface-variant">30k Lumens</td>
+<td class="px-6 py-5 font-body-sm text-body-sm text-on-surface-variant">Tech Bay 2</td>
+<td class="px-6 py-5 text-right">
+<button class="text-primary font-label-sm text-label-sm hover:underline">View Details</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="group hover:bg-surface-container-low/30 transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined">local_shipping</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface">Mercedes Sprinter</div>
+<div class="text-xs text-on-surface-variant opacity-60">VHC-221</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full bg-surface-container text-tertiary font-label-sm text-label-sm">Vehicles</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2 text-emerald-green font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-emerald-green"></span>
+                                            Available
+                                        </div>
+</td>
+<td class="px-6 py-5 font-body-sm text-body-sm text-on-surface-variant">1.5 Ton Cargo</td>
+<td class="px-6 py-5 font-body-sm text-body-sm text-on-surface-variant">Logistics Yard</td>
+<td class="px-6 py-5 text-right">
+<button class="text-primary font-label-sm text-label-sm hover:underline">View Details</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="group hover:bg-surface-container-low/30 transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">person</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface">Elena Rodriguez</div>
+<div class="text-xs text-on-surface-variant opacity-60">STF-7742</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 rounded-full bg-surface-container text-tertiary font-label-sm text-label-sm">Staff (Logistics)</span>
+</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2 text-primary font-label-sm text-label-sm">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+                                            Allocated
+                                        </div>
+</td>
+<td class="px-6 py-5 font-body-sm text-body-sm text-on-surface-variant">Multilingual (ES/EN)</td>
+<td class="px-6 py-5 font-body-sm text-body-sm text-on-surface-variant">On-Site (Expo)</td>
+<td class="px-6 py-5 text-right">
+<button class="text-primary font-label-sm text-label-sm hover:underline">View Details</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="px-6 py-4 flex items-center justify-between border-t border-border-gray bg-white/40">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Showing 5 of 124 resources</span>
+<div class="flex gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-border-gray hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-white font-label-sm text-label-sm">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-border-gray hover:bg-surface-container-low transition-all font-label-sm text-label-sm">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-border-gray hover:bg-surface-container-low transition-all font-label-sm text-label-sm">3</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg border border-border-gray hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Bento Quick Stats Grid -->
+<div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="glass-card p-6 rounded-[24px]">
+<div class="flex items-center justify-between mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant">Staff Availability</span>
+<span class="material-symbols-outlined text-primary">groups</span>
+</div>
+<div class="text-3xl font-bold text-on-surface">84%</div>
+<div class="mt-2 h-2 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-emerald-green" style="width: 84%"></div>
+</div>
+<p class="text-xs text-on-surface-variant mt-3">12 members active today</p>
+</div>
+<div class="glass-card p-6 rounded-[24px]">
+<div class="flex items-center justify-between mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant">Asset Health</span>
+<span class="material-symbols-outlined text-sunset-orange">construction</span>
+</div>
+<div class="text-3xl font-bold text-on-surface">96.2%</div>
+<div class="mt-2 h-2 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-sunset-orange" style="width: 96%"></div>
+</div>
+<p class="text-xs text-on-surface-variant mt-3">2 items in critical maintenance</p>
+</div>
+<div class="glass-card p-6 rounded-[24px]">
+<div class="flex items-center justify-between mb-4">
+<span class="font-label-md text-label-md text-on-surface-variant">Venue Utilization</span>
+<span class="material-symbols-outlined text-tertiary">location_on</span>
+</div>
+<div class="text-3xl font-bold text-on-surface">62%</div>
+<div class="mt-2 h-2 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-tertiary" style="width: 62%"></div>
+</div>
+<p class="text-xs text-on-surface-variant mt-3">Booked for 18 upcoming events</p>
+</div>
+</div>
+<!-- Real-time Location Monitor (Concept Visual) -->
+<div class="mt-12">
+<h2 class="font-headline-md text-headline-md mb-6">Resource Allocation Map</h2>
+<div class="h-96 w-full rounded-[32px] overflow-hidden relative shadow-inner">
+<img class="w-full h-full object-cover" data-alt="A sophisticated digital map visualization of a metropolitan area showing real-time resource distribution with subtle glowing markers. The aesthetic is clean and modern, featuring soft blue and grey tones with vibrant orange and red indicators for active resources. High-key lighting creates a professional and data-driven atmosphere suitable for a premium enterprise dashboard." data-location="New York City" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB83SvKM9wJEnRghy6sOBFvbNhnKpVfymfu2PDfQJNfCmKYvVNj6xKzYDiFqdbwyfEHd49hCJJ9wjas0F69UC-C_GmFYA2zQNci7TDnMzDwKVbHvdXN9YH_6SbTqESvH5cTtYKdmu5XNT29vkqDyT-xBdKv9RxHcFIx3LPCiOnJYJjjM6e2ZSKn1l3Xjif15ci7zMy7e5uNSUTHPkzdRLZiqwCrIqq-zSrWYsDL3z0_XrO53QfQQRU_gkPaccum41fFGFlxt4C-ELVw"/>
+<div class="absolute inset-0 bg-primary/10 mix-blend-multiply pointer-events-none"></div>
+<!-- Map Overlays -->
+<div class="absolute top-6 left-6 p-4 glass-card rounded-2xl w-64">
+<h3 class="font-label-md text-label-md mb-3">Live Feed</h3>
+<div class="space-y-3">
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-emerald-green"></div>
+<span class="text-xs font-medium">Van B-42 at Dock 3</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+<span class="text-xs font-medium">Stage 2 Crew checking in</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-2 h-2 rounded-full bg-tertiary"></div>
+<span class="text-xs font-medium">Projectors delivered to Hall A</span>
+</div>
+</div>
+</div>
+<div class="absolute bottom-6 right-6 flex gap-2">
+<button class="bg-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">zoom_in</span>
+</button>
+<button class="bg-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">zoom_out</span>
+</button>
+<button class="bg-white p-3 rounded-full shadow-lg hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">my_location</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Floating Action Button (FAB) - Suppression Logic: Included only on Home/Directory as per guidelines -->
+<button class="fixed bottom-10 right-10 w-16 h-16 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center hover:rotate-90 transition-all z-50 group">
+<span class="material-symbols-outlined text-3xl">add</span>
+<span class="absolute right-full mr-4 px-4 py-2 bg-inverse-surface text-white text-xs rounded-lg opacity-0 group-hover:opacity-100 whitespace-nowrap pointer-events-none transition-opacity">Quick Add Resource</span>
+</button>
+<script>
+        // Simple micro-interaction for table rows
+        document.querySelectorAll('tbody tr').forEach(row => {
+            row.addEventListener('click', () => {
+                // Concept: Open detail slide-over
+                console.log('Row clicked, opening detail view...');
+            });
+        });
+
+        // Search bar focus effect
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('ring-2', 'ring-primary/20');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('ring-2', 'ring-primary/20');
+        });
+    </script>
+</body></html>

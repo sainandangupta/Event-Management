@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vendor Directory | Events Pro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100..900&family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "emerald-green": "#4CAF8D",
+                    "surface": "#f8f9ff",
+                    "on-secondary-container": "#785d1f",
+                    "inverse-primary": "#ffb3b0",
+                    "on-tertiary-container": "#3d246c",
+                    "tertiary-container": "#a88ede",
+                    "on-tertiary-fixed-variant": "#513982",
+                    "surface-bright": "#f8f9ff",
+                    "outline": "#8c706f",
+                    "secondary-fixed-dim": "#e6c27a",
+                    "inverse-on-surface": "#eaf1ff",
+                    "secondary": "#755a1d",
+                    "on-tertiary-fixed": "#240554",
+                    "primary-fixed": "#ffdad8",
+                    "on-secondary-fixed": "#261a00",
+                    "secondary-container": "#fed88e",
+                    "on-primary-fixed-variant": "#8c1520",
+                    "surface-tint": "#ae2f34",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#27313f",
+                    "on-primary-fixed": "#410006",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-highest": "#d9e3f6",
+                    "surface-container-low": "#eff4ff",
+                    "background-alt": "#F5F7FA",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "border-gray": "#E6EAF0",
+                    "primary-container": "#ff6b6b",
+                    "on-error-container": "#93000a",
+                    "off-white": "#FAFAFA",
+                    "on-primary": "#ffffff",
+                    "on-background": "#121c2a",
+                    "primary": "#ae2f34",
+                    "error": "#ba1a1a",
+                    "on-surface": "#121c2a",
+                    "tertiary-fixed": "#eaddff",
+                    "surface-container-high": "#dee9fc",
+                    "sunset-orange": "#FF8A5B",
+                    "secondary-fixed": "#ffdea0",
+                    "surface-container": "#e6eeff",
+                    "tertiary": "#69519b",
+                    "surface-dim": "#d0dbed",
+                    "on-secondary-fixed-variant": "#5b4304",
+                    "background": "#f8f9ff",
+                    "outline-variant": "#e0bfbd",
+                    "surface-variant": "#d9e3f6",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed-dim": "#d3bbff",
+                    "primary-fixed-dim": "#ffb3b0",
+                    "on-surface-variant": "#584140",
+                    "on-primary-container": "#6d0010"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-gap": "64px",
+                    "gutter": "24px",
+                    "base": "8px",
+                    "container-margin": "32px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Hanken Grotesk"],
+                    "headline-lg": ["Hanken Grotesk"],
+                    "body-lg": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "display-lg": ["Hanken Grotesk"],
+                    "display-lg-mobile": ["Hanken Grotesk"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-lg-mobile": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8f9ff; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(230, 234, 240, 0.8);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .active-pill {
+            background: #ff6b6b;
+            color: white;
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.2);
+        }
+        .vendor-table-row:hover {
+            background-color: #f8f9ff;
+            transform: translateY(-1px);
+        }
+        .gradient-button {
+            background: linear-gradient(135deg, #ae2f34 0%, #FF8A5B 100%);
+            transition: all 0.2s ease;
+        }
+        .gradient-button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 24px rgba(174, 47, 52, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface antialiased">
+<!-- Sidebar Navigation -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-surface dark:bg-on-background shadow-[4px_0_20px_rgba(31,41,55,0.05)] flex flex-col py-8 px-4 z-50">
+<div class="mb-10 px-4">
+<h1 class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed">Digital Concierge</h1>
+<p class="text-label-sm text-on-surface-variant tracking-wider uppercase opacity-60">Enterprise Management</p>
+</div>
+<nav class="flex-1 space-y-1">
+<!-- Event Workspace -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">dashboard</span>
+<span class="font-label-md text-label-md">Event Workspace</span>
+</a>
+<!-- Events -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">calendar_month</span>
+<span class="font-label-md text-label-md">Events</span>
+</a>
+<!-- Planning -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">event_note</span>
+<span class="font-label-md text-label-md">Planning</span>
+</a>
+<!-- Resources -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">inventory_2</span>
+<span class="font-label-md text-label-md">Resources</span>
+</a>
+<!-- Budget -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">payments</span>
+<span class="font-label-md text-label-md">Budget</span>
+</a>
+<!-- Vendors - ACTIVE -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-primary font-bold border-r-4 border-primary bg-surface-container-low transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">storefront</span>
+<span class="font-label-md text-label-md">Vendors</span>
+</a>
+<!-- Execution -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">play_circle</span>
+<span class="font-label-md text-label-md">Execution</span>
+</a>
+<!-- Documents -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">description</span>
+<span class="font-label-md text-label-md">Documents</span>
+</a>
+<!-- Reporting -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary">analytics</span>
+<span class="font-label-md text-label-md">Reporting</span>
+</a>
+</nav>
+<div class="mt-auto space-y-1 pt-8 border-t border-border-gray">
+<button class="gradient-button w-full text-white py-3 px-4 rounded-xl font-label-md flex items-center justify-center gap-2 mb-4">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                New Event
+            </button>
+<a class="flex items-center gap-3 px-4 py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors text-label-md" href="#">
+<span class="material-symbols-outlined">help</span>
+                Help Center
+            </a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors text-label-md" href="#">
+<span class="material-symbols-outlined text-error">logout</span>
+                Log Out
+            </a>
+</div>
+</aside>
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 right-0 w-[calc(100%-256px)] h-20 px-10 glass-panel flex items-center justify-between z-40 shadow-sm">
+<div class="flex items-center gap-8 w-1/2">
+<h2 class="text-headline-md font-extrabold text-primary">Events Pro</h2>
+<div class="relative flex-1 max-w-md">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-background-alt border-none rounded-full py-2.5 pl-12 pr-4 focus:ring-2 focus:ring-primary/20 transition-all text-body-sm outline-none" placeholder="Search vendors, categories, or projects..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border-2 border-white"></span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-[1px] bg-border-gray"></div>
+<div class="flex items-center gap-3 cursor-pointer group">
+<div class="text-right">
+<p class="font-label-md text-on-surface group-hover:text-primary transition-colors">Alex Morgan</p>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest font-bold">Event Director</p>
+</div>
+<img alt="User Profile" class="w-10 h-10 rounded-full border-2 border-primary-fixed-dim object-cover" data-alt="A professional headshot of a confident man with a warm smile, wearing a charcoal business suit against a soft-focus studio background. The lighting is bright and airy, reflecting a high-end corporate lifestyle aesthetic. The image is crisp, detailed, and perfectly suited for a premium enterprise software interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhQgNw0NvLx5AqSs13Fb_Qp4cWPBElXO2p5fRzcBQH3bR02SmS5CPZJTPMWhjKzaNV6aQye0bQr20JZaMn3RX-b3xUFgkFpHo4ZA9OWh_Ih8MaFfF2VZ2kFwjoLyimbBKGpUhbOEvQiu5995BiSZCPVL4-9M2-1CaE0z_a2lqu0y-S6XZZkpOMVHz1Tpj6awseYH95xMsOCc7LyKpgbgGC9-40UKvCCAucvmBslQuYvZAY0wFwZJu-a_1H20NvFYpVwJUYG8Wbmiy0"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-28 px-10 pb-16 min-h-screen">
+<div class="max-w-[1440px] mx-auto">
+<!-- Page Header Area -->
+<div class="flex justify-between items-end mb-10">
+<div>
+<nav class="flex items-center gap-2 text-label-sm text-on-surface-variant mb-2">
+<span>Directory</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-primary font-bold">Vendors</span>
+</nav>
+<h3 class="text-display-lg font-headline-lg text-on-background">Vendor Directory</h3>
+<p class="text-body-lg text-on-surface-variant mt-2">Manage and monitor 42 preferred partners across all active event cycles.</p>
+</div>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 px-5 py-3 rounded-xl border border-border-gray bg-white text-on-surface font-label-md hover:bg-surface-container-low transition-colors shadow-sm">
+<span class="material-symbols-outlined">filter_list</span>
+                        Advanced Filters
+                    </button>
+<button class="gradient-button flex items-center gap-2 px-6 py-3 rounded-xl text-white font-label-md shadow-lg">
+<span class="material-symbols-outlined">person_add</span>
+                        Add Vendor
+                    </button>
+</div>
+</div>
+<!-- Bento Stats Overview -->
+<div class="grid grid-cols-4 gap-6 mb-10">
+<div class="bg-white p-6 rounded-[24px] shadow-sm border border-border-gray">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-2xl bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">verified</span>
+</div>
+<span class="text-emerald-green text-label-sm font-bold bg-emerald-green/10 px-2 py-1 rounded-lg">+12%</span>
+</div>
+<p class="text-on-surface-variant text-label-md">Preferred Partners</p>
+<h4 class="text-[32px] font-bold text-on-background mt-1">28</h4>
+</div>
+<div class="bg-white p-6 rounded-[24px] shadow-sm border border-border-gray">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-2xl bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">pending_actions</span>
+</div>
+<span class="text-secondary text-label-sm font-bold bg-secondary-fixed/30 px-2 py-1 rounded-lg">4 New</span>
+</div>
+<p class="text-on-surface-variant text-label-md">Under Review</p>
+<h4 class="text-[32px] font-bold text-on-background mt-1">6</h4>
+</div>
+<div class="bg-white p-6 rounded-[24px] shadow-sm border border-border-gray">
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-2xl bg-tertiary-fixed flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">assignment_turned_in</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-label-md">Active Projects</p>
+<h4 class="text-[32px] font-bold text-on-background mt-1">114</h4>
+</div>
+<div class="relative rounded-[24px] overflow-hidden group cursor-pointer shadow-lg">
+<img alt="Event Highlight" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" data-alt="A luxurious, high-end gala dinner set in a grand ballroom with tall ceilings. Warm amber lighting illuminates the meticulously decorated tables featuring fine crystal, floral centerpieces, and gold accents. In the background, professional caterers move gracefully, embodying the essence of premium event service and hospitality excellence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMerqNNJvhPkzG6OrKtavvM7KH89PQzlIXKiQYV0bKlPSwhKJ5T_rnCj7jns7vstzAws5npi5n4b4o2tn6uwxThQN5qIxgb_PmQjTOTOW_YllpeEyv_tU-wlxbZAmPbg144BfOS1WDHSY6mVJzT9JJa9-cxY3e3ADTjtyuinCkw1U7cisuS6U9U49-Huz_fbTJkwyi7GB6sFsRjS454YiDhT6RqEA5w2ri6eRsNjPalK3Nj_9mU_qbaesCSrocOe1taIcMT3g_Ppbl"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent flex flex-col justify-end p-6">
+<p class="text-white/80 text-label-sm font-bold uppercase tracking-widest">Featured Partner</p>
+<h4 class="text-white text-headline-md font-bold leading-tight">Gourmet Elite Catering</h4>
+<p class="text-white/70 text-body-sm">Voted #1 for Platinum Events 2023</p>
+</div>
+</div>
+</div>
+<!-- Table Section -->
+<div class="bg-white rounded-[24px] shadow-sm border border-border-gray overflow-hidden">
+<div class="px-8 py-6 border-b border-border-gray flex justify-between items-center bg-off-white/50">
+<h5 class="text-headline-md font-bold text-on-background">Directory List</h5>
+<div class="flex gap-3">
+<button class="p-2 hover:bg-surface-container-high rounded-lg transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">download</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-lg transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">sort</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/50">
+<th class="px-8 py-4 text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">Vendor Name</th>
+<th class="px-8 py-4 text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">Category</th>
+<th class="px-8 py-4 text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">Status</th>
+<th class="px-8 py-4 text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">Active Projects</th>
+<th class="px-8 py-4 text-label-sm font-bold text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-gray">
+<!-- Row 1 -->
+<tr class="vendor-table-row transition-all group">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center font-bold text-primary group-hover:scale-110 transition-transform">GL</div>
+<div>
+<p class="font-headline-md text-body-md text-on-background">Glow AV & Lighting</p>
+<p class="text-body-sm text-on-surface-variant">contact@glowav.com</p>
+</div>
+</div>
+</td>
+<td class="px-8 py-5">
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-label-sm rounded-full">AV & Production</span>
+</td>
+<td class="px-8 py-5">
+<div class="flex items-center gap-2 text-emerald-green font-bold text-label-md">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                                        Preferred
+                                    </div>
+</td>
+<td class="px-8 py-5">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-white bg-primary-fixed flex items-center justify-center text-[10px] font-bold">NY</div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-secondary-fixed flex items-center justify-center text-[10px] font-bold">WE</div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-tertiary-fixed flex items-center justify-center text-[10px] font-bold">+12</div>
+</div>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="p-2 hover:bg-primary/10 hover:text-primary rounded-lg transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="vendor-table-row transition-all group">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center font-bold text-primary group-hover:scale-110 transition-transform">SE</div>
+<div>
+<p class="font-headline-md text-body-md text-on-background">Silver Spoon Events</p>
+<p class="text-body-sm text-on-surface-variant">bookings@silverspoon.net</p>
+</div>
+</div>
+</td>
+<td class="px-8 py-5">
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-label-sm rounded-full">Catering</span>
+</td>
+<td class="px-8 py-5">
+<div class="flex items-center gap-2 text-primary font-bold text-label-md">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                                        Active
+                                    </div>
+</td>
+<td class="px-8 py-5">
+<div class="flex items-center gap-2">
+<span class="text-body-md font-bold text-on-background">8</span>
+<span class="text-body-sm text-on-surface-variant">live events</span>
+</div>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="p-2 hover:bg-primary/10 hover:text-primary rounded-lg transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="vendor-table-row transition-all group">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center font-bold text-primary group-hover:scale-110 transition-transform">PS</div>
+<div>
+<p class="font-headline-md text-body-md text-on-background">Premier Security Solutions</p>
+<p class="text-body-sm text-on-surface-variant">ops@premiersec.com</p>
+</div>
+</div>
+</td>
+<td class="px-8 py-5">
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-label-sm rounded-full">Security</span>
+</td>
+<td class="px-8 py-5">
+<div class="flex items-center gap-2 text-secondary font-bold text-label-md">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+                                        Under Review
+                                    </div>
+</td>
+<td class="px-8 py-5">
+<div class="flex items-center gap-2">
+<span class="text-body-md font-bold text-on-background">0</span>
+<span class="text-body-sm text-on-surface-variant text-error font-bold italic">Waitlisted</span>
+</div>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="p-2 hover:bg-primary/10 hover:text-primary rounded-lg transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="vendor-table-row transition-all group">
+<td class="px-8 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center font-bold text-primary group-hover:scale-110 transition-transform">AD</div>
+<div>
+<p class="font-headline-md text-body-md text-on-background">Artisan Decor Co.</p>
+<p class="text-body-sm text-on-surface-variant">hello@artisandecor.com</p>
+</div>
+</div>
+</td>
+<td class="px-8 py-5">
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant text-label-sm rounded-full">Decor</span>
+</td>
+<td class="px-8 py-5">
+<div class="flex items-center gap-2 text-emerald-green font-bold text-label-md">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                                        Preferred
+                                    </div>
+</td>
+<td class="px-8 py-5">
+<div class="flex items-center gap-2">
+<span class="text-body-md font-bold text-on-background">15</span>
+<span class="text-body-sm text-on-surface-variant">live events</span>
+</div>
+</td>
+<td class="px-8 py-5 text-right">
+<button class="p-2 hover:bg-primary/10 hover:text-primary rounded-lg transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-8 py-6 border-t border-border-gray flex justify-between items-center bg-off-white/30">
+<p class="text-body-sm text-on-surface-variant">Showing <span class="font-bold text-on-background">1-4</span> of <span class="font-bold text-on-background">42</span> vendors</p>
+<div class="flex gap-2">
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-border-gray bg-white hover:bg-surface-container transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center bg-primary text-white font-bold">1</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-border-gray bg-white hover:bg-surface-container transition-colors font-bold">2</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-border-gray bg-white hover:bg-surface-container transition-colors font-bold">3</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-border-gray bg-white hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Hidden on this transactional directory page per instruction, but shown here for layout completeness if needed elsewhere - suppressed per system prompt logic for "Details/Transactional") -->
+<!-- <button class="fixed bottom-8 right-8 w-16 h-16 rounded-full gradient-button text-white shadow-2xl flex items-center justify-center group">
+        <span class="material-symbols-outlined text-[32px] group-hover:rotate-90 transition-transform duration-300">add</span>
+    </button> -->
+<script>
+        // Micro-interaction for table rows
+        document.querySelectorAll('.vendor-table-row').forEach(row => {
+            row.addEventListener('mouseenter', () => {
+                row.style.boxShadow = 'inset 4px 0 0 #ae2f34';
+            });
+            row.addEventListener('mouseleave', () => {
+                row.style.boxShadow = 'none';
+            });
+        });
+
+        // Search focus effects
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-[1.02]');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-[1.02]');
+        });
+    </script>
+</body></html>
